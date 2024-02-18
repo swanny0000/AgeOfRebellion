@@ -1,0 +1,14 @@
+[
+  {"id":"1","species":"Rodian",
+  "brawn":2,
+  "agility":2,
+  "intellect":3,
+  "cunning":2,
+  "willpower":1,
+  "presence":2,
+  "wound_threshold_base":10,
+  "strain_threshold_base":10,
+  "starting_exp":100,
+  "special_abilities_text":"Rodians begin the game with one rank in Survival. They may not train Survival above rank 2 during character creation. Rodians start with one rank in the Expert Tracker talent."
+  }
+]
