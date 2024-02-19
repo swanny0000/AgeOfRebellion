@@ -41,12 +41,12 @@ function updateFromJson(jsonData) {
 function loadCharacterInfo(data) {}
 function loadCharacteristics(data) {
   for (var i = 0, size = data.characteristics.length; i < size; i++) {
-    updateCharacteristic(data.career_skills[i].element, data.career_skills[i].value)
+    updateCharacteristic(data.characteristics[i].element, data.characteristics[i].value)
   }
 }
 function loadCareerSkills(data) {
   for (var i = 0, size = data.career_skills.length; i < size; i++) {
-    activateCareerSkill(data.career_skills[i].skill);
+    updateCareerSkill(data.career_skills[i].skill, true);
   }
 }
 function loadSkills(data) {
@@ -58,29 +58,37 @@ function loadTalents(data) {}
 function loadGear(data) {}
 
 
-function activateCareerSkill(skill) {
-  element = "career_" + skill;
-  document.getElementById(element).checked = true;
-}
-
-function deactivateCareerSkill(skill) {
-  element = "career_" + skill;
-  document.getElementById(element).checked = false;
-}
-
-function increaseRank(skill) {
-  element = "rank_" + skill;
-  document.getElementById(element).value += 1;
+function updateCareerSkill(skill, active=true) {
+  if (skill == "knowledge") {
+    for (var i = 0, size = KNOWLEDGE_SKILL_LIST.length; i < size; i++) {
+      updateCareerSkill(KNOWLEDGE_SKILL_LIST[i], active);
+    }
+  } else if (skill == "piloting") {
+    updateCareerSkill("piloting_planetary", active);
+    updateCareerSkill("piloting_space", active);
+  } else {
+    element = "career_" + skill;
+    document.getElementById(element).checked = active;
+  }
 }
 
 function setRank(skill, rank = 0) {
-  element = "rank_" + skill;
-  document.getElementById(element).value = rank;
+  if (skill == "knowledge") {
+    for (var i = 0, size = KNOWLEDGE_SKILL_LIST.length; i < size; i++) {
+      setRank(KNOWLEDGE_SKILL_LIST[i], rank);
+    }
+  } else if (skill == "piloting") {
+    setRank("piloting_planetary", rank);
+    setRank("piloting_space", rank);
+  } else {
+    element = "rank_" + skill;
+    document.getElementById(element).value = rank;
+  }
 }
 
 function resetSkill(skill) {
   setRank(skill, 0);
-  deactivateCareerSkill(skill);
+  updateCareerSkill(skill, false);
 }
 
 function updateCharacteristic(element, newVal) {
