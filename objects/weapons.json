@@ -17,6 +17,7 @@
 
   {"id":"eo1", "name":"Frag Grenade", "skill": "ranged_light", "damage":8, "crit":4, "range": "Short", "consumable":true},
   {"id":"eo2", "name":"Stun Grenade", "skill": "ranged_light", "damage":8, "crit":-1, "range": "Short", "consumable":true},
+  {"id":"eo3", "name":"AP Grenade", "skill": "ranged_light", "damage":16, "crit":3, "range": "Short", "consumable":true, "pierce": 3},
 
   {"id":"br1", "name":"Brass Knuckles", "skill": "brawl", "damage":1, "crit":4, "range": "Engaged"},
   {"id":"br2", "name":"Shock Gloves", "skill": "brawl", "damage":0, "crit":5, "range": "Engaged"},

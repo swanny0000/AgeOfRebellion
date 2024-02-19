@@ -6,12 +6,11 @@
 <head>
   <title>Age of Rebellion</title>
   <link rel="icon" type="image/png" href="./images/favicon.png">
-  <!-- <link rel="icon" type="image/x_icon" href="favicon.ico"> -->
 </head>
 <body>
   <div class="container" title="Character">
     <div class="row"><h2>Character</h2>
-      <select id="character" onchange="loadCharacter(this);">
+      <select id="character" onchange="loadCharacter(this.value);">
         <option style="display: none;">Select a character...</option>
         <option value="new">New Character</option>
         <option value="vendri">Vendri</option>

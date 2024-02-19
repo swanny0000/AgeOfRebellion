@@ -3,35 +3,35 @@
   "species": "Duros",
   "career": "Spy (Courier)",
   "specializations":[],
-  "characteristics": {
-    "soak": 2,
-    "wounds_threshold": 13,
-    "strain_threshold": 12,
-    "defense_ranged": 4,
-    "defense_melee": 4},
+  "characteristics": [
+    {"element":"soak", "value": 2}, 
+    {"element":"wounds_threshold", "value": 13}, 
+    {"element":"strain_threshold", "value": 12}, 
+    {"element":"defense_ranged", "value": 4},
+    {"element":"defense_melee", "value": 4}],
   "career_skills": [
-    {"name": "athletics"},
-    {"name": "computers"},
-    {"name": "cool"},
-    {"name": "coordination"},
-    {"name": "deception"},
-    {"name": "perception"},
-    {"name": "skulduggery"},
-    {"name": "stealth"},
-    {"name": "warfare"},
-    {"name": "streetwise"},
-    {"name": "vigilance"}
+    {"skill": "athletics"},
+    {"skill": "computers"},
+    {"skill": "cool"},
+    {"skill": "coordination"},
+    {"skill": "deception"},
+    {"skill": "perception"},
+    {"skill": "skulduggery"},
+    {"skill": "stealth"},
+    {"skill": "warfare"},
+    {"skill": "streetwise"},
+    {"skill": "vigilance"}
   ],
   "skills":[
-    {"computers":5},
-    {"deception":5}
+    {"skill": "computers", "rank": 5},
+    {"skill": "deception", "rank": 5}
   ],
   "talents":[],
   "experience": 100,
   "armor": {"id":"ar7"},
   "weapons":[
     {"id":"ew6"},
-    {"id":"me8"},
+    {"id":"me2"},
     {"id":"eo2", "count":1}
   ],
   "items":[]
