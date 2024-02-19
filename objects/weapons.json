@@ -1,0 +1,32 @@
+[
+  {"id":"ew1", "name":"Holdout Blaster", "skill": "ranged_light", "damage":5, "crit":4, "range": "Short"},
+  {"id":"ew2", "name":"Light Blaster Pistol", "skill": "ranged_light", "damage":5, "crit":4, "range": "Medium"},
+  {"id":"ew3", "name":"Blaster Pistol", "skill": "ranged_light", "damage":6, "crit":3, "range": "Medium"},
+  {"id":"ew4", "name":"Heavy Blaster Pistol", "skill": "ranged_light", "damage":7, "crit":3, "range": "Medium"},
+  {"id":"ew5", "name":"Blaster Carbine", "skill": "ranged_heavy", "damage":9, "crit":3, "range": "Medium"},
+  {"id":"ew6", "name":"Blaster Rifle", "skill": "ranged_heavy", "damage":9, "crit":3, "range": "Long"},
+  {"id":"ew7", "name":"Heavy Blaster Rifle", "skill": "ranged_heavy", "damage":10, "crit":3, "range": "Long"},
+  {"id":"ew8", "name":"Light Repeating Blaster", "skill": "ranged_heavy", "damage":11, "crit":3, "range": "Long"},
+  {"id":"ew9", "name":"Heavy Repeating Blaster", "skill": "gunnery", "damage":15, "crit":2, "range": "Long"},
+  {"id":"ew10", "name":"Ion Blaster", "skill": "ranged_light", "damage":10, "crit":5, "range": "Short"},
+  {"id":"ew11", "name":"Disruptor Pistol", "skill": "ranged_light", "damage":10, "crit":2, "range": "Short"},
+  {"id":"ew12", "name":"Disruptor Rifle", "skill": "ranged_heavy", "damage":10, "crit":2, "range": "Long"},
+
+  {"id":"st1", "name":"Slugthrower Pistol", "skill": "ranged_light", "damage":4, "crit":5, "range": "Short"},
+  {"id":"st2", "name":"Slugthrower Rifle", "skill": "ranged_heavy", "damage":7, "crit":5, "range": "Medium"},
+
+  {"id":"eo1", "name":"Frag Grenade", "skill": "ranged_light", "damage":8, "crit":4, "range": "Short", "consumable":true},
+  {"id":"eo2", "name":"Stun Grenade", "skill": "ranged_light", "damage":8, "crit":-1, "range": "Short", "consumable":true},
+
+  {"id":"br1", "name":"Brass Knuckles", "skill": "brawl", "damage":1, "crit":4, "range": "Engaged"},
+  {"id":"br2", "name":"Shock Gloves", "skill": "brawl", "damage":0, "crit":5, "range": "Engaged"},
+
+  {"id":"me1", "name":"Corellian Cutlass", "skill": "melee", "damage":2, "crit":3, "range": "Engaged"},
+  {"id":"me2", "name":"Combat Knife", "skill": "melee", "damage":1, "crit":3, "range": "Engaged"},
+  {"id":"me3", "name":"Force Pike", "skill": "melee", "damage":3, "crit":2, "range": "Engaged"},
+  {"id":"me4", "name":"Lightsaber", "skill": "lightsaber", "damage":10, "crit":1, "range": "Engaged"},
+  {"id":"me5", "name":"Truncheon", "skill": "melee", "damage":2, "crit":5, "range": "Engaged"},
+  {"id":"me6", "name":"Vibro-ax", "skill": "melee", "damage":3, "crit":2, "range": "Engaged"},
+  {"id":"me7", "name":"Vibroknife", "skill": "melee", "damage":1, "crit":2, "range": "Engaged"},
+  {"id":"me8", "name":"Vibrosword", "skill": "melee", "damage":2, "crit":2, "range": "Engaged"}
+]

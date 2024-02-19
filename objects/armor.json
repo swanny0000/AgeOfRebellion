@@ -1,0 +1,9 @@
+[
+  {"id":"ar1", "name":"Adverse Environment Gear", "defense": 0, "soak": 1},
+  {"id":"ar2", "name":"Armored Clothing", "defense": 1, "soak": 1},
+  {"id":"ar3", "name":"Heavy Battle Armor", "defense": 1, "soak": 2},
+  {"id":"ar4", "name":"Heavy Clothing", "defense": 0, "soak": 1},
+  {"id":"ar5", "name":"Laminate Armor", "defense": 0, "soak": 2},
+  {"id":"ar6", "name":"Personal Deflector Shield", "defense": 2, "soak": 0},
+  {"id":"ar7", "name":"Padded Armor", "defense": 0, "soak": 2}
+]

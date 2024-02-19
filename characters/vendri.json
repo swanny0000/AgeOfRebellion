@@ -1,0 +1,38 @@
+{ "id": "1",
+  "name": "Vendri",
+  "species": "Duros",
+  "career": "Spy (Courier)",
+  "specializations":[],
+  "characteristics": {
+    "soak": 2,
+    "wounds_threshold": 13,
+    "strain_threshold": 12,
+    "defense_ranged": 4,
+    "defense_melee": 4},
+  "career_skills": [
+    {"name": "athletics"},
+    {"name": "computers"},
+    {"name": "cool"},
+    {"name": "coordination"},
+    {"name": "deception"},
+    {"name": "perception"},
+    {"name": "skulduggery"},
+    {"name": "stealth"},
+    {"name": "warfare"},
+    {"name": "streetwise"},
+    {"name": "vigilance"}
+  ],
+  "skills":[
+    {"computers":5},
+    {"deception":5}
+  ],
+  "talents":[],
+  "experience": 100,
+  "armor": {"id":"ar7"},
+  "weapons":[
+    {"id":"ew6"},
+    {"id":"me8"},
+    {"id":"eo2", "count":1}
+  ],
+  "items":[]
+}

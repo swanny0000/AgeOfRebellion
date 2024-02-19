@@ -1,0 +1,18 @@
+input[type=number] {
+  text-align:center;
+  border-style: none;
+  outline: none;
+}
+input[type=text]{
+  border-style: none;
+  outline: none;
+}
+select {
+  border-style: none;
+  outline: none;
+}
+::-webkit-input-placeholder {
+  font-style: italic;
+  color: #CCCCCC;
+}
+

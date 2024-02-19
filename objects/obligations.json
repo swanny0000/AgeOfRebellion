@@ -6,19 +6,19 @@
   "description": "This Obligation can work in one of two ways: either the character is the target of a deep and personal betrayal, or the character is the one who betrayed others. Whether it’s as simple as a betrayed confidence or broken promise or as serious as treason or mutiny, the betrayal eats away at the character and affects his everyday life. The target of the betrayal may seek answers, compensation, or simply revenge."
   },
   {"id": 3, "name": "Blackmail",
-  "description": " Someone has discovered one of the PC’s dirty secrets and is using that knowledge for some sort of gain. To make matters worse, the blackmailer possesses evidence that could possibly leak out—a holovid, bank records, a weapon used during a crime, and so on. In order to keep the secret safe, the character must do what he is told, although the blackmailer is savvy enough to keep the demand simple, easy, or cheap enough to maintain the blackmail for as long as possible, generally money or favors. "
+  "description": "Someone has discovered one of the PC’s dirty secrets and is using that knowledge for some sort of gain. To make matters worse, the blackmailer possesses evidence that could possibly leak out—a holovid, bank records, a weapon used during a crime, and so on. In order to keep the secret safe, the character must do what he is told, although the blackmailer is savvy enough to keep the demand simple, easy, or cheap enough to maintain the blackmail for as long as possible, generally money or favors. "
   },
   {"id": 4, "name": "Bounty",
   "description": "For some reason, the character has a price on his head. This may be in the form of a legal warrant or a contract by criminals, collection agencies, or even someone who felt his honor violated in some way. What he did to earn this mark is up to his background, and the severity of his actions can be based on the size of his Obligation. "
   },
   {"id": 5, "name": "Criminal",
-  "description": " The character has a criminal record, or was accused of a crime (perhaps one he didn’t even commit), and is somehow embroiled in the legal system. Obligation may be settled by paying ongoing legal costs, making attempts to bury evidence, or efforts to prove his innocence."
+  "description": "The character has a criminal record, or was accused of a crime (perhaps one he didn’t even commit), and is somehow embroiled in the legal system. Obligation may be settled by paying ongoing legal costs, making attempts to bury evidence, or efforts to prove his innocence."
   },
   {"id": 6, "name": "Debt",
   "description": "The character owes someone a great deal, whether that debt consists of money or something else. Perhaps the PC has a huge gambling debt to a Hutt, is indebted to the Czerka Corporation for his starship, owes a wealthy family for patronage, or has some other serious financial obligation. To make matters worse, depending on who owns the debt, even fully paying it off might not get the character completely off the hook—if the character can get that money, he can surely get more. "
   },
   {"id": 7, "name": "Dutybound",
-  "description": ": The PC has a deep sense of duty that he feels compelled to fulfill, such as military service, making good on a contract, or following some sort of thieves’ code. Unlike the Oath Obligation (see below), a Dutybound character has some legal or ritualistic bind to an organization or cause making it extremely difficult or detrimental if he fails to live up to that commitment. "
+  "description": ":The PC has a deep sense of duty that he feels compelled to fulfill, such as military service, making good on a contract, or following some sort of thieves’ code. Unlike the Oath Obligation (see below), a Dutybound character has some legal or ritualistic bind to an organization or cause making it extremely difficult or detrimental if he fails to live up to that commitment. "
   },
   {"id": 8, "name": "Family",
   "description": "The character has deep ties with his family that require a great deal of time and attention. This could include the care and assistance of siblings or parents, the management of an inheritance, trust, or family business, or simply mediating between squabbling family members. "
