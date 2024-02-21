@@ -1,18 +1,103 @@
-input[type=number] {
-  text-align:center;
-  border-style: none;
-  outline: none;
-}
-input[type=text]{
-  border-style: none;
-  outline: none;
-}
-select {
-  border-style: none;
-  outline: none;
-}
-::-webkit-input-placeholder {
-  font-style: italic;
-  color: #CCCCCC;
+:root{
+  --skill-font-size: 16px;
+  --section-margin: 0 1% 20px 1%;
 }
 
+*{text-align: center;}
+body{
+  background-image: url(images/background.jpg);
+  background-size: cover;
+}
+
+.char_container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 2% 0 2%;
+  margin: var(--section-margin);
+}
+.char_div{
+  width: 17%;
+  padding: 0 4% 0 4%;
+  font-size: 17px;
+  font-weight: bold;
+}
+.char_val{
+  width: 50%;
+  font-size: 35px;
+  font-weight: normal;
+}
+.char_label_half{
+  width: 50%;
+  font-size: 12px;
+  font-weight: normal;
+}
+.char_div_2{
+  width: 12%;
+  padding: 0 3% 0 3%;
+  font-size: 20px;
+  font-weight: bold;
+}
+.char_label_full{
+  width: 100%;
+  font-size: 12px;
+  font-weight: normal;
+}
+.section_header{
+  width: 100%;
+  font-size: 10px;
+  font-weight: bold;
+}
+.skills_container{
+  margin: var(--section-margin);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+.skill_div{
+  margin: 0 1% 0 1%;
+  padding: 10px 15px 10px 15px;
+  flex-direction: column;
+  align-content: space-between;
+  background-color: rgba(223, 221, 221, 0.7);
+  border-radius: 20px;
+  width: 45%;
+}
+.skill_box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  font-size: var(--skill-font-size);
+  height: var(--skill-font-size);
+  padding-top: 2px;
+  border-bottom: black 1px dotted;
+}
+.skill_name{
+  padding-left: 4px;
+  border-right: 1px dashed gray;
+  width: 40%;
+  text-align: left;
+}
+.skill_career{
+  width: 70px;
+}
+.skill_rank{
+  font-weight: bold;
+  width: 70px;
+}
+.skill_dice_pool{
+  border-left: 1px dashed gray;
+  width: 30%;
+  text-align: center;
+}
+.skill_table{
+  border: solid black 1px;
+}
+
+.dice{
+  max-height: 100%;
+  width: auto;
+}
