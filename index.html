@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <link href="css.css" rel="stylesheet">
-<script src="index.js"></script>
-<html>
+<script src="index.js" type="module">import updateSheet from "./index.js";</script>
+<meta name="viewport" content="width=device-width" charset="utf-8">
+<html lang="en-US">
 <head>
   <title>Age of Rebellion</title>
   <link rel="icon" type="image/png" href="./images/favicon.png">
 </head>
+
 <body>
   <div id="TESTING" style="display: flex; align-content: flex-start;">
-    <input type="button" value="resetSheet" onclick="resetSheet();">
+    <input type="button" value="Reset Sheet" onclick="updateSheet();">
     <input type="button" value="addElement" onclick="addElement();">
+    <input type="button" value="createDicePool" onclick="createDicePool();">
   </div>
   <div class="container" id="character_info">
 
@@ -49,134 +52,134 @@
         <div class="skill_box" name="astrogation_box">
           <div class="skill_name">Astrogation (Int)</div>
           <input type="checkbox"  class="skill_career" id="career_astrogation" name="career_astrogation" disabled>
-          <div class="skill_rank" id="rank_astrogation">0</div>
-          <div class="skill_dice_pool" id="dicepool_astrogation">G</div>
+          <div class="skill_rank" id="rank_astrogation"></div>
+          <div class="skill_dice_pool" id="dicepool_astrogation"></div>
         </div>
         <div class="skill_box" name="athletics_box">
           <div class="skill_name">Athletics (Br)</div>
           <input type="checkbox"  class="skill_career" id="career_athletics" name="career_athletics" disabled>
-          <div class="skill_rank" id="rank_athletics">0</div>
-          <div class="skill_dice_pool" id="dicepool_athletics">G</div>
+          <div class="skill_rank" id="rank_athletics"></div>
+          <div class="skill_dice_pool" id="dicepool_athletics"></div>
         </div>
         <div class="skill_box" name="charm_box">
           <div class="skill_name">Charm (Pr)</div>
           <input type="checkbox"  class="skill_career" id="career_charm" name="career_charm" disabled>
-          <div class="skill_rank" id="rank_charm">0</div>
-          <div class="skill_dice_pool" id="dicepool_charm">G</div>
+          <div class="skill_rank" id="rank_charm"></div>
+          <div class="skill_dice_pool" id="dicepool_charm"></div>
         </div>
         <div class="skill_box" name="coercion_box">
           <div class="skill_name">Coercion (Will)</div>
           <input type="checkbox"  class="skill_career" id="career_coercion" name="career_coercion" disabled>
-          <div class="skill_rank" id="rank_coercion">0</div>
-          <div class="skill_dice_pool" id="dicepool_coercion">G</div>
+          <div class="skill_rank" id="rank_coercion"></div>
+          <div class="skill_dice_pool" id="dicepool_coercion"></div>
         </div>
         <div class="skill_box" name="computers_box">
           <div class="skill_name">Computers (Int)</div>
           <input type="checkbox"  class="skill_career" id="career_computers" name="career_computers" disabled>
-          <div class="skill_rank" id="rank_computers">0</div>
-          <div class="skill_dice_pool" id="dicepool_computers">G</div>
+          <div class="skill_rank" id="rank_computers"></div>
+          <div class="skill_dice_pool" id="dicepool_computers"></div>
         </div>
         <div class="skill_box" name="cool_box">
           <div class="skill_name">Cool (Pr)</div>
           <input type="checkbox"  class="skill_career" id="career_cool" name="career_cool" disabled>
-          <div class="skill_rank" id="rank_cool">0</div>
-          <div class="skill_dice_pool" id="dicepool_cool">G</div>
+          <div class="skill_rank" id="rank_cool"></div>
+          <div class="skill_dice_pool" id="dicepool_cool"></div>
         </div>
         <div class="skill_box" name="coordination_box">
           <div class="skill_name">Coordination (Ag)</div>
           <input type="checkbox"  class="skill_career" id="career_coordination" name="career_coordination" disabled>
-          <div class="skill_rank" id="rank_coordination">0</div>
-          <div class="skill_dice_pool" id="dicepool_coordination">G</div>
+          <div class="skill_rank" id="rank_coordination"></div>
+          <div class="skill_dice_pool" id="dicepool_coordination"></div>
         </div>
         <div class="skill_box" name="deception_box">
           <div class="skill_name">Deception (Cun)</div>
           <input type="checkbox"  class="skill_career" id="career_deception" name="career_deception" disabled>
-          <div class="skill_rank" id="rank_deception">0</div>
-          <div class="skill_dice_pool" id="dicepool_deception">G</div>
+          <div class="skill_rank" id="rank_deception"></div>
+          <div class="skill_dice_pool" id="dicepool_deception"></div>
         </div>
         <div class="skill_box" name="discipline_box">
           <div class="skill_name">Discipline (Will)</div>
           <input type="checkbox"  class="skill_career" id="career_discipline" name="career_discipline" disabled>
-          <div class="skill_rank" id="rank_discipline">0</div>
-          <div class="skill_dice_pool" id="dicepool_discipline">G</div>
+          <div class="skill_rank" id="rank_discipline"></div>
+          <div class="skill_dice_pool" id="dicepool_discipline"></div>
         </div>
         <div class="skill_box" name="leadership_box">
           <div class="skill_name">Leadership (Pr)</div>
           <input type="checkbox"  class="skill_career" id="career_leadership" name="career_leadership" disabled>
-          <div class="skill_rank" id="rank_leadership">0</div>
-          <div class="skill_dice_pool" id="dicepool_leadership">G</div>
+          <div class="skill_rank" id="rank_leadership"></div>
+          <div class="skill_dice_pool" id="dicepool_leadership"></div>
         </div>
         <div class="skill_box" name="mechanics_box">
           <div class="skill_name">Mechanics (Int)</div>
           <input type="checkbox"  class="skill_career" id="career_mechanics" name="career_mechanics" disabled>
-          <div class="skill_rank" id="rank_mechanics">0</div>
-          <div class="skill_dice_pool" id="dicepool_mechanics">G</div>
+          <div class="skill_rank" id="rank_mechanics"></div>
+          <div class="skill_dice_pool" id="dicepool_mechanics"></div>
         </div>
         <div class="skill_box" name="medicine_box">
           <div class="skill_name">Medicine (Int)</div>
           <input type="checkbox"  class="skill_career" id="career_medicine" name="career_medicine" disabled>
-          <div class="skill_rank" id="rank_medicine">0</div>
-          <div class="skill_dice_pool" id="dicepool_medicine">G</div>
+          <div class="skill_rank" id="rank_medicine"></div>
+          <div class="skill_dice_pool" id="dicepool_medicine"></div>
         </div>
         <div class="skill_box" name="negotiation_box">
           <div class="skill_name">Negotiation (Pr)</div>
           <input type="checkbox"  class="skill_career" id="career_negotiation" name="career_negotiation" disabled>
-          <div class="skill_rank" id="rank_negotiation">0</div>
-          <div class="skill_dice_pool" id="dicepool_negotiation">G</div>
+          <div class="skill_rank" id="rank_negotiation"></div>
+          <div class="skill_dice_pool" id="dicepool_negotiation"></div>
         </div>
         <div class="skill_box" name="perception_box">
           <div class="skill_name">Perception (Cun)</div>
           <input type="checkbox"  class="skill_career" id="career_perception" name="career_perception" disabled>
-          <div class="skill_rank" id="rank_perception">0</div>
-          <div class="skill_dice_pool" id="dicepool_perception">G</div>
+          <div class="skill_rank" id="rank_perception"></div>
+          <div class="skill_dice_pool" id="dicepool_perception"></div>
         </div>
         <div class="skill_box" name="piloting_planetary_box">
           <div class="skill_name">Piloting - Planetary (Ag)</div>
           <input type="checkbox"  class="skill_career" id="career_piloting_planetary" name="career_piloting_planetary" disabled>
-          <div class="skill_rank" id="rank_piloting_planetary">0</div>
-          <div class="skill_dice_pool" id="dicepool_piloting_planetary">G</div>
+          <div class="skill_rank" id="rank_piloting_planetary"></div>
+          <div class="skill_dice_pool" id="dicepool_piloting_planetary"></div>
         </div>
         <div class="skill_box" name="piloting_space_box">
           <div class="skill_name">Piloting - Space (Ag)</div>
           <input type="checkbox"  class="skill_career" id="career_piloting_space" name="career_piloting_space" disabled>
-          <div class="skill_rank" id="rank_piloting_space">0</div>
-          <div class="skill_dice_pool" id="dicepool_piloting_space">G</div>
+          <div class="skill_rank" id="rank_piloting_space"></div>
+          <div class="skill_dice_pool" id="dicepool_piloting_space"></div>
         </div>
         <div class="skill_box" name="resilience_box">
           <div class="skill_name">Resilience (Br)</div>
           <input type="checkbox"  class="skill_career" id="career_resilience" name="career_resilience" disabled>
-          <div class="skill_rank" id="rank_resilience">0</div>
-          <div class="skill_dice_pool" id="dicepool_resilience">G</div>
+          <div class="skill_rank" id="rank_resilience"></div>
+          <div class="skill_dice_pool" id="dicepool_resilience"></div>
         </div>
         <div class="skill_box" name="skulduggery_box">
           <div class="skill_name">Skulduggery (Cun)</div>
           <input type="checkbox"  class="skill_career" id="career_skulduggery" name="career_skulduggery" disabled>
-          <div class="skill_rank" id="rank_skulduggery">0</div>
-          <div class="skill_dice_pool" id="dicepool_skulduggery">G</div>
+          <div class="skill_rank" id="rank_skulduggery"></div>
+          <div class="skill_dice_pool" id="dicepool_skulduggery"></div>
         </div>
         <div class="skill_box" name="stealth_box">
           <div class="skill_name">Stealth (Ag)</div>
           <input type="checkbox"  class="skill_career" id="career_stealth" name="career_stealth" disabled>
-          <div class="skill_rank" id="rank_stealth">0</div>
-          <div class="skill_dice_pool" id="dicepool_stealth">G</div>
+          <div class="skill_rank" id="rank_stealth"></div>
+          <div class="skill_dice_pool" id="dicepool_stealth"></div>
         </div>
         <div class="skill_box" name="streetwise_box">
           <div class="skill_name">Streetwise (Cun)</div>
           <input type="checkbox"  class="skill_career" id="career_streetwise" name="career_streetwise" disabled>
-          <div class="skill_rank" id="rank_streetwise">0</div>
-          <div class="skill_dice_pool" id="dicepool_streetwise">G</div>
+          <div class="skill_rank" id="rank_streetwise"></div>
+          <div class="skill_dice_pool" id="dicepool_streetwise"></div>
         </div>
         <div class="skill_box" name="survival_box">
           <div class="skill_name">Survival (Cun)</div>
           <input type="checkbox"  class="skill_career" id="career_survival" name="career_survival" disabled>
-          <div class="skill_rank" id="rank_survival">0</div>
-          <div class="skill_dice_pool" id="dicepool_survival">G</div>
+          <div class="skill_rank" id="rank_survival"></div>
+          <div class="skill_dice_pool" id="dicepool_survival"></div>
         </div>
         <div class="skill_box" name="vigilance_box" style="border: none;">
           <div class="skill_name">Vigilance (Will)</div>
           <input type="checkbox"  class="skill_career" id="career_vigilance" name="career_vigilance" disabled>
-          <div class="skill_rank" id="rank_vigilance">0</div>
-          <div class="skill_dice_pool" id="dicepool_vigilance">G</div>
+          <div class="skill_rank" id="rank_vigilance"></div>
+          <div class="skill_dice_pool" id="dicepool_vigilance"></div>
         </div>
       </div>
     </div>
@@ -192,32 +195,32 @@
           <div class="skill_box" name="brawl_box">
             <div class="skill_name">Brawl (Br)</div>
             <input type="checkbox"  class="skill_career" id="career_brawl" name="career_brawl" disabled>
-            <div class="skill_rank" id="rank_brawl">0</div>
-            <div class="skill_dice_pool" id="dicepool_brawl"><img class="dice" src="images/diamond.png"></div>
+            <div class="skill_rank" id="rank_brawl"></div>
+            <div class="skill_dice_pool" id="dicepool_brawl"><img src="images/die_ability.png"></div>
           </div>
           <div class="skill_box" name="gunnery_box">
             <div class="skill_name">Gunnery (Ag)</div>
             <input type="checkbox"  class="skill_career" id="career_gunnery" name="career_gunnery" disabled>
-            <div class="skill_rank" id="rank_gunnery">0</div>
-            <div class="skill_dice_pool" id="dicepool_gunnery">G</div>
+            <div class="skill_rank" id="rank_gunnery"></div>
+            <div class="skill_dice_pool" id="dicepool_gunnery"><img src="images/die_ability.png"></div>
           </div>
           <div class="skill_box" name="melee_box">
             <div class="skill_name">Melee (Br)</div>
             <input type="checkbox"  class="skill_career" id="career_melee" name="career_melee" disabled>
-            <div class="skill_rank" id="rank_melee">0</div>
-            <div class="skill_dice_pool" id="dicepool_melee">G</div>
+            <div class="skill_rank" id="rank_melee"></div>
+            <div class="skill_dice_pool" id="dicepool_melee"></div>
           </div>
           <div class="skill_box" name="ranged_light_box">
             <div class="skill_name">Ranged - Light (Ag)</div>
             <input type="checkbox"  class="skill_career" id="career_ranged_light" name="career_ranged_light" disabled>
-            <div class="skill_rank" id="rank_ranged_light">0</div>
-            <div class="skill_dice_pool" id="dicepool_ranged_light">G</div>
+            <div class="skill_rank" id="rank_ranged_light"></div>
+            <div class="skill_dice_pool" id="dicepool_ranged_light"></div>
           </div>
           <div class="skill_box" name="ranged_heavy_box" style="border: none;">
             <div class="skill_name">Ranged - Light (Ag)</div>
             <input type="checkbox"  class="skill_career" id="career_ranged_heavy" name="career_ranged_heavy" disabled>
-            <div class="skill_rank" id="rank_ranged_heavy">0</div>
-            <div class="skill_dice_pool" id="dicepool_ranged_heavy">G</div>
+            <div class="skill_rank" id="rank_ranged_heavy"></div>
+            <div class="skill_dice_pool" id="dicepool_ranged_heavy"></div>
           </div>
         </div>
       </div>
@@ -229,50 +232,50 @@
           <div class="skill_box" name="core_worlds_box">
             <div class="skill_name">Core Worlds (Int)</div>
             <input type="checkbox"  class="skill_career" id="career_core_worlds" name="career_core_worlds" disabled>
-            <div class="skill_rank" id="rank_core_worlds">0</div>
-            <div class="skill_dice_pool" id="dicepool_core_worlds">G</div>
+            <div class="skill_rank" id="rank_core_worlds"></div>
+            <div class="skill_dice_pool" id="dicepool_core_worlds"></div>
           </div>
           <div class="skill_box" name="education_box">
             <div class="skill_name">Education (Int)</div>
             <input type="checkbox"  class="skill_career" id="career_education" name="career_education" disabled>
-            <div class="skill_rank" id="rank_education">0</div>
-            <div class="skill_dice_pool" id="dicepool_education">G</div>
+            <div class="skill_rank" id="rank_education"></div>
+            <div class="skill_dice_pool" id="dicepool_education"></div>
           </div>
           <div class="skill_box" name="lore_box">
             <div class="skill_name">Lore (Int)</div>
             <input type="checkbox"  class="skill_career" id="career_lore" name="career_lore" disabled>
-            <div class="skill_rank" id="rank_lore">0</div>
-            <div class="skill_dice_pool" id="dicepool_lore">G</div>
+            <div class="skill_rank" id="rank_lore"></div>
+            <div class="skill_dice_pool" id="dicepool_lore"></div>
           </div>
           <div class="skill_box" name="outer_rim_box">
             <div class="skill_name">Outer Rim (Int)</div>
             <input type="checkbox"  class="skill_career" id="career_outer_rim" name="career_outer_rim" disabled>
-            <div class="skill_rank" id="rank_outer_rim">0</div>
-            <div class="skill_dice_pool" id="dicepool_outer_rim">G</div>
+            <div class="skill_rank" id="rank_outer_rim"></div>
+            <div class="skill_dice_pool" id="dicepool_outer_rim"></div>
           </div>
           <div class="skill_box" name="underworld_box">
             <div class="skill_name">Underworld (Int)</div>
             <input type="checkbox"  class="skill_career" id="career_underworld" name="career_underworld" disabled>
-            <div class="skill_rank" id="rank_underworld">0</div>
-            <div class="skill_dice_pool" id="dicepool_underworld">G</div>
+            <div class="skill_rank" id="rank_underworld"></div>
+            <div class="skill_dice_pool" id="dicepool_underworld"></div>
           </div>
           <div class="skill_box" name="warfare_box">
             <div class="skill_name">Warfare (Int)</div>
             <input type="checkbox"  class="skill_career" id="career_warfare" name="career_warfare" disabled>
-            <div class="skill_rank" id="rank_warfare">0</div>
-            <div class="skill_dice_pool" id="dicepool_warfare">G</div>
+            <div class="skill_rank" id="rank_warfare"></div>
+            <div class="skill_dice_pool" id="dicepool_warfare"></div>
           </div>
           <div class="skill_box" name="xenology_box">
             <div class="skill_name">Xenology (Int)</div>
             <input type="checkbox"  class="skill_career" id="career_xenology" name="career_xenology" disabled>
-            <div class="skill_rank" id="rank_xenology">0</div>
-            <div class="skill_dice_pool" id="dicepool_xenology">G</div>
+            <div class="skill_rank" id="rank_xenology"></div>
+            <div class="skill_dice_pool" id="dicepool_xenology"></div>
           </div>
           <div class="skill_box" name="other_knowledge_box" style="border: none;">
             <div class="skill_name">Other: </div>
             <input type="checkbox"  class="skill_career" id="career_other_knowledge" name="career_other_knowledge" disabled>
-            <div class="skill_rank" id="rank_other_knowledge">0</div>
-            <div class="skill_dice_pool" id="dicepool_other_knowledge">G</div>
+            <div class="skill_rank" id="rank_other_knowledge"></div>
+            <div class="skill_dice_pool" id="dicepool_other_knowledge"></div>
           </div>
         </div>
       </div>
@@ -316,6 +319,13 @@
     </div>
   </div>
   <div class="section_header">WEAPONS</div>
-  <div class="container" id="weapons"></div>
+  <div class="container" id="weapons">
+
+  </div>
+  <div>This is an example of all of the types of symbols.
+    We have Success <img src="images/symbol_success.png"> and Failure <img src="images/symbol_failure.png"> symbols,
+    triumph <img src="images/symbol_triumph.png"> and despair <img src="images/symbol_despair.png"> symbols,
+    and advantage <img src="images/symbol_advantage.png"> and threat <img src="images/symbol_threat.png"> symbols.
+  </div>
 </body>
 </html>

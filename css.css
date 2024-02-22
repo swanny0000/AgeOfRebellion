@@ -8,7 +8,10 @@ body{
   background-image: url(images/background.jpg);
   background-size: cover;
 }
-
+img{
+  height: var(--skill-font-size);
+  width: auto;
+}
 .char_container{
   display: flex;
   flex-direction: row;
@@ -95,9 +98,4 @@ body{
 }
 .skill_table{
   border: solid black 1px;
-}
-
-.dice{
-  max-height: 100%;
-  width: auto;
 }

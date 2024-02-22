@@ -1,22 +1,58 @@
-//document.body.onload = resetSheet;
-let base_characteristics_list = ["brawn", "agility", "intellect", "cunning", "willpower", "presence"];
-let base_skill_list = ["astrogation","athletics","charm","coercion","computers","cool","coordination","deception","discipline","leadership","mechanics","medicine","negotiation","perception","piloting_planetary","piloting_space","resilience","skulduggery","stealth", "streetwise", "survival","vigilance", "brawl", "gunnery", "melee", "ranged_light", "ranged_heavy", "core_worlds", "education", "lore", "outer_rim", "underworld", "warfare", "xenology", "other_knowledge"];
-let custom_skill_list = ["custom_skill_1", "custom_skill_2", "custom_skill_3", "custom_skill_4", "custom_skill_5"];
+import * as Species from "./objects/species.js"
+import * as Skills from "./objects/skills.js"
+import * as Characteristics from "./objects/characteristics.js"
+import * as Armors from "./objects/armor.js"
+import * as Weapons from "./objects/weapons.js"
+
+let character = new Species.Bothan();
+console.log(character);
+updateSheet(character);
+
+export function updateSheet(character = "") {
+  if (character == "") {character = new Species.Base();}
+  updateSheetCharacteristics(character, Characteristics.base_characteristics_list);
+  updateSheetCharacteristics(character, Characteristics.derived_characteristic_list);
+  updateSheetSkills(character);
+  clearSubElements("weapons");
+}
+
+function updateSheetCharacteristics(character, vals) {
+  for (let i=0; i<vals.length; i++) {
+    var characteristic = vals[i];
+    document.getElementById(characteristic).textContent = character[characteristic];
+  }
+}
+
+function updateSheetSkills(character) {
+  for (let i=0; i<Skills.base_skill_list.length; i++) {
+    var skill = Skills.base_skill_list[i];
+    // update career checkbox
+    document.getElementById("career_" + skill).checked = character["career_" + skill];
+    //update rank number
+    var rank = character["rank_" + skill];
+    document.getElementById("rank_" + skill).textContent = character["rank_" + skill];
+    //calculate and update dice pool
+    var associated_char = Skills[skill].associated_characteristic;
+    var rank_assoc_char = character[associated_char];
+    setDicePool("dicepool_" + skill, Math.max(rank_assoc_char, rank), Math.min(rank_assoc_char, rank));
+  }
+}
 
 function resetSheet() {
-  pushTextToElementList(["soak", "wounds_current", "strain_current", "defense_ranged", "defense_melee"], 0);
+  pushTextToElementList(Characteristics.derived_characteristic_list, 0);
   pushTextToElementList(["wounds_threshold", "strain_threshold"], 10);
-  pushTextToElementList(base_characteristics_list, 1);
-  for (i=0; i<base_skill_list.length; i++) {
-    document.getElementById("career_" + base_skill_list[i]).checked = false;
-    pushTextToElement("rank_" + base_skill_list[i], 0);
-    pushTextToElement("dicepool_" + base_skill_list[i], "A");
+  pushTextToElementList(Characteristics.base_characteristics_list, 1);
+  
+  for (i=0; i<Skills.base_skill_list.length; i++) {
+    document.getElementById("career_" + Skills.base_skill_list[i]).checked = false;
+    pushTextToElement("rank_" + Skills.base_skill_list[i], 0);
+    setDicePool("dicepool_" + Skills.base_skill_list[i]);
   }
-  for (i=0; i<custom_skill_list.length; i++) {
-    pushTextToElement(custom_skill_list[i], "");
-    document.getElementById("career_" + custom_skill_list[i]).checked = false;
-    pushTextToElement("rank_" + custom_skill_list[i], "");
-    pushTextToElement("dicepool_" + custom_skill_list[i], "");
+  for (i=0; i<Skills.custom_skill_list.length; i++) {
+    pushTextToElement(Skills.custom_skill_list[i], "");
+    document.getElementById("career_" + Skills.custom_skill_list[i]).checked = false;
+    pushTextToElement("rank_" + Skills.custom_skill_list[i], "");
+    setDicePool("dicepool_" + Skills.custom_skill_list[i], 0);
   }
   clearSubElements("weapons");
 }
@@ -27,7 +63,26 @@ function pushTextToElement(element_id, value) {
 
 function pushTextToElementList(element_id_list, value) {
   for (i=0; i<element_id_list.length; i++){
-    pushTextToElement(element_id_list[i], value)
+    pushTextToElement(element_id_list[i], value);
+  }
+}
+
+function setDicePool(element_id, ability_die_count = 1, proficiency_die_count = 0) {
+  clearSubElements(element_id);
+  pushTextToElement(element_id, "");
+  //add proficiency die
+  for (let i=0; i<proficiency_die_count; i++) {
+    var proficiency_die = document.createElement("img");
+    proficiency_die.src = "./images/die_proficiency.png";
+    proficiency_die.alt = "proficiency dice";
+    document.getElementById(element_id).appendChild(proficiency_die);
+  }
+  //add ability die
+  for (let i=0; i<ability_die_count-proficiency_die_count; i++) {
+    var ability_die = document.createElement("img");
+    ability_die.src = "./images/die_ability.png";
+    ability_die.alt = "ability dice";
+    document.getElementById(element_id).appendChild(ability_die);
   }
 }
 
