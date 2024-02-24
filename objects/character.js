@@ -16,7 +16,9 @@ export const Characteristics = {
   },
   get base_characteristics() {
     var charList = [];
-    for (var characteristic in this.base_characteristics) {charList.push(characteristic);}
+    for (var characteristic in Object.keys(this.base_characteristics)) {
+      console.out(characteristic);
+      charList.push(characteristic);}
     return charList;
   },
   get derived_characteristics() {
@@ -30,25 +32,12 @@ import { Skills } from "./skills.js";
 import { Talents } from "./talents.js";
 
 export const Character = {
-  init() {
-    //create characteristics nodes
-    for (var characteristic of Characteristics.base_characteristics) {this[characteristic] = 1;}
-    for (var characteristic of Characteristics.base_characteristics) {this[characteristic] = 0;}
-    //create skills nodes
-    for (var skill of Skills.allSkills) {
-      this[skill] = {rank: 1, career: true};
-    }
-    //create talents nodes
-    
-    //create weapons, gear, and armor nodes
-    this.weapons = {};
-    this.armor = {};
-    this.gear = {}
-  },
+  /* 
   characteristics: {brawn: 1, agility: 1, intellect: 1, cunning: 1, willpower: 1, presence: 1,
     soak: 0, base_wounds_threshold:0, base_strain_threshold: 0, },
   experience: 0,
-  skills: {
+  
+    skills: {
     astrogation: {rank: 0, career: false},
     athletics: {rank: 0, career: false},
     brawl: {rank: 0, career: false},        
@@ -84,93 +73,68 @@ export const Character = {
     warfare: {rank: 0, career: false},
     xenology: {rank: 0, career: false}
   },
-  weapons: [],
-  talents: [],
-  addSkillRank: function(skill) {
-    if (this.skills[skill].rank < 5) {this.skills[skill].rank += 1;}
+  */
+  initializeCharacter: function() {
+    //create characteristics nodes
+    console.out("setting base chars");
+    for (var characteristic of Characteristics.base_characteristics) {this[characteristic] = 1;}
+    console.out("setting derived chars");
+    for (var characteristic of Characteristics.derived_characteristics) {this[characteristic] = 0;}
+    this.editBaseThresholds(10, 10);
+    //create skills and talents nodes
+    this.skills = {};
+    this.talents = {};
+    this.experience = 0;
+    //create weapons, gear, and armor nodes
+    this.weapons = {};
+    this.armor = {};
+    this.gear = {}
   },
-  getSkillRank: function(skill) {
-    if (Number.isInteger(this.skills[skill])) {return this.skills[skill];}
-    else {return 0;}
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-export class Base {
-  constructor(brawn = 1, agility = 1, intellect = 1, cunning = 1, willpower = 1, presence = 1) {
-    this.brawn = brawn;
-    this.agility = agility;
-    this.intellect = intellect;
-    this.cunning = cunning;
-    this.willpower = willpower;
-    this.presence = presence;
-    this.init();
-  }
-  init() {
-    this.calcSoak();
-    this.calcBaseWoundThreshold();
-    this.calcBaseStrainThreshold();
-    this.calcWoundThreshold();
-    this.calcStrainThreshold();
-    this.calcDefRanged();
-    this.calcDefMelee();
-    this.addStartingExperience();
-    this.addSkillNodes();
-  }
-  addStartingExperience() {this.experience = 100;}
-  addSkillNodes() {
-    for (var i=0; i<Skills.base_skill_list.length; i++) {
-      var skill = "rank_" + Skills.base_skill_list[i];
-      var career = "career_" + Skills.base_skill_list[i];
-      this[skill] = 0;
-      this[career] = false;
+  skills: {
+    getNewRankObject: function() {return {rank: 0, career:false}},
+    raiseRank: function(skill) {
+      if (this[skill] === undefined) {this[skill]= {rank: 0, career:false};}
+      if (this[skill].rank < 5) {this[skill].rank += 1;}
+    },
+    lowerRank: function(skill) {
+      if (this[skill] === undefined) {this[skill]= {rank: 0, career:false};}
+      else if (this.skills[skill].rank > 0) {this.skills[skill].rank -= 1;}
+    },
+    getRank: function(skill) {
+      if (this[skill] === undefined) {this[skill]= {rank: 0, career:false};}
+      if (Number.isInteger(this.skills[skill])) {return this.skills[skill];}
+      else {return 0;}
     }
-  }
-  updateCharacteristics() {
-    this.calcSoak();
-    this.calcWoundThreshold();
-    this.calcStrainThreshold();
-    this.calcDefRanged();
-    this.calcDefMelee();
-  }
-  calcSoak() {this.soak = this.brawn;}
-  calcBaseWoundThreshold(){this.base_wounds_threshold = 10 + this.brawn;}
-  calcWoundThreshold(){this.wounds_threshold = this.base_wounds_threshold;}
-  calcBaseStrainThreshold(){this.base_strain_threshold = 10 + this.willpower;}
-  calcStrainThreshold(){this.strain_threshold = this.base_strain_threshold;}
-  calcDefRanged() {this.defense_ranged = 0;}
-  calcDefMelee() {this.defense_melee = 0;}
-  addSkill(skill) {
-    var skill_rank = "rank_" + skill
-    if (this[skill_rank] < 5) {
-      this[skill_rank] += 1;
+  },
+  characteristics: {
+    setVal: function(characteristic, value, threshold=false) {
+      if (["Base Wound Threshold", "Base Strain Threshold"].includes(characteristic)) {return;}
+      else {this.characteristics[characteristic] = value;}
+    },
+    getVal: function(characteristic) {return this.characteristics[characteristic];},
+    editBaseThresholds: function(wounds, strain) {
+      if (Number.isInteger(wounds)) {this.setCharacteristic("Wound Threshold", wounds);}
+      if (Number.isInteger(strain)) {this.setCharacteristic("Strain Threshold", strain);}
+    },
+    reevaluate: {
+      soak: function() {
+        var soak = this.characteristic.get("Brawn");
+        this.characteristics.setVal("Soak", soak);
+      },
+      wounds_threshold: function() {
+        var wounds_threshold = this.characteristic.getVal("Base Wound Threshold");
+        this.characteristic.setVal("Wound Threshold", wounds_threshold)
+      },
+      strain_threshold: function() {
+        var wounds_threshold = this.characteristic.getVal("Base Strain Threshold");
+        this.characteristic.setVal("Strain Threshold", strain_threshold)
+      },
+      defense_ranged: function() {},
+      defense_melee: function() {}
     }
-  }
-  removeSkill(skill) {
-    if (this.skills[skill] > 0) {
-      this.skills[skill] -= 1;
-    }
-  }
-  addTalent(talent) {
-    var talent_rank = "rank_" + talent
-    if (this[talent_rank] < 5) {
-      this[talent_rank] += 1;
-    }
-  }
-  removeTalent(talent) {
-    if (this[talent] > 0) {
-      this[talent] -= 1;
-    }
-  }
+  },
+  talents: {
+    addTalent: function(talent) {},
+    removeTalent: function(talent) {},
+  } 
 }

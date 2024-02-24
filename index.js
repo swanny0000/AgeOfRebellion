@@ -12,3 +12,11 @@ console.log("Commando Skill List:", Careers.getSkillList("Commando"));
 console.log("Available Specializations for Spy and Diplomat:", Careers.getAvailableSpecializations(["Spy", "Diplomat"]));
 
 console.log("---FUNCTIONS VERIFIED---")
+
+
+Character.skills.raiseRank("Cool");
+Character.skills.raiseRank("Cool");
+Character.skills.raiseRank("Cool");
+Character.skills.raiseRank("Astrogation");
+Character.skills.lowerRank("Stealth");
+console.log(Character);
