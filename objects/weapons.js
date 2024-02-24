@@ -1,44 +1,53 @@
-class Weapon {
-  constructor(name, skill, damage, crit, range, consumable = false, pierce = 0, page_aoe = 0) {
-    this.name = name;
-    this.skill = skill;
-    this.damage = damage;
-    this.crit = crit;
-    this.range = range;
-    this.consumable = consumable;
-    this.pierce = pierce;
-    this.page_aoe = page_aoe;
+export const Weapons = {
+  weapons: {
+    "Holdout Blaster": {
+      skill: "Ranged (Light)",
+      damage: 5,
+      crit: 4,
+      range: "Short",
+      consumable: false,
+      pierce: 0,
+      page_aoe: 0
+    },
+    "": {}, //"Light Blaster Pistol", "ranged_light", 5, 4, "Medium");
+    "": {}, //"Blaster Pistol", "ranged_light", 6, 3, "Medium");
+    "": {}, //"Heavy Blaster Pistol", "ranged_light", 7, 3, "Medium");
+    "": {}, //"Blaster Carbine", "ranged_heavy", 9, 3, "Medium");
+    "": {}, //"Blaster Rifle", "ranged_heavy", 9, 3, "Long");
+    "": {}, //"Heavy Blaster Rifle", "ranged_heavy", 10, 3, "Long");
+    "": {}, //"Light Repeating Blaster", "ranged_heavy", 11, 3, "Long");
+    "": {}, //"Heavy Repeating Blaster", "gunnery", 15, 2, "Long");
+    "": {}, //"Ion Blaster", "ranged_light", 10, 5, "Short");
+    "": {}, //"Disruptor Pistol", "ranged_light", 10, 2, "Short");
+    "": {}, //"Disruptor Rifle", "ranged_heavy", 10, 2, "Long");
+    "": {}, //"Slugthrower Pistol", "ranged_light", 4, 5, "Short");
+    "": {}, //"Slugthrower Rifle", "ranged_heavy", 7, 5, "Medium");
+    "": {}, //"Frag Grenade", "ranged_light", 8, 4, "Short", true);
+    "": {}, //"Stun Grenade", "ranged_light", 8, "", "Short", true);
+    "": {}, //"AP Grenade", "ranged_light", 16, 3, "Short", true, 3);
+    "": {}, //"Brass Knuckles", "brawl", 1, 4, "Engaged");
+    "": {}, //"Shock Gloves", "brawl", 0, 5, "Engaged");
+    "": {}, //"Corellian Cutlass", "melee", 2, 3, "Engaged");
+    "": {}, //"Combat Knife", "melee", 1, 3, "Engaged");
+    "": {}, //"Force Pike", "melee", 3, 2, "Engaged");
+    "": {}, //"Lightsaber", "lightsaber", 10, 1, "Engaged");
+    "": {}, //"Truncheon", "melee", 2, 5, "Engaged");
+    "": {}, //"Vibro-ax", "melee", 3, 2, "Engaged");
+    "": {}, //"Vibroknife", "melee", 1, 2, "Engaged");
+    "": {} //"Vibrosword", "melee", 2, 2, "Engaged");
+  },
+  consumable: function(weapon) {
+    if (Object.keys(this.weapons[weapon]).includes("consumable")) {return this.weapons[weapon].consumable;}
+    else {return false}
+  },
+  pierce: function(weapon) {
+    if (Object.keys(this.weapons[weapon]).includes("pierce")) {return this.weapons[weapon].pierce;}
+    else {return 0}
+  },
+  page_aoe: function(weapon) {
+    if (Object.keys(this.weapons[weapon]).includes("page_aoe")) {return this.weapons[weapon].page_aoe;}
+    else {return 0}
   }
 }
 
-export const ew1 = new Weapon("Holdout Blaster", "ranged_light", 5, 4, "Short");
-export const ew2 = new Weapon("Light Blaster Pistol", "ranged_light", 5, 4, "Medium");
-export const ew3 = new Weapon("Blaster Pistol", "ranged_light", 6, 3, "Medium");
-export const ew4 = new Weapon("Heavy Blaster Pistol", "ranged_light", 7, 3, "Medium");
-export const ew5 = new Weapon("Blaster Carbine", "ranged_heavy", 9, 3, "Medium");
-export const ew6 = new Weapon("Blaster Rifle", "ranged_heavy", 9, 3, "Long");
-export const ew7 = new Weapon("Heavy Blaster Rifle", "ranged_heavy", 10, 3, "Long");
-export const ew8 = new Weapon("Light Repeating Blaster", "ranged_heavy", 11, 3, "Long");
-export const ew9 = new Weapon("Heavy Repeating Blaster", "gunnery", 15, 2, "Long");
-export const ew10 = new Weapon("Ion Blaster", "ranged_light", 10, 5, "Short");
-export const ew11 = new Weapon("Disruptor Pistol", "ranged_light", 10, 2, "Short");
-export const ew12 = new Weapon("Disruptor Rifle", "ranged_heavy", 10, 2, "Long");
 
-export const st1 = new Weapon("Slugthrower Pistol", "ranged_light", 4, 5, "Short");
-export const st2 = new Weapon("Slugthrower Rifle", "ranged_heavy", 7, 5, "Medium");
-
-export const eo1 = new Weapon("Frag Grenade", "ranged_light", 8, 4, "Short", true);
-export const eo2 = new Weapon("Stun Grenade", "ranged_light", 8, "", "Short", true);
-export const eo3 = new Weapon("AP Grenade", "ranged_light", 16, 3, "Short", true, 3);
-
-export const br1 = new Weapon("Brass Knuckles", "brawl", 1, 4, "Engaged");
-export const br2 = new Weapon("Shock Gloves", "brawl", 0, 5, "Engaged");
-
-export const me1 = new Weapon("Corellian Cutlass", "melee", 2, 3, "Engaged");
-export const me2 = new Weapon("Combat Knife", "melee", 1, 3, "Engaged");
-export const me3 = new Weapon("Force Pike", "melee", 3, 2, "Engaged");
-export const me4 = new Weapon("Lightsaber", "lightsaber", 10, 1, "Engaged");
-export const me5 = new Weapon("Truncheon", "melee", 2, 5, "Engaged");
-export const me6 = new Weapon("Vibro-ax", "melee", 3, 2, "Engaged");
-export const me7 = new Weapon("Vibroknife", "melee", 1, 2, "Engaged");
-export const me8 = new Weapon("Vibrosword", "melee", 2, 2, "Engaged");
