@@ -58,6 +58,7 @@ export const Careers = {
         }
       }
     }
+    console.log("Error retrieving skill list for", string);
     return "";
   },
   getAvailableSpecializations: function (careerList) {
