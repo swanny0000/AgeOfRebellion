@@ -1,6 +1,6 @@
 export const Skills = {
   skills: {
-    Astrogation: {charateristic: "Intellect", type: "General", page_aoe: 116},
+    Astrogation: {characteristic: "Intellect", type: "General", page_aoe: 116},
     Athletics: {characteristic: "Brawn", type:"General", page_aoe:117},
     Brawl: {characteristic: "Brawn", type:"Combat", page_aoe:131},
     Charm: {characteristic: "Presence", type:"General", page_aoe:117},

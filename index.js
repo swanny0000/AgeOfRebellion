@@ -16,11 +16,12 @@ console.log("Knowledge Skills:", Skills.skillsOfType("Knowledge"));
 
 console.log("---FUNCTIONS VERIFIED---")
 Character.init();
-//Character.setSpecies("Bothan");
-Character.addCareer("Diplomat");
-Character.addSpecialization("Disruptor");
-Character.raiseRank("cool");
-Character.lowerRank("stealth");
+Character.raiseRank("Brawl"); console.log("ADDING BRAWL");
+Character.lowerRank("Stealth"); console.log("LOWERING STEALTH");
+//Character.setSpecies("Droid");
+//Character.addCareer("Diplomat");
+//Character.addSpecialization("Disruptor");
+
 console.log(Character);
 
 Page_Functions.updateSheet(Character);

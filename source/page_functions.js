@@ -22,23 +22,23 @@ export function updateSheet(character = "") {
 function updateSheetCharacteristics() {
   var characteristics = Characteristics.list_all;
   for (var i=0; i<characteristics.length; i++) {
-    var characteristic = characteristics[i];
+    const characteristic = characteristics[i];
     document.getElementById(characteristic).textContent = Character.getVal(characteristic);
   }
 }
 
 function updateSheetSkills(character) {
-  for (let i=0; i<Skills.all_skills.length; i++) {
-    var skill = Skills.all_skills[i];
+  for (var i=0; i<Skills.all_skills.length; i++) {
+    const skill = Skills.all_skills[i];
     // update career checkbox
-    document.getElementById("career_" + skill).checked = character["career_" + skill];
+    document.getElementById("career_" + skill).checked = character.isCareer(skill);
     //update rank number
-    var rank = character["rank_" + skill];
-    document.getElementById("rank_" + skill).textContent = character["rank_" + skill];
+    const rank = character.getRank(skill);
+    document.getElementById("rank_" + skill).textContent = character.getRank(skill);
     //calculate and update dice pool
-    var associated_char = Skills.associated_characteristic(skill);
-    var rank_assoc_char = character[associated_char];
-    setDicePool("dicepool_" + skill, Math.max(rank_assoc_char, rank), Math.min(rank_assoc_char, rank));
+    const associated_char = Skills.associated_characteristic(skill);
+    const val_assoc_char = character.getVal(associated_char);
+    setDicePool("dicepool_" + skill, Math.max(val_assoc_char, rank), Math.min(val_assoc_char, rank));
   }
 }
 
@@ -46,15 +46,15 @@ export function setDicePool(element_id, ability_die_count = 1, proficiency_die_c
   clearSubElements(element_id);
   pushTextToElement(element_id, "");
   //add proficiency die
-  for (let i=0; i<proficiency_die_count; i++) {
-    var proficiency_die = document.createElement("img");
+  for (var i=0; i<proficiency_die_count; i++) {
+    const proficiency_die = document.createElement("img");
     proficiency_die.src = "./images/die_proficiency.png";
     proficiency_die.alt = "proficiency dice";
     document.getElementById(element_id).appendChild(proficiency_die);
   }
   //add ability die
-  for (let i=0; i<ability_die_count-proficiency_die_count; i++) {
-    var ability_die = document.createElement("img");
+  for (var i=0; i<ability_die_count-proficiency_die_count; i++) {
+    const ability_die = document.createElement("img");
     ability_die.src = "./images/die_ability.png";
     ability_die.alt = "ability dice";
     document.getElementById(element_id).appendChild(ability_die);
@@ -73,6 +73,6 @@ function pushTextToElement(element_id, value) {
 }
 
 function clearSubElements(element_id) {
-  var fields = document.getElementById(element_id).children;
+  const fields = document.getElementById(element_id).children;
   for (var i = fields.length-1; i >= 0; i--) { fields[i].remove(); }
 }
