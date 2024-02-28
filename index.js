@@ -13,15 +13,23 @@ console.log("Commando Skill List:", Careers.getSkillList("Commando"));
 console.log("Available Specializations for Spy and Diplomat:", Careers.getAvailableSpecializations(["Spy", "Diplomat"]));
 console.log(Skills);
 console.log("Knowledge Skills:", Skills.skillsOfType("Knowledge"));
-
+console.log(Talents);
+console.log("Brace:",
+  "\nRanked?",Talents.isRanked("Brace"),
+  "\nActivation:", Talents.getActivation("Brace"),
+  "\nActivation Type:", Talents.getActivationType("Brace"));
 console.log("---FUNCTIONS VERIFIED---")
-Character.init();
-Character.raiseRank("Brawl"); console.log("ADDING BRAWL");
-Character.lowerRank("Stealth"); console.log("LOWERING STEALTH");
-//Character.setSpecies("Droid");
-//Character.addCareer("Diplomat");
-//Character.addSpecialization("Disruptor");
 
+Character.init();
+//Character.setSpecies("Droid");
+Character.addCareer("Diplomat");
+Character.addSpecialization("Agitator");
+Character.addTalent("Swift");Character.addTalent("Swift");
 console.log(Character);
+console.log(Character.active_talents);
+console.log(Character.purchaseCharacteristicIncrease("Cunning", true), Character.experience);
+console.log(Character.purchaseSkillRankIncrease("Streetwise", true), Character.experience);
+console.log(Character.purchaseSkillRankIncrease("Streetwise", true), Character.experience);
+
 
 Page_Functions.updateSheet(Character);

@@ -54,5 +54,6 @@ export const Species = {
   starting_talents: function(species) {
     try {return this.species[species].starting_talents;}
     catch (error) {return [""];}
-  }
+  },
+  getStartingExperience: function(species) {return this.species[species].starting_experience;}
 }

@@ -46,6 +46,7 @@ import { Skills } from "./skills.js";
 import { Talents } from "./talents.js";
 import { Species } from "./species.js";
 import { Armor } from "./armor.js";
+import { Careers } from "./careers.js";
 
 export const Character = {
   skills: {
@@ -58,11 +59,23 @@ export const Character = {
     setCareer: function(skill, isCareer = true) {this[skill].career = isCareer;}
   },
   talents: {
-    init: function(talent) {
-      if (Talents.isRanked(talent)) {this[talent] = {rank: 1};}
-      else {this[talent] = {};}
+    init: function(talent) {this[talent] = {rank: 1};},
+    addTalent: function(talent) {
+      if (!Object.hasOwnProperty(this, talent)) {this.init(talent);}
+      else if (Talents.isRanked(talent)) {this.addRank(talent);}
     },
-    getRank: function(talent) {},
+    addRank: function(talent) {
+      if (!Object.hasOwnProperty(this, talent)) {return;}
+      else if (Talents.isRanked(talent)) {this[talent].rank += 1;}
+    },
+    removeRank: function(talent) {
+      if (!Object.hasOwnProperty(this, talent)) {return;}
+      else if (Talents.isRanked(talent)) {this[talent].rank -= 1;}
+    },
+    getRank: function(talent) {
+      if (!Object.hasOwnProperty(this, talent)) {return 0;}
+      else {return this[talent].rank;}
+    },
     delete: function(talent) {delete this[talent];}
   },
   characteristics: {
@@ -70,8 +83,8 @@ export const Character = {
     getVal: function(characteristic) {return this[characteristic];}
   },
   Armor: "",
-  init: function() {this.setSpecies("Bothan")},
-  setSpecies: function(species) {
+  init: function() {this.setSpecies()},
+  setSpecies: function(species="Bothan") {
     this.Species = species;
     //create characteristics nodes
     for (const characteristic of Characteristics.list_base) {
@@ -86,7 +99,8 @@ export const Character = {
       for (const skill of Species.starting_skills(this.Species)) {this.raiseRank(skill);}
     }
     if (Species.hasStartingTalents(this.Species)) {
-      for (const talent of Species.starting_talents(this.Species)) {this.createTalent(talent);}
+      for (const talent of Species.starting_talents(this.Species)) {this.talents.init(talent);}
+    this.experience = Species.getStartingExperience(this.Species);
     }
   },
   setBaseWoundsThreshold: function(wounds) {
@@ -108,7 +122,7 @@ export const Character = {
   getVal: function(element) {
     if (Characteristics.list_all.includes(element)) {return this.characteristics.getVal(element);}
     else if (Characteristics.list_threshold.includes(element)) {return this.characteristics.getVal(element);}
-    else {return "";}
+    else {return 0;}
   },
   raiseRank: function(element) {
     if (Skills.all_skills.includes(element)) {this.skills.addRank(element);}
@@ -125,8 +139,45 @@ export const Character = {
   isCareer: function(skill) {
     if (Skills.all_skills.includes(skill)) {return this.skills.isCareer(skill);}
   },
-  createTalent: function(talent) {if (Talents.all_talents.includes(talent)) {this.talents.init(talent);}},
+  addTalent: function(talent) {this.talents.addTalent(talent);},
   removeTalent: function(talent) {this.talents.delete(talent);},
-  addCareer: function(career) {},
-  addSpecialization: function(Specialization) {}
+  get active_talents() {
+    var list = [];
+    for (const talent in this.talents) {list.push(talent);}
+    return list;
+  },
+  refresh: function() {
+    this.calulateDerivedCharacteristics();
+  },
+  addCareer: function(career) {
+    for (var skill of Careers.getSkillList(career)) {this.skills.setCareer(skill);}
+  },
+  addSpecialization: function(specialization) {
+    for (var skill of Careers.getSkillList(specialization)) {this.skills.setCareer(skill);}
+  },
+  spendExperience: function(cost) {
+    if (this.experience < cost) {return false;}
+    else {this.experience -= cost; return true;}
+  },
+  purchaseCharacteristicIncrease: function(characteristic, isCharacterCreation=false) {
+    if (!isCharacterCreation) {return false;}
+    const current_val = this.getVal(characteristic);
+    const cost = 10 * (current_val + 1);
+    if (this.spendExperience(cost)) {
+      this.setVal(characteristic, current_val + 1);
+      return true;
+    } else {return false;}
+  },
+  purchaseSkillRankIncrease: function(skill, isCharacterCreation=false) {
+    const current_rank = this.getRank(skill);
+    if (current_rank > 1 && isCharacterCreation) {return false;}
+    const cost = 5 * (current_rank + 1);
+    if (!this.isCareer(skill)) {cost += 5};
+    if (this.spendExperience(cost)) {
+      this.raiseRank(skill);
+      return true;
+    } else {return false;}
+  },
+  purchaseTalent: function(talent) {},
+  purchaseSpecialization: function(specialization) {}
 }
