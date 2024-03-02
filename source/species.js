@@ -20,12 +20,69 @@ export const Species = {
         {"Mechanical Being": ""}
       ]
     },
-    Duros: {},
-    Gran: {},
-    Human: {},
-    Ithorian: {},
-    "Mon Calamari": {},
-    Sullustan: {}
+    Duros: {
+      Brawn: 1, Agility: 2, Intellect: 3, Cunning: 2, Willpower: 2, Presence: 2,
+      wound_threshold_base: 11, wound_threshold_char: "Brawn",
+      strain_threshold_base: 10, strain_threshold_char: "Willpower",
+      starting_experience: 100,
+      starting_skills: ["Piloting (Space)"],
+      abilities: [
+        {"Special Abilities": "Duros begin the game with one rank in Piloting (Space). They still may not train Piloting (Space) above rank 2 during character creation."},
+        {"Intuitive Navigation": "Duros may add <<advantage>> to all Astrogation checks they make."}
+      ]
+    },
+    Gran: {
+      Brawn: 2, Agility: 2, Intellect: 2, Cunning: 1, Willpower: 2, Presence: 3,
+      wound_threshold_base: 10, wound_threshold_char: "Brawn",
+      strain_threshold_base: 9, strain_threshold_char: "Willpower",
+      starting_experience: 100,
+      starting_skills: ["Charm"],
+      abilities: [
+        {"Special Abilities": "Gran begin the game with one rank in Charm of Negotiation. They still may not train Charm of Negotiation above rank 2 during character creation."},
+        {"Enhanced Vision": ""}
+      ]
+    },
+    Human: {
+      Brawn: 2, Agility: 2, Intellect: 2, Cunning: 2, Willpower: 2, Presence: 2,
+      wound_threshold_base: 10, wound_threshold_char: "Brawn",
+      strain_threshold_base: 10, strain_threshold_char: "Willpower",
+      starting_experience: 110,
+      starting_skills: ["Astrogation", "Athletics"],
+      abilities: [
+        {"Special Abilities": ""},
+        {"Enhanced Vision": ""}
+      ]
+    },
+    Ithorian: {
+      Brawn: 2, Agility: 1, Intellect: 2, Cunning: 2, Willpower: 3, Presence: 2,
+      wound_threshold_base: 9, wound_threshold_char: "Brawn",
+      strain_threshold_base: 12, strain_threshold_char: "Willpower",
+      starting_experience: 90,
+      starting_skills: ["Survival"],
+      abilities: [
+        {"Special Abilities": "Ithorians begin the game with one rank in Survival. They still may not train Survival above rank 2 during character creation."},
+        {"Ithorian Bellow": ""}
+      ]
+    },
+    "Mon Calamari": {
+      Brawn: 2, Agility: 2, Intellect: 3, Cunning: 1, Willpower: 2, Presence: 2,
+      wound_threshold_base: 10, wound_threshold_char: "Brawn",
+      strain_threshold_base: 10, strain_threshold_char: "Willpower",
+      starting_experience: 100,
+      starting_skills: ["Education"],
+      abilities: [
+        {"Special Abilities": "Mon Calamari begin the game with one rank in Knowledge (Education). They still may not train Knowledge (Education) above rank 2 during character creation."},
+        {"Amphibious": "Mon Calamari can breathe underwater without penalty and never suffer movement penalities for travelling through water."}
+      ]
+    },
+    Sullustan: {
+      Brawn: 2, Agility: 3, Intellect: 2, Cunning: 1, Willpower: 2, Presence: 2,
+      wound_threshold_base: 10, wound_threshold_char: "Brawn",
+      strain_threshold_base: 10, strain_threshold_char: "Willpower",
+      starting_experience: 100,
+      starting_skills: ["Astrogation"],
+      abilities: [{"Special Abilities": "Ithorians begin the game with one rank in Astrogation. They still may not train Astrogation above rank 2 during character creation."}]
+    }
   },
   get_base_characteristic: function(species, characteristic) {return this.species[species][characteristic];},
   calcSoak: function() {},

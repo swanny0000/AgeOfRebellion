@@ -1,11 +1,11 @@
 export const Characteristics = {
   base_characteristics: {
-    Brawn: {description: "", page_aoe: 23},
-    Agility: {description: "", page_aoe: 23},
-    Intellect: {description: "", page_aoe: 23},
-    Cunning: {description: "", page_aoe: 23},
-    Willpower: {description: "", page_aoe: 23},
-    Presence: {description: "", page_aoe: 23}
+    Brawn: {description: "", page_aoe: 23, short:"Br"},
+    Agility: {description: "", page_aoe: 23, short:"Ag"},
+    Intellect: {description: "", page_aoe: 23, short:"Int"},
+    Cunning: {description: "", page_aoe: 23, short:"Cun"},
+    Willpower: {description: "", page_aoe: 23, short:"Will"},
+    Presence: {description: "", page_aoe: 23, short:"Pr"}
   },
   derived_characteristics: {
     Soak: {description: "", page_aoe: 221},
@@ -39,6 +39,9 @@ export const Characteristics = {
     for (const characteristic in this.base_characteristics) {list.push(characteristic);}
     for (const characteristic in this.derived_characteristics) {list.push(characteristic);}
     return list;
+  },
+  getShort: function(characteristic) {
+    return this.base_characteristics[characteristic].short;
   }
 }
 
@@ -159,24 +162,46 @@ export const Character = {
     if (this.experience < cost) {return false;}
     else {this.experience -= cost; return true;}
   },
+  refundExperience: function(cost) {
+    this.experience += cost;
+  },
   purchaseCharacteristicIncrease: function(characteristic, isCharacterCreation=false) {
-    if (!isCharacterCreation) {return false;}
     const current_val = this.getVal(characteristic);
+    if (!isCharacterCreation && current_val < 5) {return false;}
     const cost = 10 * (current_val + 1);
     if (this.spendExperience(cost)) {
+      console.log("Purchased",characteristic,"for",cost,"exp. Remaining Exp:",this.experience)
       this.setVal(characteristic, current_val + 1);
       return true;
     } else {return false;}
   },
+  refundCharacteristicIncrease: function(characteristic, isCharacterCreation=false) {
+    const current_val = this.getVal(characteristic);
+    if (!isCharacterCreation || current_val <= 1 ) {return false;}
+    const cost = 10 * current_val;
+    this.setVal(characteristic, current_val - 1);
+    this.refundExperience(cost);
+    console.log("Refunded",characteristic,"for",cost,"exp. Remaining Exp:",this.experience)
+    return true;
+  },
   purchaseSkillRankIncrease: function(skill, isCharacterCreation=false) {
     const current_rank = this.getRank(skill);
     if (current_rank > 1 && isCharacterCreation) {return false;}
-    const cost = 5 * (current_rank + 1);
+    let cost = 5 * (current_rank + 1);
     if (!this.isCareer(skill)) {cost += 5};
     if (this.spendExperience(cost)) {
       this.raiseRank(skill);
       return true;
     } else {return false;}
+  },
+  refundSkillRankIncrease: function(skill) {
+    const current_rank = this.getRank(skill);
+    if (current_rank < 1) {return false;}
+    let cost = 5 * current_rank;
+    if (!this.isCareer(skill)) {cost += 5};
+    this.lowerRank(skill);
+    this.refundExperience(cost);
+    return true;
   },
   purchaseTalent: function(talent) {},
   purchaseSpecialization: function(specialization) {}

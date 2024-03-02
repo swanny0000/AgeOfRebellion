@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<link href="css.css" rel="stylesheet">
+<link href="css_old.css" rel="stylesheet">
 <script src="index.js" type="module"></script>
 <meta name="viewport" content="width=device-width" charset="utf-8">
 <html lang="en-US">
@@ -9,13 +9,13 @@
 </head>
 
 <body>
-  <div class="skicky" id="TESTING" style="display: flex; align-content: flex-start;">
-    <input type="button" value="Reset Sheet" onclick="updateSheet();">
-    <input type="button" value="addElement" onclick="addElement();">
-    <input type="button" value="createDicePool" onclick="createDicePool();">
+  <div class="sticky" id="TESTING" style="display: flex; align-content: flex-start;">
+    <button id="showOverlay">Spend Experience</button>
+    <button id="editSheet">Edit Sheet</button>
+    <button id="noEditSheet" hidden>Done Editing Sheet</button>
   </div>
   <div class="container" id="character_info">
-
+    
   </div>
   <div class="container" id="characteristics">
     <div class="char_container" name="derived_characteristics">
@@ -31,12 +31,32 @@
         <div style="display: flex;"><div class="char_label_half">RANGED</div><div class="char_label_half">MELEE</div></div></div></div>
     <div class="section_header">CHARACTERISTICS</div>
     <div class="char_container" name="base_characteristics">
-      <div class="char_div_2"><div class="char_val" style="width: 100%;" id="Brawn">1</div><div class="char_label_full">BRAWN</div></div>
-      <div class="char_div_2"><div class="char_val" style="width: 100%;" id="Agility">1</div><div class="char_label_full">AGILITY</div></div>
-      <div class="char_div_2"><div class="char_val" style="width: 100%;" id="Intellect">1</div><div class="char_label_full">INTELLECT</div></div>
-      <div class="char_div_2"><div class="char_val" style="width: 100%;" id="Cunning">1</div><div class="char_label_full">CUNNING</div></div>
-      <div class="char_div_2"><div class="char_val" style="width: 100%;" id="Willpower">1</div><div class="char_label_full">WILLPOWER</div></div>
-      <div class="char_div_2"><div class="char_val" style="width: 100%;" id="Presence">1</div><div class="char_label_full">PRESENCE</div></div>
+      <div class="char_div_2">
+        <button class="rank_button" id="Brawn_down" hidden>+</button>
+        <div class="char_val" style="display: inline;" id="Brawn">1</div>
+        <button class="rank_button" id="Brawn_up" hidden>+</button>
+        <div class="char_label_full">BRAWN</div>
+      </div>
+      <div class="char_div_2">
+        <div class="char_val" style="width: 100%;" id="Agility">1</div>
+        <div class="char_label_full">AGILITY</div>
+      </div>
+      <div class="char_div_2">
+        <div class="char_val" style="width: 100%;" id="Intellect">1</div>
+        <div class="char_label_full">INTELLECT</div>
+      </div>
+      <div class="char_div_2">
+        <div class="char_val" style="width: 100%;" id="Cunning">1</div>
+        <div class="char_label_full">CUNNING</div>
+      </div>
+      <div class="char_div_2">
+        <div class="char_val" style="width: 100%;" id="Willpower">1</div>
+        <div class="char_label_full">WILLPOWER</div>
+      </div>
+      <div class="char_div_2">
+        <div class="char_val" style="width: 100%;" id="Presence">1</div>
+        <div class="char_label_full">PRESENCE</div>
+      </div>
     </div>
   </div>
   <div class="section_header">SKILLS</div>
@@ -52,7 +72,11 @@
         <div class="skill_box" name="Astrogation_box">
           <div class="skill_name">Astrogation (Int)</div>
           <input type="checkbox"  class="skill_career" id="career_Astrogation" name="career_Astrogation" disabled>
-          <div class="skill_rank" id="rank_Astrogation"></div>
+          <div>
+            <button class="rank_button" id="Astrogation_down" hidden>-</button>
+            <div class="skill_rank" id="rank_Astrogation"></div>
+            <button class="rank_button" id="Astrogation_up" hidden>+</button>
+          </div>
           <div class="skill_dice_pool" id="dicepool_Astrogation"></div>
         </div>
         <div class="skill_box" name="Athletics_box">
@@ -326,6 +350,14 @@
     We have Success <img src="images/symbol_success.png"> and Failure <img src="images/symbol_failure.png"> symbols,
     triumph <img src="images/symbol_triumph.png"> and despair <img src="images/symbol_despair.png"> symbols,
     and advantage <img src="images/symbol_advantage.png"> and threat <img src="images/symbol_threat.png"> symbols.
+  </div>
+  <div id="spendExp_background">
+    <div id="spendExp_box">
+      <div>Level Up!</div>
+      <br>
+      <div><div>Current EXP: </div><div id="currentEXP">0</div>
+      <button id="hideOverlay">Done2</button>
+    </div>
   </div>
 </body>
 </html>

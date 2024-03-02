@@ -23,11 +23,11 @@ img{
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 2% 0 2%;
   margin: var(--section-margin);
 }
-.char_div_derived{
+.char_div{
   width: 17%;
   padding: 0 4% 0 4%;
   font-size: 17px;
@@ -43,7 +43,7 @@ img{
   font-size: 12px;
   font-weight: normal;
 }
-.char_div_base{
+.char_div_2{
   width: 12%;
   padding: 0 3% 0 3%;
   font-size: 20px;
@@ -64,18 +64,16 @@ img{
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
 }
 .skill_div{
   margin: 0 1% 0 1%;
   padding: 10px 15px 10px 15px;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-content: space-between;
   background-color: rgba(223, 221, 221, 0.7);
   border-radius: 20px;
   width: 45%;
-  flex-basis: 100%;
 }
 .skill_box{
   display: flex;
@@ -86,51 +84,50 @@ img{
   padding-top: 2px;
   border-bottom: black 1px dotted;
 }
-.skill_career{
-  height: 100%;
-}
-.skill_rank{
-  font-weight: bold;
-}
-.skill_dice_pool{
-  width: 30%;
-  display: flex;
-  flex-flow: row nowrap;
-  text-align: center;
-  justify-content: center;
-}
-.skill_table {
-  width: 100%;
-}
-thead{
-  color: gray;
-  border: none;
-  font-size: smaller;
-  font-style: italic;
-  width: 100%;
-}
-tbody {
-  outline: solid black 1px;
-  empty-cells: show;
-  width: 100%;
-}
-.cell_skill_title {
+.skill_name{
   padding-left: 4px;
   border-right: 1px dashed gray;
   width: 40%;
-  min-width: 200px;
   text-align: left;
 }
-.cell_skill_career {
-  justify-content: center;
+.skill_career{
+  width: 70px;
 }
-.cell_skill_rank {
-  width: 5%;
+.skill_rank{
+  font-weight: bold;
+  width: 70px;
+  display: inline;
 }
-.cell_skill_dicepool{
+.skill_dice_pool{
   border-left: 1px dashed gray;
-  width: 100%;
+  width: 30%;
+  text-align: center;
+}
+.skill_table{
+  border: solid black 1px;
+}
+#spendExp_background {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: default; /* Add a pointer on hover */
   display: flex;
-  flex-flow: row nowrap;
   justify-content: center;
+  align-content: center;
+}
+#spendExp_box {
+  background-color: beige;
+  z-index: 3;
+  width: 50%;
+  height: 50%;
+}
+.rank_button {
+  font-size: smaller;
 }

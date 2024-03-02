@@ -1,22 +1,13 @@
 import { Character, Characteristics } from "./character.js";
 import { Skills } from "./skills.js";
 
-export function resetSheet() {
-  pushTextToElementList(Characteristics.list_base, 0);
-  pushTextToElementList(Characteristics.list_derived, 0);
-  var skill_list = Skills.all_skills
-  for (var i=0; i<skill_list.length; i++) {
-    var skill = skill_list[i];
-    document.getElementById("career_" + skill).checked = false;
-    pushTextToElement("rank_" + skill, "");
-    setDicePool("dicepool_" + skill);
-  }
-}
-
 export function updateSheet(character = "") {
   if (character == "") {Character.init();}
-  updateSheetCharacteristics();
-  updateSheetSkills(character);
+  try {
+    updateSheetCharacteristics();
+    updateSheetSkills(character);
+  } catch (error) {console.log(error)}
+  
 }
 
 function updateSheetCharacteristics() {
