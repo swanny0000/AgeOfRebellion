@@ -88,16 +88,16 @@ export const Species = {
   calcSoak: function() {},
   calcBaseWoundsThreshold: function(character) {
     try {
-      const base = this.get_base_characteristic(character.Species, "wound_threshold_base");
-      const add = character.getVal(this.get_base_characteristic(character.Species, "wound_threshold_char"));
+      const base = this.get_base_characteristic(character.species, "wound_threshold_base");
+      const add = character.getCharVal(this.get_base_characteristic(character.species, "wound_threshold_char"));
       return base + add;
     }
     catch (error) {console.log(error); return 0;}
   },
   calcBaseStrainThreshold: function(character) {
     try {
-      const base = this.get_base_characteristic(character.Species, "strain_threshold_base");
-      const add = character.getVal(this.get_base_characteristic(character.Species, "strain_threshold_char"));
+      const base = this.get_base_characteristic(character.species, "strain_threshold_base");
+      const add = character.getCharVal(this.get_base_characteristic(character.species, "strain_threshold_char"));
       return base + add;
     }
     catch (error) {console.log(error); return 0;}
@@ -112,5 +112,9 @@ export const Species = {
     try {return this.species[species].starting_talents;}
     catch (error) {return [""];}
   },
-  getStartingExperience: function(species) {return this.species[species].starting_experience;}
+  getStartingExperience: function(species) {return this.species[species].starting_experience;},
+  isValid: function(species) {
+    if (this.species.hasOwnProperty(species)) {return true;}
+    else {return false;}
+  }
 }

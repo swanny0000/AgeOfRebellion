@@ -52,6 +52,17 @@ export const Careers = {
       return this[career].skill_list;
     }
   },
+  isValid: function(string) {
+    for (const career in this.careers) {
+      if (string == career) {return true;}
+      else {
+        for (const specialization in this.careers[career].specializations) {
+          if (string == specialization) {return true;}
+        }
+      }
+    }
+    return false;
+  },
   getSkillList: function(string) {
     for (const career in this.careers) {
       if (string == career) {return this.careers.getSkillList(career);}

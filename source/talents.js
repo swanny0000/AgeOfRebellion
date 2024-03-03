@@ -188,6 +188,7 @@ export const Talents = {
       else {return null;}
     }
   },
+  isValid: function(string) {if (this.talents.hasOwnProperty(string)) {return true;} else {return false;}},
   get all_talents() {
     var list = [];
     for (var talent in this.talents) {list.push(talent);}

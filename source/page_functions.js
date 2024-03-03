@@ -1,37 +1,32 @@
-import { Character, Characteristics } from "./character.js";
+import { Character } from "./character.js";
+import { Characteristics } from "./characteristics.js";
 import { Skills } from "./skills.js";
 
-export function updateSheet(character = "") {
-  if (character == "") {Character.init();}
-  try {
-    updateSheetCharacteristics();
-    updateSheetSkills(character);
-  } catch (error) {console.log(error)}
-  
-}
-
-function updateSheetCharacteristics() {
+export function updateCharacteristics(character) {
   var characteristics = Characteristics.list_all;
   for (var i=0; i<characteristics.length; i++) {
     const characteristic = characteristics[i];
-    document.getElementById(characteristic).textContent = Character.getVal(characteristic);
+    document.getElementById(characteristic).textContent = character.getCharVal(characteristic);
   }
 }
 
-function updateSheetSkills(character) {
+export function updateSkills(character) {
   for (var i=0; i<Skills.all_skills.length; i++) {
     const skill = Skills.all_skills[i];
     // update career checkbox
-    document.getElementById("career_" + skill).checked = character.isCareer(skill);
+    document.getElementById("career_" + skill).checked = character.isCareerSkill(skill);
     //update rank number
-    const rank = character.getRank(skill);
-    document.getElementById("rank_" + skill).textContent = character.getRank(skill);
+    const rank = character.getSkillRank(skill);
+    document.getElementById("rank_" + skill).textContent = character.getSkillRank(skill);
     //calculate and update dice pool
     const associated_char = Skills.associated_characteristic(skill);
-    const val_assoc_char = character.getVal(associated_char);
+    const val_assoc_char = character.getCharVal(associated_char);
     setDicePool("dicepool_" + skill, Math.max(val_assoc_char, rank), Math.min(val_assoc_char, rank));
   }
 }
+
+export function updateTalents(character) {}
+
 
 export function setDicePool(element_id, ability_die_count = 1, proficiency_die_count = 0) {
   clearSubElements(element_id);
@@ -52,18 +47,29 @@ export function setDicePool(element_id, ability_die_count = 1, proficiency_die_c
   }
 }
 
-function pushTextToElementList(element_id_list, value) {
-  for (var i=0; i<element_id_list.length; i++){
-    pushTextToElement(element_id_list[i], value)
-    pushTextToElement(element_id_list[i], value);
-  }
-}
-
-function pushTextToElement(element_id, value) {
+export function pushTextToElement(element_id, value) {
   document.getElementById(element_id).textContent = value;
 }
 
 function clearSubElements(element_id) {
   const fields = document.getElementById(element_id).children;
   for (var i = fields.length-1; i >= 0; i--) { fields[i].remove(); }
+}
+
+export function makeButtonsVisible(visible=false) {
+  //loop through all base char, and skills and un-hide up and down buttons
+  for (const char of Characteristics.list_base) {
+    makeButtonVisible(document.getElementById(char + "_down"), visible);
+    makeButtonVisible(document.getElementById(char + "_up"), visible);
+  }
+  for (const skill of Skills.all_skills) {
+    makeButtonVisible(document.getElementById(skill + "_down"), visible);
+    makeButtonVisible(document.getElementById(skill + "_up"), visible);
+  }
+}
+
+function makeButtonVisible(btn, visble=false) {
+  if (visble) {btn.removeAttribute("hidden");
+  } else {btn.setAttribute("hidden", "hidden");
+  }
 }

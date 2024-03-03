@@ -1,4 +1,5 @@
-import { Character, Characteristics } from "./character.js";
+import { Character } from "./character.js";
+import { Characteristics } from "./characteristics.js";
 import { Skills } from "./skills.js";
 
 export function buildPage() {
@@ -284,22 +285,3 @@ function buildItems() {
 }
 
 import * as Page_Functions from "./page_functions.js"
-
-export function addEventListeners() {
-  for (const characteristic of Characteristics.list_base) {
-    document.getElementById(characteristic+"_down").addEventListener("click",function() {refundChar(characteristic)});
-    document.getElementById(characteristic+"_up").addEventListener("click",function() {purchaseChar(characteristic)});
-  }
-  for (const skill of Skills.all_skills) {
-   //document.getElementById(skill + "_down").addEventListener("click",refundRank(skill));
-    //document.getElementById(skill + "_up").addEventListener("click",purchaseRank(skill));
-  }
-}
-
-function purchaseChar(characteristic) {
-  Character.purchaseCharacteristicIncrease(characteristic, true)}
-  Page_Functions.updateSheet(Character);
-function refundChar(characteristic) {
-  Character.refundCharacteristicIncrease(characteristic, true)}
-function purchaseRank(skill) {Character.purchaseSkillRankIncrease(skill)}
-function refundRank(skill) {Character.refundSkillRankIncrease(skill)}

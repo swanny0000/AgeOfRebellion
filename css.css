@@ -15,8 +15,11 @@ img{
 .sticky{
     position: sticky;
     top: 0px;
-    justify-content: end;
-    padding: 10px 0px;
+    right: 0px;
+    width: min-content;
+    float: right;
+    text-wrap: nowrap;
+    z-index: 2;
 }
 .char_container{
   display: flex;

@@ -1,31 +1,41 @@
 import { Skills } from "./source/skills.js";
 import { Talents } from "./source/talents.js";
 import { Species } from "./source/species.js";
-import { Character, Characteristics } from "./source/character.js";
+import { Character } from "./source/character.js";
 import {Careers} from "./source/careers.js";
 import * as Armors from "./source/armor.js";
 import * as Weapons from "./source/weaponsOLD.js";
 import * as Page_Functions from "./source/page_functions.js";
-import { buildPage, addEventListeners } from "./source/pageBuilder.js";
+import { buildPage } from "./source/pageBuilder.js";
+import { Characteristics } from "./source/characteristics.js";
 
-buildPage()
-
-Character.init();
-Character.setSpecies("Duros");
-Character.addCareer("Spy");
-Character.addSpecialization("Infiltrator");
-console.log(Character);
-
-Page_Functions.updateSheet(Character);
-
+buildPage();
 addEventListeners();
+var character = new Character("Character Name", "Duros");
+character.setCareer("Spy");
+character.addSpecialization("Infiltrator");
+console.log(character);
 
 
-document.getElementById("editSheet").addEventListener("click", toggleEdit);
+var editToggle = true; editSheet()
+document.getElementById("editSheet").addEventListener("click", editSheet);
 
-function toggleEdit() {
-  document.getElementById("editSheet").innerHTML = "Done editing"
-  //loop through all base char, and skills and un-hide up and down buttons
+function editSheet() {
+  editToggle = !editToggle;
+  if (editToggle) {document.getElementById("editSheet").innerHTML = "Done Spending"}
+  else {document.getElementById("editSheet").innerHTML = "Spend Experience"}
+  Page_Functions.makeButtonsVisible(editToggle);
 }
 
+var isCharacterCreation = true;
 
+function addEventListeners() {
+  for (const characteristic of Characteristics.list_base) {
+    document.getElementById(characteristic+"_down").addEventListener("click",function() {character.refundChar(characteristic, isCharacterCreation);});
+    document.getElementById(characteristic+"_up").addEventListener("click",function() {character.buyChar(characteristic, isCharacterCreation);});
+  }
+  for (const skill of Skills.all_skills) {
+    document.getElementById(skill + "_down").addEventListener("click",function() {character.refundRank(skill)});
+    document.getElementById(skill + "_up").addEventListener("click",function() {character.buyRank(skill, isCharacterCreation);});
+  }
+}
