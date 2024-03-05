@@ -4,7 +4,7 @@ import { Species } from "./source/species.js";
 import { Character } from "./source/character.js";
 import {Careers} from "./source/careers.js";
 import * as Armors from "./source/armor.js";
-import * as Weapons from "./source/weaponsOLD.js";
+import * as Weapons from "./source/weapons.js";
 import * as Page_Functions from "./source/page_functions.js";
 import { buildPage } from "./source/pageBuilder.js";
 import { Characteristics } from "./source/characteristics.js";
@@ -38,4 +38,5 @@ function addEventListeners() {
     document.getElementById(skill + "_down").addEventListener("click",function() {character.refundRank(skill)});
     document.getElementById(skill + "_up").addEventListener("click",function() {character.buyRank(skill, isCharacterCreation);});
   }
+  document.getElementById("armor").addEventListener("change",function() {character.setArmor(document.getElementById("armor").value)})
 }

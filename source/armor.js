@@ -19,5 +19,10 @@ export const Armor = {
       var defense = this.armor[armor].defense;
       return defense;
     } catch (error) {return 0;}
+  },
+  get list_all() {
+    let list = [];
+    for (const option in this.armor) {list.push(option);}
+    return list;
   }
 }

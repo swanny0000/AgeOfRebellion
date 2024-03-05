@@ -135,4 +135,8 @@ export class Character {
     else {this.experience -= cost; return true;}
   }
   refundExperience(cost) {this.experience += cost;}
+  setArmor(armor) {
+    this.armor = armor;
+    this.refresh();
+  }
 }

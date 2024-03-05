@@ -1,6 +1,8 @@
 import { Character } from "./character.js";
 import { Characteristics } from "./characteristics.js";
 import { Skills } from "./skills.js";
+import * as Page_Functions from "./page_functions.js"
+import { Armor } from "./armor.js";
 
 export function buildPage() {
   buildCharacterHeader();
@@ -11,7 +13,33 @@ export function buildPage() {
 
 function buildCharacterHeader() {
   const page_div = document.getElementById("character_info");
+  const name_header = newDiv("", "char_header_name", "CHARACTER");
+  const name = newInput("char_name", "char_header_name_value", "Vendri");
+  page_div.appendChild(name_header); page_div.appendChild(name);
+  page_div.appendChild(newDiv("", "horizontal_line"));
+
+  const species_div = newDiv("", "char_header_div")
+  const species_header = newDiv("", "char_header", "SPECIES");
+  const species = newDiv("species", "char_header_value", "Duros");
+  species_div.appendChild(species_header); species_div.appendChild(species);
+  page_div.appendChild(species_div);
+  page_div.appendChild(newDiv("", "horizontal_line"));
+
+  const career_div = newDiv("", "char_header_div")
+  const career_header = newDiv("", "char_header", "CAREER");
+  const career = newDiv("career", "char_header_value", "Spy");
+  career_div.appendChild(career_header); career_div.appendChild(career);
+  page_div.appendChild(career_div);
+  page_div.appendChild(newDiv("", "horizontal_line"));
+
+  const spec_list_div = newDiv("", "char_header_div")
+  const spec_list_header = newDiv("", "char_header", "SPECIALIZATION TREES");
+  const spec_list = newDiv("specializations", "char_header_value", "Infiltrator");
+  spec_list_div.appendChild(spec_list_header); spec_list_div.appendChild(spec_list);
+  page_div.appendChild(spec_list_div);
+  page_div.appendChild(newDiv("", "horizontal_line"));
 }
+
 
 function buildCharacteristics() {
   //derived characteristics section
@@ -42,9 +70,23 @@ function newDiv(div_id="", div_class="", div_text="", div_style="") {
   return div;
 }
 
-function newInput(inp_id, inp_class="", inp_value="", inp_style="") {
+function newInput(inp_id, inp_class="", inp_value="", inp_style="", inp_type="") {
   const input = document.createElement("input");
   input.setAttribute("id", inp_id);
+  if (inp_class != "") {input.setAttribute("class", inp_class);}
+  if (inp_style != "") {input.setAttribute("style", inp_style);}
+  if (inp_value != "") {input.setAttribute("value", inp_value);}
+  if (inp_type == "number") {
+    input.setAttribute("type", "number")
+    input.setAttribute("min", "0");
+  }
+  return input;
+}
+
+function newCurrentValue(inp_id, inp_class="", inp_value="", inp_style="") {
+  const input = document.createElement("input");
+  input.setAttribute("id", inp_id);
+  input.setAttribute("min", "0");
   if (inp_class != "") {input.setAttribute("class", inp_class);}
   if (inp_style != "") {input.setAttribute("style", inp_style);}
   if (inp_value != "") {input.setAttribute("value", inp_value);}
@@ -81,14 +123,32 @@ function buildSoakDiv() {
   const soak_val = newDiv("Soak", "char_val", "0");
   soak_val.setAttribute("style", "width:100%")
   soak_div.appendChild(soak_val);
+  soak_div.appendChild(createArmorOptions());
   return soak_div;
+}
+
+function createArmorOptions() {
+  const armor_div = document.createElement("select");
+  armor_div.appendChild(addOption("No Armor", ""));
+  for (const armor of Armor.list_all) {
+    armor_div.appendChild(addOption(armor));
+  }
+  armor_div.setAttribute("id", "armor");
+  return armor_div;
+}
+
+function addOption(option, elementValue=option) {
+  const element = document.createElement("option");
+  element.setAttribute("value", elementValue);
+  element.appendChild(document.createTextNode(option));
+  return element;
 }
 
 function buildThresholdDiv(type) {
   const threshold_div = newDiv( "", "char_div_derived", type.toUpperCase());
   const val_div = newDiv( "", "", "", "display: flex;");
   val_div.appendChild(newDiv(type + " Threshold", "char_val", "10", "width: 50%"));
-  val_div.appendChild(newInput(type + "_current", "char_val", "0", "width: 50%"));
+  val_div.appendChild(newInput(type + "_current", "char_val", "0", "width: 50%", "number"));
   threshold_div.appendChild(val_div);
   const label_div = newDiv( "", "", "", "display: flex;");
   label_div.appendChild(newDiv( "", "char_label_half", "THRESHOLD"));
@@ -284,4 +344,4 @@ function buildItems() {
   page_div.appendChild(div);
 }
 
-import * as Page_Functions from "./page_functions.js"
+
