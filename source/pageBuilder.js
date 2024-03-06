@@ -3,6 +3,8 @@ import { Characteristics } from "./characteristics.js";
 import { Skills } from "./skills.js";
 import * as Page_Functions from "./page_functions.js"
 import { Armor } from "./armor.js";
+import { Species } from "./species.js";
+import { Careers } from "./careers.js";
 
 export function buildPage() {
   buildCharacterHeader();
@@ -20,15 +22,13 @@ function buildCharacterHeader() {
 
   const species_div = newDiv("", "char_header_div")
   const species_header = newDiv("", "char_header", "SPECIES");
-  const species = newDiv("species", "char_header_value", "Duros");
-  species_div.appendChild(species_header); species_div.appendChild(species);
+  species_div.appendChild(species_header); species_div.appendChild(createSpeciesOptions());
   page_div.appendChild(species_div);
   page_div.appendChild(newDiv("", "horizontal_line"));
 
   const career_div = newDiv("", "char_header_div")
   const career_header = newDiv("", "char_header", "CAREER");
-  const career = newDiv("career", "char_header_value", "Spy");
-  career_div.appendChild(career_header); career_div.appendChild(career);
+  career_div.appendChild(career_header); career_div.appendChild(createCareerOptions());
   page_div.appendChild(career_div);
   page_div.appendChild(newDiv("", "horizontal_line"));
 
@@ -40,6 +40,24 @@ function buildCharacterHeader() {
   page_div.appendChild(newDiv("", "horizontal_line"));
 }
 
+function createSpeciesOptions() {
+  const species_div = document.createElement("select");
+  for (const species of Species.list_all) {
+    species_div.appendChild(addOption(species));
+  }
+  species_div.setAttribute("id", "species");
+  return species_div;
+}
+
+function createCareerOptions() {
+  const career_div = document.createElement("select");
+  career_div.appendChild(addOption("Select a career...", "", false));
+  for (const career of Careers.list_all) {
+    career_div.appendChild(addOption(career));
+  }
+  career_div.setAttribute("id", "career");
+  return career_div;
+}
 
 function buildCharacteristics() {
   //derived characteristics section
@@ -80,16 +98,6 @@ function newInput(inp_id, inp_class="", inp_value="", inp_style="", inp_type="")
     input.setAttribute("type", "number")
     input.setAttribute("min", "0");
   }
-  return input;
-}
-
-function newCurrentValue(inp_id, inp_class="", inp_value="", inp_style="") {
-  const input = document.createElement("input");
-  input.setAttribute("id", inp_id);
-  input.setAttribute("min", "0");
-  if (inp_class != "") {input.setAttribute("class", inp_class);}
-  if (inp_style != "") {input.setAttribute("style", inp_style);}
-  if (inp_value != "") {input.setAttribute("value", inp_value);}
   return input;
 }
 
@@ -137,10 +145,14 @@ function createArmorOptions() {
   return armor_div;
 }
 
-function addOption(option, elementValue=option) {
+function addOption(option, elementValue=option, selectable=true) {
   const element = document.createElement("option");
   element.setAttribute("value", elementValue);
   element.appendChild(document.createTextNode(option));
+  if (selectable != true) {
+    element.setAttribute("disabled", "true");
+    element.setAttribute("selected", "true");
+  }
   return element;
 }
 

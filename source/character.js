@@ -32,6 +32,24 @@ export class Character {
     this.experience = Species.getStartingExperience(this.species);
     this.refresh();
   }
+  setSpecies(species) {
+    this.species = species;
+    for (const skill of Skills.all_skills) {this.setSkillRank(skill, 0);}
+    for (const characteristic of Characteristics.list_base) {
+      this.setCharVal(characteristic, Species.get_base_characteristic(this.species, characteristic));
+    }
+    this.setCharVal("Base Wounds Threshold", Species.calcBaseWoundsThreshold(this));
+    this.setCharVal("Base Strain Threshold", Species.calcBaseStrainThreshold(this));
+    this.updateDerivedChar();
+    if (Species.hasStartingSkills(this.species)) {
+      for (const skill of Species.starting_skills(this.species)) {this.setSkillRank(skill, 1);}
+    }
+    if (Species.hasStartingTalents(this.species)) {
+      for (const talent of Species.starting_talents(this.species)) {this.addTalent(talent);}
+    }
+    this.experience = Species.getStartingExperience(this.species);
+    this.refresh();
+  }
   setCharVal(characteristic, value, isCharCreate) {
     this.characteristics[characteristic] = value;
     if (isCharCreate) {
@@ -57,6 +75,8 @@ export class Character {
   getSkillRank(skill) {return this.skills[skill].rank;}
   setCareerSkill(skill, value=true) {this.skills[skill].career = value;}
   isCareerSkill(skill) {return this.skills[skill].career;}
+  addTalent(talent) {this.talents[talent] = true;}
+  removeTalent(talent) {this.talents[talent] = false;}
   buyChar(char, isCharCreate=false) {
     if (!isCharCreate) {return;}
     let currVal = this.getCharVal(char);
@@ -101,17 +121,18 @@ export class Character {
   }
   buyTalent(talent) {
     if (!Talents.isValid(talent)) {return;}
-    this.talents[talent] = true;
+    this.addTalent(talent);
     this.refresh();
   }
   refundTalent(talent) {
     if (!Talents.isValid(talent)) {return;}
-    this.talents[talent] = false;
+    this.removeTalent(talent);
     this.refresh();
   }
   setCareer(career) {
     if (!Careers.isValid(career)) {return;}
     this.career = career;
+    for (const skill of Skills.all_skills) {this.setCareerSkill(skill, false);}
     for (const skill of Careers.getSkillList(career)) {this.setCareerSkill(skill, true);}
     this.refresh();
   }
@@ -126,7 +147,8 @@ export class Character {
     if (!Careers.isValid(spec)) {return;}
     if (!this.specializations.hasOwnProperty(spec)) {return;}
     this.specializations[spec] = false;
-    for (const skill of Careers.getSkillList(spec)) {this.setCareerSkill(skill, false);}
+    this.setCareer(this.career);
+    for (const specialization of this.specializations) {this.addSpecialization(specialization);}
     //what about cases where a career or another spec also gives these career skills?
     this.refresh();
   }

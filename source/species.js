@@ -116,5 +116,10 @@ export const Species = {
   isValid: function(species) {
     if (this.species.hasOwnProperty(species)) {return true;}
     else {return false;}
+  },
+  get list_all() {
+    let list = [];
+    for (const species in this.species) {list.push(species);}
+    return list;
   }
 }

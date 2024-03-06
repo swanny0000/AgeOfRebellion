@@ -12,8 +12,6 @@ import { Characteristics } from "./source/characteristics.js";
 buildPage();
 addEventListeners();
 var character = new Character("Character Name", "Duros");
-character.setCareer("Spy");
-character.addSpecialization("Infiltrator");
 console.log(character);
 
 
@@ -38,5 +36,8 @@ function addEventListeners() {
     document.getElementById(skill + "_down").addEventListener("click",function() {character.refundRank(skill)});
     document.getElementById(skill + "_up").addEventListener("click",function() {character.buyRank(skill, isCharacterCreation);});
   }
-  document.getElementById("armor").addEventListener("change",function() {character.setArmor(document.getElementById("armor").value)})
+  document.getElementById("armor").addEventListener("change",function() {character.setArmor(document.getElementById("armor").value);});
+  document.getElementById("species").addEventListener("change", function() {character.setSpecies(document.getElementById("species").value);});
+  document.getElementById("career").addEventListener("change", function() {character.setCareer(document.getElementById("career").value);});
+
 }

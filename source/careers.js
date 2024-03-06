@@ -47,9 +47,6 @@ export const Careers = {
         Scout: {skill_list: ["Athletics", "Medicine", "Piloting (Planetary)", "Survival"]},
         Slicer: {skill_list: ["Computers", "Education", "Underworld", "Stealth"]}
       }
-    },
-    getSkillList: function(career) {
-      return this[career].skill_list;
     }
   },
   isValid: function(string) {
@@ -65,10 +62,14 @@ export const Careers = {
   },
   getSkillList: function(string) {
     for (const career in this.careers) {
-      if (string == career) {return this.careers.getSkillList(career);}
+      if (string == career) {
+        return this.careers[career].skill_list;
+      }
       else {
         for (const specialization in this.careers[career].specializations) {
-          if (string == specialization) {return this.careers[career].specializations[specialization].skill_list;}
+          if (string == specialization) {
+            return this.careers[career].specializations[specialization].skill_list;
+          }
         }
       }
     }
@@ -85,5 +86,10 @@ export const Careers = {
       }
     }
     return availableSpecializations;
+  },
+  get list_all() {
+    var list = [];
+    for (const career in this.careers) {list.push(career);}
+    return list;
   }
 }
