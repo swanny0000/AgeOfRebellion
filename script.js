@@ -12,6 +12,8 @@ import { Characteristics } from "./source/characteristics.js";
 buildPage();
 addEventListeners();
 var character = new Character("Character Name", "Duros");
+character.addTalent("Grit");
+character.addTalent("Stalker");
 console.log(character);
 
 

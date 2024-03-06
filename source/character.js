@@ -76,7 +76,12 @@ export class Character {
   setCareerSkill(skill, value=true) {this.skills[skill].career = value;}
   isCareerSkill(skill) {return this.skills[skill].career;}
   addTalent(talent) {this.talents[talent] = true;}
-  removeTalent(talent) {this.talents[talent] = false;}
+  removeTalent(talent) {delete this.talents[talent];}
+  availableTalents() {
+    let list = [];
+    for (const talent in this.talents) {list.push(talent);}
+    return list;
+  }
   buyChar(char, isCharCreate=false) {
     if (!isCharCreate) {return;}
     let currVal = this.getCharVal(char);
