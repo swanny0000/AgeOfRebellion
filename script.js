@@ -25,6 +25,9 @@ function editSheet() {
   if (editToggle) {document.getElementById("editSheet").innerHTML = "Done Spending"}
   else {document.getElementById("editSheet").innerHTML = "Spend Experience"}
   Page_Functions.makeButtonsVisible(editToggle);
+
+  if (editToggle) {document.getElementById("exp_div").setAttribute("style", "display: flex; flex-flow: column;");}
+  else {document.getElementById("exp_div").setAttribute("style", "display: none;");}
 }
 
 var isCharacterCreation = true;
@@ -42,4 +45,6 @@ function addEventListeners() {
   document.getElementById("species").addEventListener("change", function() {character.setSpecies(document.getElementById("species").value);});
   document.getElementById("career").addEventListener("change", function() {character.setCareer(document.getElementById("career").value);});
 
+  document.getElementById("exp_down").addEventListener("click", function() {character.lowerExperience(5);});
+  document.getElementById("exp_up").addEventListener("click", function() {character.addExperience(5);});
 }

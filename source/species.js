@@ -13,7 +13,7 @@ export const Species = {
       Brawn: 1, Agility: 1, Intellect: 1, Cunning: 1, Willpower: 1, Presence: 1,
       wound_threshold_base: 10, wound_threshold_char: "Brawn",
       strain_threshold_base: 10, strain_threshold_char: "Willpower",
-      starting_experience: 100,
+      starting_experience: 175,
       abilities: [
         {"Special Abilities": ""},
         {"Inorganic": ""},

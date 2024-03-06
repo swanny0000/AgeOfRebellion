@@ -88,7 +88,7 @@ export class Character {
     if (currVal >= 5) {return;}
     const cost = 10 * (currVal + 1);
     if (this.spendExperience(cost)) {
-      console.log("Purchased",char,"for",cost,"exp. Remaining Exp:",this.experience);
+      //console.log("Purchased",char,"for",cost,"exp. Remaining Exp:",this.experience);
       this.setCharVal(char, currVal + 1, isCharCreate);
       this.refresh();
     }
@@ -100,7 +100,7 @@ export class Character {
     const cost = 10 * currVal;
     this.setCharVal(char, currVal - 1, isCharCreate);
     this.refundExperience(cost);
-    console.log("Refunded",char,"for",cost,"exp. Remaining Exp:",this.experience);
+    //console.log("Refunded",char,"for",cost,"exp. Remaining Exp:",this.experience);
     this.refresh();
   }
   buyRank(skill, isCharCreate=false) {
@@ -110,7 +110,7 @@ export class Character {
     if (!this.isCareerSkill(skill)) {cost += 5};
     if (this.spendExperience(cost)) {
       this.setSkillRank(skill, current_rank + 1);
-      console.log("Purchased",skill,"for",cost,"exp. Remaining Exp:",this.experience);
+      //console.log("Purchased",skill,"for",cost,"exp. Remaining Exp:",this.experience);
     }
     this.refresh();
   }
@@ -121,7 +121,7 @@ export class Character {
     if (!this.isCareerSkill(skill)) {cost += 5};
     this.setSkillRank(skill, current_rank - 1);
     this.refundExperience(cost);
-    console.log("Refunded",skill,"for",cost,"exp. Remaining Exp:",this.experience);
+    //console.log("Refunded",skill,"for",cost,"exp. Remaining Exp:",this.experience);
     this.refresh();
   }
   buyTalent(talent) {
@@ -161,6 +161,8 @@ export class Character {
     if (this.experience < cost) {return false;}
     else {this.experience -= cost; return true;}
   }
+  addExperience(amount) {this.experience += amount; this.refresh();}
+  lowerExperience(amount) {this.experience -= amount; this.refresh();}
   refundExperience(cost) {this.experience += cost;}
   setArmor(armor) {
     this.armor = armor;

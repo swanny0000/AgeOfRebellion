@@ -8,6 +8,7 @@ export function updateCharacteristics(character) {
     const characteristic = characteristics[i];
     document.getElementById(characteristic).textContent = character.getCharVal(characteristic);
   }
+  document.getElementById("experience").textContent = character.experience;
 }
 
 export function updateSkills(character) {
