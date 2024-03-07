@@ -1,8 +1,10 @@
-import { Character } from "./character.js";
 import { Characteristics } from "./characteristics.js";
 import { Skills } from "./skills.js";
+import { Species } from "./species.js";
 
 export function updateCharacteristics(character) {
+  document.getElementById("char_name").value = character.getName();
+  if (Species.list_all.includes(character.species)) {document.getElementById("species").value = character.species;}
   var characteristics = Characteristics.list_all;
   for (var i=0; i<characteristics.length; i++) {
     const characteristic = characteristics[i];

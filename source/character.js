@@ -5,11 +5,11 @@ import { Species } from "./species.js";
 import { Armor } from "./armor.js";
 import { Careers } from "./careers.js";
 import * as Sheet from "./page_functions.js";
+import * as IO from "./io_saver.js";
 
 export class Character {
-  constructor(char_name, species) {
-    this.char_name = char_name;
-    this.species = species;
+  constructor(char_name="", species="", from_load=false) {
+    this.setName(char_name);
     this.characteristics = {}
     this.skills = {};
     this.talents = {};
@@ -17,21 +17,18 @@ export class Character {
     this.specializations = {};
     this.armor = "";
     for (const skill of Skills.all_skills) {this.skills[skill] = {rank: 0, career: false};}
-    for (const characteristic of Characteristics.list_base) {
-      this.setCharVal(characteristic, Species.get_base_characteristic(this.species, characteristic));
+    if (species != "") {this.setSpecies(species);}
+    else {
+      console.log("Character Constructor: no species")
+      for (const characteristic of Characteristics.list_base) {this.setCharVal(characteristic, 0);}
+      this.setCharVal("Base Wounds Threshold", 0);
+      this.setCharVal("Base Strain Threshold", 0);
+      this.experience = 0;
+      if (from_load != true) {this.refresh();}
     }
-    this.setCharVal("Base Wounds Threshold", Species.calcBaseWoundsThreshold(this));
-    this.setCharVal("Base Strain Threshold", Species.calcBaseStrainThreshold(this));
-    this.updateDerivedChar();
-    if (Species.hasStartingSkills(this.species)) {
-      for (const skill of Species.starting_skills(this.species)) {this.setSkillRank(skill, 1);}
-    }
-    if (Species.hasStartingTalents(this.species)) {
-      for (const talent of Species.starting_talents(this.species)) {this.addTalent(talent);}
-    }
-    this.experience = Species.getStartingExperience(this.species);
-    this.refresh();
   }
+  setName(name) {this.char_name = name; this.refresh;}
+  getName() {return this.char_name;}
   setSpecies(species) {
     this.species = species;
     for (const skill of Skills.all_skills) {this.setSkillRank(skill, 0);}
@@ -40,7 +37,6 @@ export class Character {
     }
     this.setCharVal("Base Wounds Threshold", Species.calcBaseWoundsThreshold(this));
     this.setCharVal("Base Strain Threshold", Species.calcBaseStrainThreshold(this));
-    this.updateDerivedChar();
     if (Species.hasStartingSkills(this.species)) {
       for (const skill of Species.starting_skills(this.species)) {this.setSkillRank(skill, 1);}
     }
@@ -70,6 +66,7 @@ export class Character {
     Sheet.updateCharacteristics(this);
     Sheet.updateSkills(this);
     Sheet.updateTalents(this);
+    IO.saveCookies(this);
   }
   setSkillRank(skill, value) {if (this.getSkillRank(skill) < 5) {this.skills[skill].rank = value;}}
   getSkillRank(skill) {return this.skills[skill].rank;}

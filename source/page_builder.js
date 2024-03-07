@@ -16,7 +16,7 @@ export function buildPage() {
 function buildCharacterHeader() {
   const page_div = document.getElementById("character_info");
   const name_header = newDiv("", "char_header_name", "CHARACTER");
-  const name = newInput("char_name", "char_header_name_value", "Vendri");
+  const name = newInput("char_name", "char_header_name_value", "");
   page_div.appendChild(name_header); page_div.appendChild(name);
   page_div.appendChild(newDiv("", "horizontal_line"));
 
@@ -42,6 +42,7 @@ function buildCharacterHeader() {
 
 function createSpeciesOptions() {
   const species_div = document.createElement("select");
+  species_div.appendChild(addOption("Select a species...", "", false));
   for (const species of Species.list_all) {
     species_div.appendChild(addOption(species));
   }

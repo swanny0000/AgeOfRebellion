@@ -6,15 +6,15 @@ import {Careers} from "./source/careers.js";
 import * as Armors from "./source/armor.js";
 import * as Weapons from "./source/weapons.js";
 import * as Page_Functions from "./source/page_functions.js";
-import { buildPage } from "./source/pageBuilder.js";
+import { buildPage } from "./source/page_builder.js";
 import { Characteristics } from "./source/characteristics.js";
+import * as IO from "./source/io_saver.js";
 
 buildPage();
 addEventListeners();
-var character = new Character("Character Name", "Duros");
-character.addTalent("Grit");
-character.addTalent("Stalker");
-console.log(character);
+var character = IO.loadFromCookie();
+//character.addTalent("Grit");
+//character.addTalent("Stalker");
 
 
 var editToggle = true; editSheet()
@@ -33,6 +33,8 @@ function editSheet() {
 var isCharacterCreation = true;
 
 function addEventListeners() {
+  document.getElementById("char_name").addEventListener("change", function() {character.setName(document.getElementById("char_name").value)});
+
   for (const characteristic of Characteristics.list_base) {
     document.getElementById(characteristic+"_down").addEventListener("click",function() {character.refundChar(characteristic, isCharacterCreation);});
     document.getElementById(characteristic+"_up").addEventListener("click",function() {character.buyChar(characteristic, isCharacterCreation);});
