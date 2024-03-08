@@ -121,60 +121,36 @@ img{
   width: 45%;
   flex-basis: 100%;
 }
-.skill_box{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  font-size: var(--skill-font-size);
-  height: var(--skill-font-size);
-  padding-top: 2px;
-  border-bottom: black 1px dotted;
+.skill_grid {
+  display: grid;
+  border-bottom: black 1px solid;
 }
-.skill_career{
-  height: 100%;
+.skill_grid_header {
+  display: grid;
+  grid-template-columns: 40% 15% 20% 25%;
+  font-style: italic; color: #505050; font-size: small;
+  border-bottom: black 1px solid;
+}
+.skill_grid_row {
+  display: grid;
+  grid-template-columns: 40% 15% 20% 25%;
+  border-left: black 1px solid;
+  border-right: black 1px solid;
+  border-bottom: darkgray dotted;
+}
+.skill_title{
+  border-right: #505050 1px dashed;
+  padding-left: 4px;
 }
 .skill_rank{
   font-weight: bold;
 }
+.skill_rank_edit_button {
+  
+}
 .skill_dice_pool{
-  width: 30%;
-  display: flex;
-  flex-flow: row nowrap;
-  text-align: center;
-  justify-content: center;
+  border-left: #505050 1px dashed;
 }
 .skill_table {
   width: 100%;
-}
-thead{
-  color: gray;
-  border: none;
-  font-size: smaller;
-  font-style: italic;
-  width: 100%;
-}
-tbody {
-  outline: solid black 1px;
-  empty-cells: show;
-  width: 100%;
-}
-.cell_skill_title {
-  padding-left: 4px;
-  border-right: 1px dashed gray;
-  width: 40%;
-  min-width: 200px;
-  text-align: left;
-}
-.cell_skill_career {
-  justify-content: center;
-}
-.cell_skill_rank {
-  width: 5%;
-}
-.cell_skill_dicepool{
-  border-left: 1px dashed gray;
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
 }

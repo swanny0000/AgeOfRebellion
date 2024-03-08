@@ -9,7 +9,7 @@ import { Careers } from "./careers.js";
 export function buildPage() {
   buildCharacterHeader();
   buildCharacteristics();
-  buildSkills();
+  buildSkillGrid();
   buildItems();
 }
 
@@ -196,139 +196,6 @@ function buildBaseCharDiv(char_name) {
   return char_div;
 }
 
-function buildSkills() {
-  const skills_div = newDiv("", "skills_container")
-  const left_side = newDiv("", "skill_div");
-  left_side.appendChild(buildGeneralSkillBox());
-  const right_side = newDiv("", "skill_div");
-  right_side.appendChild(buildCombatSkillBox());
-  right_side.appendChild(buildKnowledgeSkillBox());
-  right_side.appendChild(buildCustomSkillBox());
-
-  const page_div = document.getElementById("skills");
-  page_div.appendChild(newDiv("", "section_header", "SKILLS"));
-  skills_div.appendChild(left_side);
-  skills_div.appendChild(right_side);
-  page_div.appendChild(skills_div);
-}
-
-function buildGeneralSkillBox() {
-  const table = document.createElement("table");
-  table.setAttribute("class", "skill_table");
-  let row_num = 0;
-  for (const skill of Skills.General_skills) {
-    buildSkillRow(table, row_num, skill);
-    row_num++;
-  }
-  buildSkillTableHeader(table, "GENERAL");
-  return table;
-}
-
-function buildCombatSkillBox() {
-  const table = document.createElement("table");
-  table.setAttribute("class", "skill_table");
-  let row_num = 0;
-  for (const skill of Skills.Combat_skills) {
-    buildSkillRow(table, row_num, skill);
-    row_num++;
-  }
-  buildSkillTableHeader(table, "COMBAT");
-  return table;
-}
-
-function buildKnowledgeSkillBox() {
-  const table = document.createElement("table");
-  table.setAttribute("class", "skill_table");
-  let row_num = 0;
-  for (const skill of Skills.Knowledge_skills) {
-    buildSkillRow(table, row_num, skill);
-    row_num++;
-  }
-  buildSkillTableHeader(table, "KNOWLEDGE");
-  return table;
-}
-
-function buildCustomSkillBox() {
-  const table = document.createElement("table");
-  table.setAttribute("class", "skill_table");
-  const body = table.createTBody();
-  for (let row_num=0; row_num<5; row_num++) {
-    const row = table.insertRow(row_num);
-    addStringCell(row, 0, "______________________")
-    let career = row.insertCell(1);
-    career.appendChild(newBtn("career_custom_skill_"+row_num, "skill_career", "", "", true, true));
-    let rank = row.insertCell(2);
-    rank.appendChild(newDiv("rank_custom_skill_"+row_num, "skill_rank"));
-    let dicepool = row.insertCell(3);
-    dicepool.appendChild(newDiv("dicepool_custom_skill_"+row_num, "skill_dice_pool"));
-  }
-  buildSkillTableHeader(table, "CUSTOM");
-  return table;
-}
-
-function buildSkillTableHeader (table, type) {
-  const header = table.createTHead();
-  const row = header.insertRow(0);
-  addStringCell(row, 0, type+" SKILLS", "cell_skill_title");
-  if (type == "KNOWLEDGE" || type == "CUSTOM") {return;}
-  addStringCell(row, 1, "CAREER?");
-  addStringCell(row, 2, "");
-  addStringCell(row, 3, "RANK");
-  addStringCell(row, 4, "");
-  addStringCell(row, 5, "DICEPOOL");
-}
-
-function addStringCell(row, col_num, cell_text, cell_class="", cell_style="") {
-  let cell = row.insertCell(col_num);
-  if (cell_class != "") {cell.setAttribute("class", cell_class)};
-  if (cell_style != "") {cell.setAttribute("style", cell_style)};
-  cell.appendChild(document.createTextNode(cell_text));
-}
-
-function buildSkillRow(table, row_num, skill) {
-  let attr_char = Skills.associated_characteristic(skill);
-  let row_title = skill + " (" + Characteristics.getShort(attr_char) + ")";
-
-  const row = table.insertRow(row_num);
-  addStringCell(row, 0, row_title, "cell_skill_title");
-  buildCareerCell(row, skill);
-  buildButtonCell(row, skill, "down");
-  buildRankCell(row, skill);
-  buildButtonCell(row, skill, "up");
-  buildDicepoolCell(row, skill);
-}
-
-function buildButtonCell(row, skill, up_or_down) {
-  if (up_or_down == "up") {
-    let button = row.insertCell(4);
-    button.setAttribute("class", "cell_skill_rank");
-    button.appendChild(newBtn(skill+"_up", "", "+", "", false));
-  } else if (up_or_down == "down") {
-    let button = row.insertCell(2);
-    button.setAttribute("class", "cell_skill_rank");
-    button.appendChild(newBtn(skill+"_down", "", "-", "", false));
-  }
-  
-}
-
-function buildCareerCell(row, skill) {
-  let career = row.insertCell(1);
-  career.setAttribute("class", "cell_skill_career");
-  career.appendChild(newChk("career_"+skill));
-}
-
-function buildRankCell(row, skill) {
-  let rank = row.insertCell(3);
-  rank.setAttribute("class", "cell_skill_rank");
-  rank.appendChild(newDiv("rank_"+skill, "skill_rank", "0"));
-}
-
-function buildDicepoolCell(row, skill) {
-  let dicepool = row.insertCell(5);
-  dicepool.setAttribute("class", "cell_skill_dicepool");
-  dicepool.appendChild(newDiv("dicepool_"+skill, "skill_dice_pool"));
-}
-
 function buildItems() {
   const success = newImg("images/symbol_success.png");
   const failure = newImg("images/symbol_failure.png");
@@ -357,4 +224,70 @@ function buildItems() {
   page_div.appendChild(div);
 }
 
+function buildSkillGrid() {
+  const skills_div = newDiv("", "skills_container")
+  const left_side = newDiv("", "skill_div");
+  left_side.appendChild(buildSkillBoxGrid("General", true));
+  const right_side = newDiv("", "skill_div");
+  right_side.appendChild(buildSkillBoxGrid("Combat", true));
+  right_side.appendChild(buildSkillBoxGrid("Knowledge"));
+  right_side.appendChild(buildSkillBoxGrid("Custom"));
 
+  const page_div = document.getElementById("skills");
+  page_div.appendChild(newDiv("", "section_header", "SKILLS"));
+  skills_div.appendChild(left_side);
+  skills_div.appendChild(right_side);
+  page_div.appendChild(skills_div);
+}
+
+function buildSkillBoxGrid(skill_list_type, full_header=false) {
+  const skill_box = newDiv("", "skill_grid");
+  skill_box.appendChild(newSkillGridRow(skill_list_type, true, full_header));
+  if (skill_list_type == "Custom") {
+    for (let i=1; i<6; i++) {skill_box.appendChild(newSkillGridRow(i, "", "", true));}
+  }
+  else {
+    for (const skill of Skills.skillsOfType(skill_list_type)) {
+      skill_box.appendChild(newSkillGridRow(skill));
+    }
+  }
+  return skill_box;
+}
+
+function newSkillGridRow(skill_name, isHeader=false, full_header=false, isCustom=false) {
+  const row = newDiv("", isHeader ? "skill_grid_header" : "skill_grid_row");
+  if (isHeader == true) {
+    row.appendChild(newDiv("", "", skill_name.toUpperCase()+" SKILLS", "text-align: left;"));
+    if (full_header == true) {
+      row.appendChild(newDiv("", "", "CAREER"));
+      row.appendChild(newDiv("", "", "RANK"));
+      row.appendChild(newDiv("", "", "DICEPOOL"));
+    }
+    row.setAttribute("style","font-style: italic; color: #505050; font-size: small;")
+  }
+  else if (isCustom) {
+    row.appendChild(newDiv("custom_skill_"+skill_name, "skill_title", "", "text-align: left;"));
+    row.appendChild(newChk("career_custom_skill_"+skill_name));
+    const rank_div = newDiv()
+    rank_div.appendChild(newBtn("custom_skill_"+skill_name+"_down", "skill_rank_edit_button", "-", "", true));
+    rank_div.appendChild(newDiv("rank_custom_skill"+skill_name, "skill_rank", "", "hidden: hidden;"));
+    rank_div.appendChild(newBtn("custom_skill_"+skill_name+"_up", "skill_rank_edit_button", "+", "", true));
+    rank_div.setAttribute("style","display:flex; justify-content: space-around;")
+    row.appendChild(rank_div);
+    row.appendChild(newDiv("dicepool_custom_skill"+skill_name, "skill_dice_pool"))
+  }
+  else {
+    let attr_char = Skills.associated_characteristic(skill_name);
+    let row_title = skill_name + " (" + Characteristics.getShort(attr_char) + ")";
+    row.appendChild(newDiv("", "skill_title", row_title, "text-align: left;"));
+    row.appendChild(newChk("career_"+skill_name));
+    const rank_div = newDiv()
+    rank_div.appendChild(newBtn(skill_name+"_down", "skill_rank_edit_button", "-", "", false));
+    rank_div.appendChild(newDiv("rank_"+skill_name, "skill_rank", "0"));
+    rank_div.appendChild(newBtn(skill_name+"_up", "skill_rank_edit_button", "+", "", false));
+    rank_div.setAttribute("style","display:flex; justify-content: space-around;")
+    row.appendChild(rank_div);
+    row.appendChild(newDiv("dicepool_"+skill_name, "skill_dice_pool"))
+  }
+  return row;
+}
