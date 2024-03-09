@@ -1,4 +1,5 @@
 import { Character } from "./character.js";
+import { Characteristics } from "./characteristics.js";
 import { Species } from "./species.js";
 
 export function saveCookies(character) {
@@ -6,6 +7,12 @@ export function saveCookies(character) {
   expireDate.setTime(expireDate.getTime() + (7*24*60*60*1000));
   setCookie("character_name", character.getName());
   setCookie("species", character.species);
+  setCookie("experience", parseInt(character.experience));
+  setCookie("career", character.career);
+  for (const characteristic of Characteristics.list_base) {
+    setCookie(characteristic, character.getCharVal(characteristic));
+  }
+  setCookie("weapons", character.getWeapons());
 
   console.log("setting cookie:",document.cookie);
 }
@@ -20,9 +27,19 @@ function setCookie(name, value, expireDate="") {
 
 export function loadFromCookie() {
   let cookie = readCookie()
-  if (cookie["isValid"] != true) {console.log("New Char"); return new Character("");}
+  if (cookie["isValid"] != true) {console.log("New Char"); return new Character("", "", true);}
   console.log("Importing Char");
-  return new Character(cookie["character_name"], cookie["species"], true);
+  let character = new Character(cookie["character_name"], cookie["species"], true);
+  for (const characteristic of Characteristics.list_base) {
+    if (cookie[characteristic] != undefined) {character.setCharVal(characteristic, cookie[characteristic])}
+  }
+  if (cookie["experience"] != undefined) {character.experience = parseInt(cookie["experience"])}
+  if (cookie["career"] != undefined) {character.setCareer(cookie["career"])}
+  const weapons_array = cookie["weapons"].split(",");
+  if (weapons_array[0] != "") {for (const weapon of weapons_array) {character.addWeapon(weapon)}}
+  console.log(character);
+  character.refresh();
+  return character
 }
 
 function readCookie(cookie=document.cookie) {

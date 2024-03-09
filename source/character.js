@@ -13,8 +13,8 @@ export class Character {
     this.characteristics = {}
     this.skills = {};
     this.talents = {};
-    this.career = ""
     this.specializations = {};
+    this.weapons = {};
     this.armor = "";
     for (const skill of Skills.all_skills) {this.skills[skill] = {rank: 0, career: false};}
     if (species != "") {this.setSpecies(species);}
@@ -47,7 +47,7 @@ export class Character {
     this.refresh();
   }
   setCharVal(characteristic, value, isCharCreate) {
-    this.characteristics[characteristic] = value;
+    this.characteristics[characteristic] = +value;
     if (isCharCreate) {
       this.setCharVal("Base Wounds Threshold", Species.calcBaseWoundsThreshold(this));
       this.setCharVal("Base Strain Threshold", Species.calcBaseStrainThreshold(this));
@@ -66,6 +66,7 @@ export class Character {
     Sheet.updateCharacteristics(this);
     Sheet.updateSkills(this);
     Sheet.updateTalents(this);
+    Sheet.updateWeapons(this);
     IO.saveCookies(this);
   }
   setSkillRank(skill, value) {if (this.getSkillRank(skill) < 5) {this.skills[skill].rank = value;}}
@@ -164,5 +165,12 @@ export class Character {
   setArmor(armor) {
     this.armor = armor;
     this.refresh();
+  }
+  addWeapon(weapon) {this.weapons[weapon] = 1; this.refresh();}
+  removeWeapon(weapon_id) {delete this.weapons[weapon_id]; this.refresh();}
+  getWeapons() {
+    let list = [];
+    for (const weapon in this.weapons) {list.push(weapon);}
+    return list;
   }
 }

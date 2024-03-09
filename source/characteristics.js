@@ -19,23 +19,23 @@ export const Characteristics = {
     "Base Strain Threshold": {description: "", page_aoe: 0}
   },
   get list_base() {
-    var list = [];
+    let list = [];
     for (const characteristic in this.base_characteristics) {list.push(characteristic);}
     return list;
   },
   get list_derived() {
-    var list = [];
+    let list = [];
     for (const characteristic in this.derived_characteristics) {list.push(characteristic);}
     return list;
   },
   get list_threshold() {
-    var list = [];
+    let list = [];
     for (const characteristic in this.base_threshold_characteristics) {list.push(characteristic);}
     return list;
   }
   ,
   get list_all() {
-    var list = [];
+    let list = [];
     for (const characteristic in this.base_characteristics) {list.push(characteristic);}
     for (const characteristic in this.derived_characteristics) {list.push(characteristic);}
     return list;

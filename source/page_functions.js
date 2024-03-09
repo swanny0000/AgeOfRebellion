@@ -1,10 +1,13 @@
+import { Careers } from "./careers.js";
 import { Characteristics } from "./characteristics.js";
 import { Skills } from "./skills.js";
 import { Species } from "./species.js";
+import { Weapons } from "./weapons.js";
 
 export function updateCharacteristics(character) {
   document.getElementById("char_name").value = character.getName();
   if (Species.list_all.includes(character.species)) {document.getElementById("species").value = character.species;}
+  if (Careers.list_all.includes(character.career)) {document.getElementById("career").value = character.career;}
   var characteristics = Characteristics.list_all;
   for (var i=0; i<characteristics.length; i++) {
     const characteristic = characteristics[i];
@@ -30,6 +33,32 @@ export function updateSkills(character) {
 
 export function updateTalents(character) {}
 
+export function updateWeapons(character) {
+  let i = 0;
+  for (const weapon of character.getWeapons()) {
+    i++; if (i>8) {break}
+    document.getElementById("weapon_"+i+"_name").textContent = weapon;
+    document.getElementById("weapon_"+i+"_skill").textContent = Weapons.getSkill(weapon);
+    document.getElementById("weapon_"+i+"_damage").textContent = Weapons.getDamage(weapon);
+    document.getElementById("weapon_"+i+"_range").textContent = Weapons.getRange(weapon);
+    clearSubElements("weapon_"+i+"_crit");
+    for (let adv_count=0; adv_count<Weapons.getCrit(weapon); adv_count++) {
+      document.getElementById("weapon_"+i+"_crit").appendChild(newImg("images/symbol_advantage.png"));
+    }
+    document.getElementById("weapon_"+i+"_special").textContent = "";
+    document.getElementById("weapon_"+i+"_delete").removeAttribute("hidden");
+  }
+  while (i<8) {
+    i++
+    document.getElementById("weapon_"+i+"_name").textContent = "";
+    document.getElementById("weapon_"+i+"_skill").textContent = "";
+    document.getElementById("weapon_"+i+"_damage").textContent = "";
+    document.getElementById("weapon_"+i+"_range").textContent = "";
+    clearSubElements("weapon_"+i+"_crit");
+    document.getElementById("weapon_"+i+"_special").textContent = "";
+    document.getElementById("weapon_"+i+"_delete").setAttribute("hidden", "hidden");
+  }
+}
 
 export function setDicePool(element_id, ability_die_count = 1, proficiency_die_count = 0) {
   clearSubElements(element_id);
@@ -62,17 +91,36 @@ function clearSubElements(element_id) {
 export function makeButtonsVisible(visible=false) {
   //loop through all base char, and skills and un-hide up and down buttons
   for (const char of Characteristics.list_base) {
-    makeButtonVisible(document.getElementById(char + "_down"), visible);
-    makeButtonVisible(document.getElementById(char + "_up"), visible);
+    makeButtonVisible(char + "_down", visible);
+    makeButtonVisible(char + "_up", visible);
   }
   for (const skill of Skills.all_skills) {
-    makeButtonVisible(document.getElementById(skill + "_down"), visible);
-    makeButtonVisible(document.getElementById(skill + "_up"), visible);
+    makeButtonVisible(skill + "_down", visible);
+    makeButtonVisible(skill + "_up", visible);
   }
 }
 
-function makeButtonVisible(btn, visble=false) {
-  if (visble) {btn.removeAttribute("hidden");
+export function makeButtonVisible(btn_id, visible=false) {
+  const btn = document.getElementById(btn_id);
+  if (visible) {btn.removeAttribute("hidden");
   } else {btn.setAttribute("hidden", "hidden");
   }
+}
+
+export function makeSelectVisible(select_id, visible=false) {
+  const select = document.getElementById(select_id);
+  if (visible) {select.removeAttribute("hidden");
+  } else {select.setAttribute("hidden", "hidden");
+  }
+}
+
+export function addItem(row_num) {
+
+}
+
+export function newImg(img_src, img_id="") {
+  const img = document.createElement("img");
+  if (img_id != "") {img.setAttribute("id", img_id);}
+  img.setAttribute("src", img_src);
+  return img;
 }

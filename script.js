@@ -49,4 +49,17 @@ function addEventListeners() {
 
   document.getElementById("exp_down").addEventListener("click", function() {character.lowerExperience(5);});
   document.getElementById("exp_up").addEventListener("click", function() {character.addExperience(5);});
+
+  document.getElementById("weapon_add_list").addEventListener("change", function() {
+    if (document.getElementById("weapon_add_list").value == 0) {return;}
+    character.addWeapon(document.getElementById("weapon_add_list").value);
+    document.getElementById("weapon_add_list").value = 0;
+  });
+
+  for (let i=1; i<9; i++) {
+    document.getElementById("weapon_"+i+"_delete").addEventListener("click", function() {
+      console.log("Removing",i,":",document.getElementById("weapon_"+i+"_name").textContent)
+      character.removeWeapon(document.getElementById("weapon_"+i+"_name").textContent);
+    })
+  }
 }

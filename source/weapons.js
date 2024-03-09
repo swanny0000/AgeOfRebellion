@@ -1,51 +1,64 @@
 export const Weapons = {
   weapons: {
-    "Holdout Blaster": {
-      skill: "Ranged (Light)",
-      damage: 5,
-      crit: 4,
-      range: "Short",
-      consumable: false,
-      pierce: 0,
-      page_aoe: 0
-    },
-    "": {}, //"Light Blaster Pistol", "ranged_light", 5, 4, "Medium");
-    "": {}, //"Blaster Pistol", "ranged_light", 6, 3, "Medium");
-    "": {}, //"Heavy Blaster Pistol", "ranged_light", 7, 3, "Medium");
-    "": {}, //"Blaster Carbine", "ranged_heavy", 9, 3, "Medium");
-    "": {}, //"Blaster Rifle", "ranged_heavy", 9, 3, "Long");
-    "": {}, //"Heavy Blaster Rifle", "ranged_heavy", 10, 3, "Long");
-    "": {}, //"Light Repeating Blaster", "ranged_heavy", 11, 3, "Long");
-    "": {}, //"Heavy Repeating Blaster", "gunnery", 15, 2, "Long");
-    "": {}, //"Ion Blaster", "ranged_light", 10, 5, "Short");
-    "": {}, //"Disruptor Pistol", "ranged_light", 10, 2, "Short");
-    "": {}, //"Disruptor Rifle", "ranged_heavy", 10, 2, "Long");
-    "": {}, //"Slugthrower Pistol", "ranged_light", 4, 5, "Short");
-    "": {}, //"Slugthrower Rifle", "ranged_heavy", 7, 5, "Medium");
-    "": {}, //"Frag Grenade", "ranged_light", 8, 4, "Short", true);
-    "": {}, //"Stun Grenade", "ranged_light", 8, "", "Short", true);
-    "": {}, //"AP Grenade", "ranged_light", 16, 3, "Short", true, 3);
-    "": {}, //"Brass Knuckles", "brawl", 1, 4, "Engaged");
-    "": {}, //"Shock Gloves", "brawl", 0, 5, "Engaged");
-    "": {}, //"Corellian Cutlass", "melee", 2, 3, "Engaged");
-    "": {}, //"Combat Knife", "melee", 1, 3, "Engaged");
-    "": {}, //"Force Pike", "melee", 3, 2, "Engaged");
-    "": {}, //"Lightsaber", "lightsaber", 10, 1, "Engaged");
-    "": {}, //"Truncheon", "melee", 2, 5, "Engaged");
-    "": {}, //"Vibro-ax", "melee", 3, 2, "Engaged");
-    "": {}, //"Vibroknife", "melee", 1, 2, "Engaged");
-    "": {} //"Vibrosword", "melee", 2, 2, "Engaged");
+    "Holdout Blaster": {skill: "Ranged (Light)", damage: 5, crit: 4, range: "Short", consumable: false, pierce: 0, page_aoe: 0},
+    "Light Blaster Pistol": {skill: "Ranged (Light)", damage: 5, crit: 4, range: "Medium"},
+    "Blaster Pistol": {skill: "Ranged (Light)", damage: 6, crit: 3, range: "Medium"},
+    "Heavy Blaster Pistol": {skill: "Ranged (Light)", damage: 7, crit: 3, range: "Medium"},
+    "Blaster Carbine": {skill: "Ranged (Heavy)", damage: 9, crit: 3, range: "Medium"},
+    "Blaster Rifle": {skill: "Ranged (Heavy)", damage: 9, crit: 3, range: "Long"},
+    "Heavy Blaster Rifle": {skill: "Ranged (Heavy)", damage: 10, crit: 3, range: "Long"},
+    "Light Repeating Blaster": {skill: "Ranged (Heavy)", damage: 11, crit: 3, range: "Long"},
+    "Heavy Repeating Blaster": {skill: "Gunnery", damage: 15, crit: 2, range: "Long"},
+    "Ion Blaster": {skill: "Ranged (Light)", damage: 10, crit: 5, range: "Short"},
+    "Disruptor Pistol": {skill: "Ranged (Light)", damage: 10, crit: 2, range: "Short"},
+    "Disruptor Rifle": {skill: "Ranged (Heavy)", damage: 10, crit: 2, range: "Long"},
+    "Slugthrower Pistol": {skill: "Ranged (Light)", damage: 4, crit: 5, range: "Short"},
+    "Slugthrower Rifle": {skill: "Ranged (Heavy)", damage: 7, crit: 5, range: "Medium"},
+    "Frag Grenade": {skill: "Ranged (Light)", damage: 8, crit: 4, range: "Short", consumable: true},
+    "Stun Grenade": {skill: "Ranged (Light)", damage: 8, crit: "", range: "Short", consumable: true},
+    "AP Grenade": {skill: "Ranged (Light)", damage: 16, crit: 3, range: "Short", consumable: true, pierce: 3},
+    "Brass Knuckles": {skill: "Brawl", damage: 1, crit: 4, range: "Engaged"},
+    "Shock Gloves": {skill: "Brawl", damage: 0, crit: 5, range: "Engaged"},
+    "Corellian Cutlass": {skill: "Melee", damage: 2, crit: 3, range: "Engaged"},
+    "Combat Knife": {skill: "Melee", damage: 1, crit: 3, range: "Engaged"},
+    "Force Pike": {skill: "Melee", damage: 3, crit: 2, range: "Engaged"},
+    "Lightsaber": {skill: "Lightsaber", damage: 10, crit: 1, range: "Engaged"},
+    "Truncheon": {skill: "Melee", damage: 2, crit: 5, range: "Engaged"},
+    "Vibro-ax": {skill: "Melee", damage: 3, crit: 2, range: "Engaged"},
+    "Vibroknife": {skill: "Melee", damage: 1, crit: 2, range: "Engaged"},
+    "Vibrosword": {skill: "Melee", damage: 2, crit: 2, range: "Engaged"},
   },
-  consumable: function(weapon) {
+  get list_all() {
+    let list = [];
+    for (const weapon in this.weapons) {list.push(weapon);}
+    return list;
+  },
+  isConsumable: function(weapon) {
     if (Object.keys(this.weapons[weapon]).includes("consumable")) {return this.weapons[weapon].consumable;}
     else {return false}
   },
-  pierce: function(weapon) {
+  getPierce: function(weapon) {
     if (Object.keys(this.weapons[weapon]).includes("pierce")) {return this.weapons[weapon].pierce;}
     else {return 0}
   },
   page_aoe: function(weapon) {
     if (Object.keys(this.weapons[weapon]).includes("page_aoe")) {return this.weapons[weapon].page_aoe;}
+    else {return 0}
+  },
+  getSkill(weapon) {
+    if (Object.keys(this.weapons[weapon]).includes("skill")) {return this.weapons[weapon].skill;}
+    else {return 0}
+  },
+  getDamage(weapon) {
+    if (Object.keys(this.weapons[weapon]).includes("damage")) {return this.weapons[weapon].damage;}
+    else {return 0}
+  },
+  getCrit(weapon) {
+    if (Object.keys(this.weapons[weapon]).includes("crit")) {return this.weapons[weapon].crit;}
+    else {return 0}
+  },
+  getRange(weapon) {
+    if (Object.keys(this.weapons[weapon]).includes("range")) {return this.weapons[weapon].range;}
     else {return 0}
   }
 }

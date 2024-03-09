@@ -5,12 +5,14 @@ import * as Page_Functions from "./page_functions.js"
 import { Armor } from "./armor.js";
 import { Species } from "./species.js";
 import { Careers } from "./careers.js";
+import { Weapons } from "./weapons.js";
 
 export function buildPage() {
   buildCharacterHeader();
   buildCharacteristics();
   buildSkillGrid();
   buildItems();
+  extraSection();
 }
 
 function buildCharacterHeader() {
@@ -113,13 +115,6 @@ function newBtn(btn_id, btn_class="", btn_text="", btn_style="", hidden=true, di
   return button;
 }
 
-function newImg(img_src, img_id="") {
-  const img = document.createElement("img");
-  if (img_id != "") {img.setAttribute("id", img_id);}
-  img.setAttribute("src", img_src);
-  return img;
-}
-
 function newChk(chk_id, disabled=true) {
   let chk = newInput(chk_id);
   chk.setAttribute("type", "checkbox");
@@ -196,13 +191,13 @@ function buildBaseCharDiv(char_name) {
   return char_div;
 }
 
-function buildItems() {
-  const success = newImg("images/symbol_success.png");
-  const failure = newImg("images/symbol_failure.png");
-  const triumph = newImg("images/symbol_triumph.png");
-  const despair = newImg("images/symbol_despair.png");
-  const advantage = newImg("images/symbol_advantage.png");
-  const threat = newImg("images/symbol_threat.png");
+function extraSection() {
+  const success = Page_Functions.newImg("images/symbol_success.png");
+  const failure = Page_Functions.newImg("images/symbol_failure.png");
+  const triumph = Page_Functions.newImg("images/symbol_triumph.png");
+  const despair = Page_Functions.newImg("images/symbol_despair.png");
+  const advantage = Page_Functions.newImg("images/symbol_advantage.png");
+  const threat = Page_Functions.newImg("images/symbol_threat.png");
 
   const div = newDiv();
   div.appendChild(document.createTextNode("This is an example of all of the types of symbols.\nWe have Success "));
@@ -220,7 +215,6 @@ function buildItems() {
   div.appendChild(document.createTextNode("."));
 
   const page_div = document.getElementById("items");
-  page_div.appendChild(newDiv("", "section_header", "WEAPONS"));
   page_div.appendChild(div);
 }
 
@@ -241,7 +235,7 @@ function buildSkillGrid() {
 }
 
 function buildSkillBoxGrid(skill_list_type, full_header=false) {
-  const skill_box = newDiv("", "skill_grid");
+  const skill_box = newDiv("", "", "", "border-bottom: black 1px solid;");
   skill_box.appendChild(newSkillGridRow(skill_list_type, true, full_header));
   if (skill_list_type == "Custom") {
     for (let i=1; i<6; i++) {skill_box.appendChild(newSkillGridRow(i, "", "", true));}
@@ -255,7 +249,7 @@ function buildSkillBoxGrid(skill_list_type, full_header=false) {
 }
 
 function newSkillGridRow(skill_name, isHeader=false, full_header=false, isCustom=false) {
-  const row = newDiv("", isHeader ? "skill_grid_header" : "skill_grid_row");
+  const row = newDiv("", isHeader ? "skill_grid header" : "skill_grid row");
   if (isHeader == true) {
     row.appendChild(newDiv("", "", skill_name.toUpperCase()+" SKILLS", "text-align: left;"));
     if (full_header == true) {
@@ -290,4 +284,49 @@ function newSkillGridRow(skill_name, isHeader=false, full_header=false, isCustom
     row.appendChild(newDiv("dicepool_"+skill_name, "skill_dice_pool"))
   }
   return row;
+}
+
+function buildItems() {
+  const items_div = document.getElementById("items");
+  const items_grid_div = newDiv("", "items_grid_div");
+  const items_grid = newDiv("", "", "", "border-bottom: black 1px solid;");
+  const items_header = newDiv("", "items_grid header");
+  const weapon_header = newDiv("", "", "", "display:flex; flex-flow: row nowrap; justify-content: space-between;");
+  weapon_header.appendChild(newDiv("", "", "WEAPON", "text-align: left;"));
+  weapon_header.appendChild(buildWeaponOptionList());
+  items_header.appendChild(weapon_header);
+  items_header.appendChild(newDiv("", "", "SKILL"));
+  items_header.appendChild(newDiv("", "", "DAMAGE"));
+  items_header.appendChild(newDiv("", "", "RANGE"));
+  items_header.appendChild(newDiv("", "", "CRIT"));
+  items_header.appendChild(newDiv("", "", "SPECIAL", "text-align: right;"));
+  items_grid.appendChild(items_header);
+  for (let i=1; i<9; i++) {
+    const row = newDiv("items_row_"+i, "items_grid row", "", "width: 100%;");
+    const weapon_name = newDiv("", "", "", "border-right: #505050 1px dashed; display: flex; flex-flow: row nowrap; justify-content: space-between;");
+    weapon_name.appendChild(newDiv("weapon_"+i+"_name", "", "", ));
+    weapon_name.appendChild(newBtn("weapon_"+i+"_delete", "", "-", ""))
+    row.appendChild(weapon_name);
+    row.appendChild(newDiv("weapon_"+i+"_skill", "", "", "border-right: #505050 1px dashed;"));
+    row.appendChild(newDiv("weapon_"+i+"_damage", "", "", "border-right: #505050 1px dashed;"));
+    row.appendChild(newDiv("weapon_"+i+"_range", "", "", "border-right: #505050 1px dashed;"));
+    row.appendChild(newDiv("weapon_"+i+"_crit", "", "", "border-right: #505050 1px dashed;"));
+    row.appendChild(newDiv("weapon_"+i+"_special"));
+    items_grid.appendChild(row);
+  }
+  items_grid_div.appendChild(items_grid);
+  items_div.appendChild(newDiv("", "section_header", "WEAPONS"));
+  items_div.appendChild(items_grid_div);
+}
+
+function buildWeaponOptionList() {
+  const weapon_option_div = document.createElement("select");
+  weapon_option_div.appendChild(addOption("Add weapon", "0", false));
+  for (const weapon of Weapons.list_all) {
+    weapon_option_div.appendChild(addOption(weapon));
+  }
+  weapon_option_div.setAttribute("id", "weapon_add_list");
+  weapon_option_div.setAttribute("style", "max-width:60%;");
+  //weapon_option_div.setAttribute("hidden", "hidden");
+  return weapon_option_div;
 }

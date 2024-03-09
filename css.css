@@ -125,18 +125,19 @@ img{
   display: grid;
   border-bottom: black 1px solid;
 }
-.skill_grid_header {
-  display: grid;
-  grid-template-columns: 40% 15% 20% 25%;
+.header {
   font-style: italic; color: #505050; font-size: small;
   border-bottom: black 1px solid;
 }
-.skill_grid_row {
+.skill_grid {
   display: grid;
   grid-template-columns: 40% 15% 20% 25%;
+}
+.row {
   border-left: black 1px solid;
   border-right: black 1px solid;
   border-bottom: darkgray dotted;
+  min-height: 18.5px;
 }
 .skill_title{
   border-right: #505050 1px dashed;
@@ -146,11 +147,21 @@ img{
   font-weight: bold;
 }
 .skill_rank_edit_button {
-  
+  height: 100%;
 }
 .skill_dice_pool{
   border-left: #505050 1px dashed;
 }
 .skill_table {
   width: 100%;
+}
+.items_grid_div {
+  margin: 0 2% 0 2%;
+  background-color: rgba(223, 221, 221, 0.7);
+  border-radius: 20px;
+  padding: 10px 2% 10px 2%;
+}
+.items_grid {
+  display: grid;
+  grid-template-columns: 20% 15% 10% 10% 10% 35%;
 }
