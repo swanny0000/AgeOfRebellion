@@ -14,6 +14,21 @@ export function updateCharacteristics(character) {
     document.getElementById(characteristic).textContent = character.getCharVal(characteristic);
   }
   document.getElementById("experience").textContent = character.experience;
+  document.getElementById("armor").value = character.armor;
+
+  if (character.isEditable == true) {
+    console.log("now editable", character.isEditable)
+    document.getElementById("char_name").removeAttribute("disabled");
+    document.getElementById("armor").removeAttribute("disabled");
+    document.getElementById("species").removeAttribute("disabled");
+    document.getElementById("career").removeAttribute("disabled");
+  } else {
+    console.log("no longer editable", character.isEditable)
+    document.getElementById("char_name").setAttribute("disabled", "disabled");
+    document.getElementById("armor").setAttribute("disabled", "disabled");
+    document.getElementById("species").setAttribute("disabled", "disabled");
+    document.getElementById("career").setAttribute("disabled", "disabled");
+  }
 }
 
 export function updateSkills(character) {

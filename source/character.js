@@ -16,6 +16,7 @@ export class Character {
     this.specializations = {};
     this.weapons = {};
     this.armor = "";
+    this.isEditable = true;
     for (const skill of Skills.all_skills) {this.skills[skill] = {rank: 0, career: false};}
     if (species != "") {this.setSpecies(species);}
     else {
@@ -27,6 +28,8 @@ export class Character {
       if (from_load != true) {this.refresh();}
     }
   }
+  makeEditable() {this.isEditable = true;}
+  makeUneditable() {this.isEditable = false;}
   setName(name) {this.char_name = name; this.refresh;}
   getName() {return this.char_name;}
   setSpecies(species) {

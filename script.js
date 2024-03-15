@@ -22,9 +22,10 @@ document.getElementById("editSheet").addEventListener("click", editSheet);
 
 function editSheet() {
   editToggle = !editToggle;
-  if (editToggle) {document.getElementById("editSheet").innerHTML = "Done Spending"}
-  else {document.getElementById("editSheet").innerHTML = "Spend Experience"}
+  if (editToggle) {document.getElementById("editSheet").innerHTML = "Done Spending"; character.makeEditable();}
+  else {document.getElementById("editSheet").innerHTML = "Spend Experience"; character.makeUneditable();}
   Page_Functions.makeButtonsVisible(editToggle);
+  Page_Functions.updateCharacteristics(character);
 
   if (editToggle) {document.getElementById("exp_div").setAttribute("style", "display: flex; flex-flow: column;");}
   else {document.getElementById("exp_div").setAttribute("style", "display: none;");}
@@ -62,4 +63,10 @@ function addEventListeners() {
       character.removeWeapon(document.getElementById("weapon_"+i+"_name").textContent);
     })
   }
+
+  document.getElementById("isCharCreate").addEventListener("click", function() {
+    isCharacterCreation = !isCharacterCreation;
+    if (isCharacterCreation) { document.getElementById("isCharCreate").style.background = "#22DD22"} 
+    else {document.getElementById("isCharCreate").style.background = "#f0f0f0"}
+  })
 }

@@ -1,5 +1,6 @@
 import { Character } from "./character.js";
 import { Characteristics } from "./characteristics.js";
+import { Skills } from "./skills.js";
 import { Species } from "./species.js";
 
 export function saveCookies(character) {
@@ -13,7 +14,11 @@ export function saveCookies(character) {
     setCookie(characteristic, character.getCharVal(characteristic));
   }
   setCookie("weapons", character.getWeapons());
-
+  setCookie("armor", character.armor);
+  for (const skill of Skills.all_skills) {
+    if (character.getSkillRank(skill) > 0) {setCookie(skill, character.getSkillRank(skill))}
+    else {setCookie(skill, "", "Mon, 20 Feb 1995 12:00:00 UTC");}
+  }
   console.log("setting cookie:",document.cookie);
 }
 
@@ -21,6 +26,7 @@ function setCookie(name, value, expireDate="") {
   if (expireDate="") {
     let expireDate = new Date;
     expireDate.setTime(expireDate.getTime() + (7*24*60*60*1000));
+    console.log(expireDate);
   }
   document.cookie = `${name}=${value}; expires=${expireDate}; path=/`;
 }
@@ -37,6 +43,10 @@ export function loadFromCookie() {
   if (cookie["career"] != undefined) {character.setCareer(cookie["career"])}
   const weapons_array = cookie["weapons"].split(",");
   if (weapons_array[0] != "") {for (const weapon of weapons_array) {character.addWeapon(weapon)}}
+  if (cookie["armor"] != undefined) {character.setArmor(cookie["armor"]);}
+  for (const skill of Skills.all_skills) {
+    if (parseInt(cookie[skill]) > 0) {character.setSkillRank(skill, parseInt(cookie[skill]));}
+  }
   console.log(character);
   character.refresh();
   return character
