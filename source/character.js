@@ -89,7 +89,6 @@ export class Character {
     if (currVal >= 5) {return;}
     const cost = 10 * (currVal + 1);
     if (this.spendExperience(cost)) {
-      //console.log("Purchased",char,"for",cost,"exp. Remaining Exp:",this.experience);
       this.setCharVal(char, currVal + 1, isCharCreate);
       this.refresh();
     }
@@ -101,7 +100,6 @@ export class Character {
     const cost = 10 * currVal;
     this.setCharVal(char, currVal - 1, isCharCreate);
     this.refundExperience(cost);
-    //console.log("Refunded",char,"for",cost,"exp. Remaining Exp:",this.experience);
     this.refresh();
   }
   buyRank(skill, isCharCreate=false) {
@@ -111,7 +109,6 @@ export class Character {
     if (!this.isCareerSkill(skill)) {cost += 5};
     if (this.spendExperience(cost)) {
       this.setSkillRank(skill, current_rank + 1);
-      //console.log("Purchased",skill,"for",cost,"exp. Remaining Exp:",this.experience);
     }
     this.refresh();
   }
@@ -122,7 +119,6 @@ export class Character {
     if (!this.isCareerSkill(skill)) {cost += 5};
     this.setSkillRank(skill, current_rank - 1);
     this.refundExperience(cost);
-    //console.log("Refunded",skill,"for",cost,"exp. Remaining Exp:",this.experience);
     this.refresh();
   }
   buyTalent(talent) {
@@ -155,7 +151,6 @@ export class Character {
     this.specializations[spec] = false;
     this.setCareer(this.career);
     for (const specialization of this.specializations) {this.addSpecialization(specialization);}
-    //what about cases where a career or another spec also gives these career skills?
     this.refresh();
   }
   spendExperience(cost) {

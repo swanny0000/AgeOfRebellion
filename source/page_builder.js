@@ -327,6 +327,5 @@ function buildWeaponOptionList() {
   }
   weapon_option_div.setAttribute("id", "weapon_add_list");
   weapon_option_div.setAttribute("style", "max-width:60%;");
-  //weapon_option_div.setAttribute("hidden", "hidden");
   return weapon_option_div;
 }

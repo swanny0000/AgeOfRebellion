@@ -19,7 +19,6 @@ export function saveCookies(character) {
     if (character.getSkillRank(skill) > 0) {setCookie(skill, character.getSkillRank(skill))}
     else {setCookie(skill, "", "Mon, 20 Feb 1995 12:00:00 UTC");}
   }
-  console.log("setting cookie:",document.cookie);
 }
 
 function setCookie(name, value, expireDate="") {

@@ -17,13 +17,11 @@ export function updateCharacteristics(character) {
   document.getElementById("armor").value = character.armor;
 
   if (character.isEditable == true) {
-    console.log("now editable", character.isEditable)
     document.getElementById("char_name").removeAttribute("disabled");
     document.getElementById("armor").removeAttribute("disabled");
     document.getElementById("species").removeAttribute("disabled");
     document.getElementById("career").removeAttribute("disabled");
   } else {
-    console.log("no longer editable", character.isEditable)
     document.getElementById("char_name").setAttribute("disabled", "disabled");
     document.getElementById("armor").setAttribute("disabled", "disabled");
     document.getElementById("species").setAttribute("disabled", "disabled");
@@ -54,11 +52,15 @@ export function updateWeapons(character) {
     i++; if (i>8) {break}
     document.getElementById("weapon_"+i+"_name").textContent = weapon;
     document.getElementById("weapon_"+i+"_skill").textContent = Weapons.getSkill(weapon);
-    document.getElementById("weapon_"+i+"_damage").textContent = Weapons.getDamage(weapon);
+    let damage = Weapons.getDamage(weapon)
+    if (damage[damage.length - 1] == "+") {damage = parseInt(damage) + parseInt(character.getCharVal("Brawn"));}
+    document.getElementById("weapon_"+i+"_damage").textContent = damage;
     document.getElementById("weapon_"+i+"_range").textContent = Weapons.getRange(weapon);
     clearSubElements("weapon_"+i+"_crit");
     for (let adv_count=0; adv_count<Weapons.getCrit(weapon); adv_count++) {
-      document.getElementById("weapon_"+i+"_crit").appendChild(newImg("images/symbol_advantage.png"));
+      let critSymbol = newImg("images/symbol_advantage.png")
+      critSymbol.setAttribute("style","vertical-align: middle;")
+      document.getElementById("weapon_"+i+"_crit").appendChild(critSymbol);
     }
     document.getElementById("weapon_"+i+"_special").textContent = "";
     document.getElementById("weapon_"+i+"_delete").removeAttribute("hidden");

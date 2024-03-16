@@ -13,8 +13,6 @@ import * as IO from "./source/io_saver.js";
 buildPage();
 addEventListeners();
 var character = IO.loadFromCookie();
-//character.addTalent("Grit");
-//character.addTalent("Stalker");
 
 
 var editToggle = true; editSheet()
