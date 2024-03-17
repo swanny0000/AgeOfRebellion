@@ -3,6 +3,7 @@ import { Characteristics } from "./characteristics.js";
 import { Skills } from "./skills.js";
 import { Species } from "./species.js";
 import { Weapons } from "./weapons.js";
+import * as Page_Builder from "./page_builder.js";
 
 export function updateCharacteristics(character) {
   document.getElementById("char_name").value = character.getName();
@@ -14,6 +15,7 @@ export function updateCharacteristics(character) {
     document.getElementById(characteristic).textContent = character.getCharVal(characteristic);
   }
   document.getElementById("experience").textContent = character.experience;
+  document.getElementById("total_experience").textContent = character.total_experience;
   document.getElementById("armor").value = character.armor;
 
   if (character.isEditable == true) {
@@ -21,11 +23,27 @@ export function updateCharacteristics(character) {
     document.getElementById("armor").removeAttribute("disabled");
     document.getElementById("species").removeAttribute("disabled");
     document.getElementById("career").removeAttribute("disabled");
+    document.getElementById("specialization_options").removeAttribute("disabled");
   } else {
     document.getElementById("char_name").setAttribute("disabled", "disabled");
     document.getElementById("armor").setAttribute("disabled", "disabled");
     document.getElementById("species").setAttribute("disabled", "disabled");
     document.getElementById("career").setAttribute("disabled", "disabled");
+    document.getElementById("specialization_options").setAttribute("disabled", "disabled");
+  }
+}
+
+export function updateSpecializations(character) {
+  clearSubElements("specializations");
+  //for (const element of document.getElementById("specialization_options")) {}
+  for (const spec of character.specializations) {
+    let spec_div = Page_Builder.newDiv(spec, "specialization", spec);
+    spec_div.addEventListener("click", function() {
+      if (!character.isEditable) {return}
+      character.refundSpecialization(spec);
+      character.refresh();
+    })
+    document.getElementById("specializations").appendChild(spec_div);
   }
 }
 
@@ -115,6 +133,8 @@ export function makeButtonsVisible(visible=false) {
     makeButtonVisible(skill + "_down", visible);
     makeButtonVisible(skill + "_up", visible);
   }
+  makeButtonVisible("exp_down", visible);
+  makeButtonVisible("exp_up", visible);
 }
 
 export function makeButtonVisible(btn_id, visible=false) {

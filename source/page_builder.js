@@ -35,9 +35,9 @@ function buildCharacterHeader() {
   page_div.appendChild(newDiv("", "horizontal_line"));
 
   const spec_list_div = newDiv("", "char_header_div")
-  const spec_list_header = newDiv("", "char_header", "SPECIALIZATION TREES");
-  const spec_list = newDiv("specializations", "char_header_value", "Infiltrator");
-  spec_list_div.appendChild(spec_list_header); spec_list_div.appendChild(spec_list);
+  spec_list_div.appendChild(newDiv("", "char_header", "SPECIALIZATION TREES"));
+  spec_list_div.appendChild(newDiv("specializations", "char_header_value"));
+  spec_list_div.appendChild(createSpecializationOptions());
   page_div.appendChild(spec_list_div);
   page_div.appendChild(newDiv("", "horizontal_line"));
 }
@@ -62,6 +62,18 @@ function createCareerOptions() {
   return career_div;
 }
 
+function createSpecializationOptions() {
+  const spec_select_div = document.createElement("select");
+  spec_select_div.setAttribute("id", "specialization_options");
+  spec_select_div.appendChild(addOption("Add...", "0", false));
+  for (const career of Careers.list_all) {
+    for (const specialization of Careers.getCareerSpecializations(career)) {
+      spec_select_div.appendChild(addOption(specialization));
+    }
+  }
+  return spec_select_div;
+}
+
 function buildCharacteristics() {
   //derived characteristics section
   const derived_char_div = newDiv( "", "char_container");
@@ -82,7 +94,7 @@ function buildCharacteristics() {
   page_div.appendChild(base_char_div);
 }
 
-function newDiv(div_id="", div_class="", div_text="", div_style="") {
+export function newDiv(div_id="", div_class="", div_text="", div_style="") {
   const div = document.createElement("div");
   if (div_id != "") {div.setAttribute("id", div_id);}
   if (div_class != "") {div.setAttribute("class", div_class);}

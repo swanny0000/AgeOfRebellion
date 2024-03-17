@@ -1,38 +1,64 @@
-{ "id": "1",
-  "name": "Vendri",
-  "species": "Duros",
-  "career": "Spy (Courier)",
-  "specializations":[],
-  "characteristics": [
-    {"element":"soak", "value": 2}, 
-    {"element":"wounds_threshold", "value": 13}, 
-    {"element":"strain_threshold", "value": 12}, 
-    {"element":"defense_ranged", "value": 4},
-    {"element":"defense_melee", "value": 4}],
-  "career_skills": [
-    {"skill": "athletics"},
-    {"skill": "computers"},
-    {"skill": "cool"},
-    {"skill": "coordination"},
-    {"skill": "deception"},
-    {"skill": "perception"},
-    {"skill": "skulduggery"},
-    {"skill": "stealth"},
-    {"skill": "warfare"},
-    {"skill": "streetwise"},
-    {"skill": "vigilance"}
-  ],
-  "skills":[
-    {"skill": "computers", "rank": 5},
-    {"skill": "deception", "rank": 5}
-  ],
-  "talents":[],
-  "experience": 100,
-  "armor": {"id":"ar7"},
-  "weapons":[
-    {"id":"ew6"},
-    {"id":"me2"},
-    {"id":"eo2", "count":1}
-  ],
-  "items":[]
+{ "player": "Swanny",
+  "character": {
+    "experience": 0,
+    "total_experience": 155,
+    "career": "Spy",
+    "specializations":["Infiltrator"],
+    "characteristics": [
+      {"Brawn": 2},
+      {"Agility": 2},
+      {"Intellect": 3},
+      {"Cunning": 4},
+      {"Willpower": 2},
+      {"Presence": 2}
+    ],
+    "career_skills": ["Melee", "Streetwise"],
+    "skills":[
+      {"Computers": 1},
+      {"Cool": 1},
+      {"Deception": 3},
+      {"Perception": 1},
+      {"Skulduggery": 1},
+      {"Stealth": 1},
+      {"Streetwise": 1}
+    ],
+    "talents":[
+      {"Dodge": 1},
+      {"Intuitive Navigation": 1}
+    ]
+  },
+  "items": {
+    "credits": 0,
+    "armor": "Padded Armor",
+    "weapons": [
+      {"Blaster Rifle": 1},
+      {"Combat Knife": 1},
+      {"Stun Grenade": 3}
+    ],
+    "items": [
+      {"Stimpack": 3},
+      {"Electrogoggles": 1},
+      {"Com Suite": 1}
+    ]
+  },
+  "demographics": {
+    "name": "Vendri",
+    "species": "Duros",
+    "gender": "male",
+    "age": "early 30s",
+    "height": "5'6\"",
+    "build": "",
+    "hair": "",
+    "eyes": "",
+    "notable features": "",
+    "motivations": [
+      {"type":"", "comments": ""}
+    ],
+    "duties": [
+      {"type": "", "magnitude": "", "comments": ""}
+    ],
+    "critical injuries": [
+      {"severity": "", "result": ""}
+    ]
+  }
 }

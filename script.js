@@ -9,11 +9,13 @@ import * as Page_Functions from "./source/page_functions.js";
 import { buildPage } from "./source/page_builder.js";
 import { Characteristics } from "./source/characteristics.js";
 import * as IO from "./source/io_saver.js";
+import { Specializations } from "./source/specializations.js";
 
 buildPage();
 addEventListeners();
 var character = IO.loadFromCookie();
-
+character.addSpecialization("Infiltrator");
+character.addSpecialization("Scout");
 
 var editToggle = true; editSheet()
 document.getElementById("editSheet").addEventListener("click", editSheet);
@@ -55,9 +57,14 @@ function addEventListeners() {
     document.getElementById("weapon_add_list").value = 0;
   });
 
+  document.getElementById("specialization_options").addEventListener("change", function() {
+    if (document.getElementById("specialization_options").value == 0) {return;}
+    character.buySpecialization(document.getElementById("specialization_options").value);
+    document.getElementById("specialization_options").value = 0;
+  })
+
   for (let i=1; i<9; i++) {
     document.getElementById("weapon_"+i+"_delete").addEventListener("click", function() {
-      console.log("Removing",i,":",document.getElementById("weapon_"+i+"_name").textContent)
       character.removeWeapon(document.getElementById("weapon_"+i+"_name").textContent);
     })
   }

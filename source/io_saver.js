@@ -9,10 +9,12 @@ export function saveCookies(character) {
   setCookie("character_name", character.getName());
   setCookie("species", character.species);
   setCookie("experience", parseInt(character.experience));
+  setCookie("total_experience", character.total_experience);
   setCookie("career", character.career);
   for (const characteristic of Characteristics.list_base) {
     setCookie(characteristic, character.getCharVal(characteristic));
   }
+  setCookie("specializations", character.specializations);
   setCookie("weapons", character.getWeapons());
   setCookie("armor", character.armor);
   for (const skill of Skills.all_skills) {
@@ -33,20 +35,23 @@ function setCookie(name, value, expireDate="") {
 export function loadFromCookie() {
   let cookie = readCookie()
   if (cookie["isValid"] != true) {console.log("New Char"); return new Character("", "", true);}
-  console.log("Importing Char");
   let character = new Character(cookie["character_name"], cookie["species"], true);
   for (const characteristic of Characteristics.list_base) {
     if (cookie[characteristic] != undefined) {character.setCharVal(characteristic, cookie[characteristic])}
   }
   if (cookie["experience"] != undefined) {character.experience = parseInt(cookie["experience"])}
+  if (cookie["total_experience"] != undefined) {character.total_experience = parseInt(cookie["total_experience"])}
   if (cookie["career"] != undefined) {character.setCareer(cookie["career"])}
+  if (cookie["specializations"] != undefined) {
+    for (const spec of cookie["specializations"]) {character.addSpecialization(spec)}
+  }
   const weapons_array = cookie["weapons"].split(",");
   if (weapons_array[0] != "") {for (const weapon of weapons_array) {character.addWeapon(weapon)}}
   if (cookie["armor"] != undefined) {character.setArmor(cookie["armor"]);}
   for (const skill of Skills.all_skills) {
     if (parseInt(cookie[skill]) > 0) {character.setSkillRank(skill, parseInt(cookie[skill]));}
   }
-  console.log(character);
+  console.log("Loaded Char from Cache:",character);
   character.refresh();
   return character
 }
@@ -58,9 +63,10 @@ function readCookie(cookie=document.cookie) {
     let cur = cookie_array[i].split('=');
     cookie_object[cur[0]] = cur[1];
   }
-  console.log("Cookie parsed into:",cookie_object)
+  if (cookie_object["specializations"] != "") {cookie_object["specializations"] = cookie_object["specializations"].split(",")}
   if (cookie_object["character_name"] == "") {console.log("Cookie loading error: character_name is blank");return {};}
   if (!Species.list_all.includes(cookie_object["species"])) {console.log("Cookie loading error: species is", cookie["species"]);return {};}
+  console.log("Cookie Object:",cookie_object);
   cookie_object["isValid"] = true;
   return cookie_object;
 }

@@ -6,6 +6,7 @@ import { Armor } from "./armor.js";
 import { Careers } from "./careers.js";
 import * as Sheet from "./page_functions.js";
 import * as IO from "./io_saver.js";
+import { Specializations } from "./specializations.js";
 
 export class Character {
   constructor(char_name="", species="", from_load=false) {
@@ -13,7 +14,7 @@ export class Character {
     this.characteristics = {}
     this.skills = {};
     this.talents = {};
-    this.specializations = {};
+    this.specializations = [];
     this.weapons = {};
     this.armor = "";
     this.isEditable = true;
@@ -24,7 +25,7 @@ export class Character {
       for (const characteristic of Characteristics.list_base) {this.setCharVal(characteristic, 0);}
       this.setCharVal("Base Wounds Threshold", 0);
       this.setCharVal("Base Strain Threshold", 0);
-      this.experience = 0;
+      this.experience = 0; this.total_experience = 0;
       if (from_load != true) {this.refresh();}
     }
   }
@@ -47,6 +48,7 @@ export class Character {
       for (const talent of Species.starting_talents(this.species)) {this.addTalent(talent);}
     }
     this.experience = Species.getStartingExperience(this.species);
+    this.total_experience = this.experience;
     this.refresh();
   }
   setCharVal(characteristic, value, isCharCreate) {
@@ -70,6 +72,7 @@ export class Character {
     Sheet.updateSkills(this);
     Sheet.updateTalents(this);
     Sheet.updateWeapons(this);
+    Sheet.updateSpecializations(this);
     IO.saveCookies(this);
   }
   setSkillRank(skill, value) {if (this.getSkillRank(skill) < 5) {this.skills[skill].rank = value;}}
@@ -139,26 +142,46 @@ export class Character {
     this.refresh();
   }
   addSpecialization(spec) {
-    if (!Careers.isValid(spec)) {return;}
-    if (this.specializations.hasOwnProperty(spec)) {return;}
-    this.specializations[spec] = true;
-    for (const skill of Careers.getSkillList(spec)) {this.setCareerSkill(skill, true);}
+    if (!Specializations.isValid(spec)) {return false;}
+    if (this.specializations.includes(spec)) {return false;}
+    this.specializations.push(spec)
+    for (const skill of Specializations.getSkillList(spec)) {this.setCareerSkill(skill, true);}
     this.refresh();
+    return true;
   }
   removeSpecialization(spec) {
-    if (!Careers.isValid(spec)) {return;}
-    if (!this.specializations.hasOwnProperty(spec)) {return;}
-    this.specializations[spec] = false;
-    this.setCareer(this.career);
-    for (const specialization of this.specializations) {this.addSpecialization(specialization);}
+    if (!Specializations.isValid(spec)) {return;}
+    if (!this.specializations.includes(spec)) {return;}
+    const index = this.specializations.indexOf(spec);
+    this.specializations.splice(index, 1);
+    for (const skill of Specializations.getSkillList(spec)) {
+      if (Careers.getSkillList(this.career).includes(skill)) {continue;}
+      this.setCareerSkill(skill, false);
+    }
     this.refresh();
+  }
+  buySpecialization(spec) {
+    if (this.specializations.includes(spec)) {return;}
+    let cost = 10 * (this.specializations.length + 1);
+    if (!this.spendExperience(cost)) {return;}
+    this.addSpecialization(spec);
+  }
+  refundSpecialization(spec) {
+    for (const skill of Specializations.getSkillList(spec)) {
+      if (this.getSkillRank(skill) > 0) {return;}
+    }
+    let cost = 10 * this.specializations.length;
+    this.removeSpecialization(spec);
+    this.addExperience(cost);
   }
   spendExperience(cost) {
     if (this.experience < cost) {return false;}
     else {this.experience -= cost; return true;}
   }
-  addExperience(amount) {this.experience += amount; this.refresh();}
-  lowerExperience(amount) {this.experience -= amount; this.refresh();}
+  addExperience(amount) {this.experience += amount; this.total_experience += amount; this.refresh();}
+  lowerExperience(amount) {
+    if (this.experience < amount) {return}
+    this.experience -= amount; this.total_experience -= amount; this.refresh();}
   refundExperience(cost) {this.experience += cost;}
   setArmor(armor) {
     this.armor = armor;

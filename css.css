@@ -12,14 +12,35 @@ img{
   height: var(--skill-font-size);
   width: auto;
 }
-.sticky{
+.page_buttons{
     position: sticky;
-    top: 0px;
+    bottom: 0px;
     right: 0px;
     width: min-content;
     float: right;
     text-wrap: nowrap;
     z-index: 2;
+    background-color: rgba(20, 20, 20, .2);
+}
+.exp_div {
+  position: sticky;
+  top: 0px;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 5px 30px 5px 30px;
+  width: 100px;
+  z-index: 2;
+}
+.currEXPdiv {
+  float: right;
+}
+.totalEXPdiv {
+  float: left;
+}
+.exp_value {
+  font-size: 30px;
+}
+.exp_text {
+  font-size: 10px;
 }
 #character_info {
   text-align: left;
@@ -53,6 +74,10 @@ img{
 }
 .char_header_value {
   margin-left: 20px;
+  display: flex;
+}
+.specialization {
+  padding-right: 20px;
 }
 .horizontal_line{
   z-index: 9999;
