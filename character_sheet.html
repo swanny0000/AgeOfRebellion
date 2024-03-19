@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<link href="css_character_sheet.css" rel="stylesheet">
+<script src="script_chararacter_sheet.js" type="module"></script>
+<meta name="viewport" content="width=device-width" charset="utf-8">
+<html lang="en-US">
+<head>
+  <title>Age of Rebellion</title>
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+</head>
+
+<body style="margin: 0px;">
+  <div id="currEXPdiv" class="currEXPdiv exp_div">
+    <div style="display: flex; justify-content: center;">
+      <button id="exp_down">-</button>
+      <div id="experience" class="exp_value">0</div>
+      <button id="exp_up">+</button>
+    </div>
+    <div class="exp_text">AVAILABLE XP</div>
+  </div>
+  <div id="totalEXPdiv" class="totalEXPdiv exp_div">
+    <div id="total_experience" class="exp_value">0</div>
+    <div class="exp_text">TOTAL XP</div>
+  </div>
+
+  <div id="character_info"></div>
+  <div id="characteristics"></div>
+  <div id="skills"></div>
+  <div id="items"></div>
+
+  <div class="page_buttons">
+    <div id="exp_div" class="toggleHide">
+      <div><button id="isCharCreate">Char Creation?</button></div>
+    </div>
+    <div id="buttons">
+      <button id="editSheet">Edit Sheet</button>
+    </div>
+  </div>
+</body>
