@@ -1,0 +1,32 @@
+.header {
+  position: sticky;
+  width: 100%;
+  top: 0px;
+}
+.window {
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+}
+.arrow_box {
+  display: flex;
+  width: 5%;
+  align-items: center;
+  justify-content: center;
+}
+.arrow_box:hover {
+  background-color: darkgray;
+}
+.pane {
+  background-color: beige;
+  width: 75%;
+  min-height: 200px;
+}
+.step_header {
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 2%;
+}
+.step_content {
+  padding-bottom: 2%;
+}

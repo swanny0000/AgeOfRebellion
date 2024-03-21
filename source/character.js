@@ -4,7 +4,7 @@ import { Talents } from "./talents.js";
 import { Species } from "./species.js";
 import { Armor } from "./armor.js";
 import { Careers } from "./careers.js";
-import * as Sheet from "../pages/character_sheet_page_functions.js";
+import * as Sheet from "../characters/character_sheet_page_functions.js";
 import * as IO from "./io_saver.js";
 import { Specializations } from "./specializations.js";
 
