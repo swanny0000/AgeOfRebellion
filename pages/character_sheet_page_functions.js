@@ -1,9 +1,9 @@
-import { Careers } from "./careers.js";
-import { Characteristics } from "./characteristics.js";
-import { Skills } from "./skills.js";
-import { Species } from "./species.js";
-import { Weapons } from "./weapons.js";
-import * as Page_Builder from "./page_builder.js";
+import { Careers } from "../source/careers.js";
+import { Characteristics } from "../source/characteristics.js";
+import { Skills } from "../source/skills.js";
+import { Species } from "../source/species.js";
+import { Weapons } from "../source/weapons.js";
+import * as Page_Builder from "./character_sheet_page_builder.js";
 
 export function updateCharacteristics(character) {
   document.getElementById("char_name").value = character.getName();
@@ -76,7 +76,7 @@ export function updateWeapons(character) {
     document.getElementById("weapon_"+i+"_range").textContent = Weapons.getRange(weapon);
     clearSubElements("weapon_"+i+"_crit");
     for (let adv_count=0; adv_count<Weapons.getCrit(weapon); adv_count++) {
-      let critSymbol = newImg("images/symbol_advantage.png")
+      let critSymbol = newImg("../images/symbol_advantage.png")
       critSymbol.setAttribute("style","vertical-align: middle;")
       document.getElementById("weapon_"+i+"_crit").appendChild(critSymbol);
     }
@@ -101,14 +101,14 @@ export function setDicePool(element_id, ability_die_count = 1, proficiency_die_c
   //add proficiency die
   for (var i=0; i<proficiency_die_count; i++) {
     const proficiency_die = document.createElement("img");
-    proficiency_die.src = "./images/die_proficiency.png";
+    proficiency_die.src = "../images/die_proficiency.png";
     proficiency_die.alt = "proficiency dice";
     document.getElementById(element_id).appendChild(proficiency_die);
   }
   //add ability die
   for (var i=0; i<ability_die_count-proficiency_die_count; i++) {
     const ability_die = document.createElement("img");
-    ability_die.src = "./images/die_ability.png";
+    ability_die.src = "../images/die_ability.png";
     ability_die.alt = "ability dice";
     document.getElementById(element_id).appendChild(ability_die);
   }

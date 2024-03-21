@@ -1,11 +1,11 @@
-import { Character } from "./character.js";
-import { Characteristics } from "./characteristics.js";
-import { Skills } from "./skills.js";
-import * as Page_Functions from "./page_functions.js"
-import { Armor } from "./armor.js";
-import { Species } from "./species.js";
-import { Careers } from "./careers.js";
-import { Weapons } from "./weapons.js";
+import { Character } from "../source/character.js";
+import { Characteristics } from "../source/characteristics.js";
+import { Skills } from "../source/skills.js";
+import * as Page_Functions from "./character_sheet_page_functions.js"
+import { Armor } from "../source/armor.js";
+import { Species } from "../source/species.js";
+import { Careers } from "../source/careers.js";
+import { Weapons } from "../source/weapons.js";
 
 export function buildPage() {
   buildCharacterHeader();
@@ -204,12 +204,12 @@ function buildBaseCharDiv(char_name) {
 }
 
 function extraSection() {
-  const success = Page_Functions.newImg("images/symbol_success.png");
-  const failure = Page_Functions.newImg("images/symbol_failure.png");
-  const triumph = Page_Functions.newImg("images/symbol_triumph.png");
-  const despair = Page_Functions.newImg("images/symbol_despair.png");
-  const advantage = Page_Functions.newImg("images/symbol_advantage.png");
-  const threat = Page_Functions.newImg("images/symbol_threat.png");
+  const success = Page_Functions.newImg("../images/symbol_success.png");
+  const failure = Page_Functions.newImg("../images/symbol_failure.png");
+  const triumph = Page_Functions.newImg("../images/symbol_triumph.png");
+  const despair = Page_Functions.newImg("../images/symbol_despair.png");
+  const advantage = Page_Functions.newImg("../images/symbol_advantage.png");
+  const threat = Page_Functions.newImg("../images/symbol_threat.png");
 
   const div = newDiv();
   div.appendChild(document.createTextNode("This is an example of all of the types of symbols.\nWe have Success "));

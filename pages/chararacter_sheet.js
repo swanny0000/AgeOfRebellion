@@ -1,15 +1,15 @@
-import { Skills } from "./source/skills.js";
-import { Talents } from "./source/talents.js";
-import { Species } from "./source/species.js";
-import { Character } from "./source/character.js";
-import {Careers} from "./source/careers.js";
-import * as Armors from "./source/armor.js";
-import * as Weapons from "./source/weapons.js";
-import * as Page_Functions from "./source/page_functions.js";
-import { buildPage } from "./source/page_builder.js";
-import { Characteristics } from "./source/characteristics.js";
-import * as IO from "./source/io_saver.js";
-import { Specializations } from "./source/specializations.js";
+import { Skills } from "../source/skills.js";
+import { Talents } from "../source/talents.js";
+import { Species } from "../source/species.js";
+import { Character } from "../source/character.js";
+import {Careers} from "../source/careers.js";
+import * as Armors from "../source/armor.js";
+import * as Weapons from "../source/weapons.js";
+import * as Page_Functions from "./character_sheet_page_functions.js";
+import { buildPage } from "./character_sheet_page_builder.js";
+import { Characteristics } from "../source/characteristics.js";
+import * as IO from "../source/io_saver.js";
+import { Specializations } from "../source/specializations.js";
 
 buildPage();
 addEventListeners();

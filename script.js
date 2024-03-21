@@ -1,2 +1,2 @@
-document.getElementById("new_char").addEventListener("click", function() {window.location.href = "new_character.html"})
-document.getElementById("char_v1").addEventListener("click", function() {window.location.href = "character_sheet.html"})
+document.getElementById("new_char").addEventListener("click", function() {window.location.href = "pages/new_character.html"})
+document.getElementById("char_v1").addEventListener("click", function() {window.location.href = "pages/character_sheet.html"})

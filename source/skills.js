@@ -14,6 +14,7 @@ export const Skills = {
     Education: {characteristic: "Intellect", type:"Knowledge", page_aoe:135},
     Gunnery: {characteristic: "Agility", type:"Combat", page_aoe:131},
     Leadership: {characteristic: "Presence", type:"General", page_aoe:123},
+    Lightsaber: {characteristic: "Brawn", type:"Combat", page_aoe:0},
     Lore: {characteristic: "Intellect", type:"Knowledge", page_aoe:135},
     Mechanics: {characteristic: "Intellect", type:"General", page_aoe:124},
     Medicine: {characteristic: "Intellect", type:"General", page_aoe:125},
