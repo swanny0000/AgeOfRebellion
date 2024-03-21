@@ -1,32 +1,57 @@
-.header {
+html {
+  scroll-behavior: smooth;
+}
+
+.page-header {
   position: sticky;
   width: 100%;
   top: 0px;
 }
+.toc {
+  position: sticky;
+  float: left;
+  top: 20px;
+  width: 10%;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  padding-left: 1%;
+  padding-top: 1%;
+}
+.toc-item {
+  font-style: italic;
+  color: gray;
+}
+.toc-item:hover {
+  background-color: lightgray;
+  -webkit-transition: all .5s;
+  -moz-transition:    all .5s;
+  -ms-transition:     all .5s;
+  -o-transition:      all .5s;
+  transition:         all .5s;
+  color: black;
+}
 .window {
   display: flex;
   justify-content: center;
-  flex-flow: row nowrap;
+  flex-flow: column;
+  
 }
-.arrow_box {
-  display: flex;
-  width: 5%;
-  align-items: center;
-  justify-content: center;
+.step {
+  padding-left: 10%;
+  min-height: 100px;
 }
-.arrow_box:hover {
-  background-color: darkgray;
-}
-.pane {
+.step-header {
   background-color: beige;
-  width: 75%;
-  min-height: 200px;
-}
-.step_header {
-  text-align: center;
+  text-align: left;
   padding-top: 1%;
+  padding-bottom: 1%;
+}
+.step-content {
   padding-bottom: 2%;
 }
-.step_content {
-  padding-bottom: 2%;
+.step-text {
+  font-style: italic;
+  color: darkgray;
+  font-size: smaller;
 }

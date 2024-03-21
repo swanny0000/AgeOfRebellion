@@ -9,16 +9,83 @@
 </head>
 
 <body style="margin: 0px;">
-  <div class="header">
+  <div class="page-header">
     <button onclick="location.href='../../index.html'">Home</button>
     <button onclick="location.href='../character_sheet.html'">View Character Sheet</button>
   </div>
+  <div class="toc">
+    <a class="toc-item" href="#Background">Background</a>
+    <a class="toc-item" href="#Duty">Duty</a>
+    <a class="toc-item" href="#Species">Species</a>
+    <a class="toc-item" href="#Career">Career</a>
+    <a class="toc-item" href="#Level Up">Level Up</a>
+    <a class="toc-item" href="#Motivation">Motivation</a>
+    <a class="toc-item" href="#Gear and Appearance">Gear and Appearance</a>
+  </div>
   <div class="window">
-    <div id="prev" class="arrow_box"><</div>
-    <div class="pane">
-      <div id="step_header" class="step_header"></div>
-      <div id="step_content" class="step_content"></div>
+    <div id="Background" class="step">
+      <div class="step-header">
+        Determine Background
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        <input type="text">
+      </div>
     </div>
-    <div id="next" class="arrow_box">></div>
+    <div id="Duty" class="step">
+      <div class="step-header">
+        Determine Duty
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        <input type="text">
+      </div>
+    </div>
+    <div id="Species" class="step">
+      <div class="step-header">
+        Select a Species
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+          <select name="species" id="species"></select>
+      </div>
+    </div>
+    <div id="Career" class="step">
+      <div class="step-header">
+        Select Career and Specialization
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        <select name="career" id="career"></select>
+        <select name="specialization" id="specialization"></select>
+      </div>
+    </div>
+    <div id="Level Up" class="step">
+      <div class="step-header">
+        Spend Experience
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        
+      </div>
+    </div>
+    <div id="Motivation" class="step">
+      <div class="step-header">
+        Determine Motivation
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        <input type="text" name="" id="">
+      </div>
+    </div>
+    <div id="Gear and Appearance" class="step">
+      <div class="step-header">
+        Choose Gear and Appearance
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        <input type="text" name="" id="">
+      </div>
+    </div>
   </div>
 </body>
