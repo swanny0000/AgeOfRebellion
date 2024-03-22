@@ -74,6 +74,14 @@ export function newSpeciesSelect() {
   return species_div;
 }
 
+export function buildSpeciesSelect(select_id) {
+  const select_element = document.getElementById(select_id);
+  select_element.appendChild(newOption("Select a species...", "", false));
+  for (const species of Species.list_all) {
+    select_element.appendChild(newOption(species));
+  }
+}
+
 export function newCareerSelect() {
   const career_div = document.createElement("select");
   career_div.appendChild(newOption("Select a career...", "", false));

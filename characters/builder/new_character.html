@@ -14,43 +14,55 @@
     <button onclick="location.href='../character_sheet.html'">View Character Sheet</button>
   </div>
   <div class="toc">
-    <a class="toc-item" href="#Background">Background</a>
-    <a class="toc-item" href="#Duty">Duty</a>
-    <a class="toc-item" href="#Species">Species</a>
-    <a class="toc-item" href="#Career">Career</a>
+    <a class="toc-item" href="#species_step">Species</a>
+    <a class="toc-item" href="#career_step">Career</a>
     <a class="toc-item" href="#Level Up">Level Up</a>
-    <a class="toc-item" href="#Motivation">Motivation</a>
     <a class="toc-item" href="#Gear and Appearance">Gear and Appearance</a>
+    <a class="toc-item" href="#Background">Background</a>
+    <a class="toc-item" href="#Motivation">Motivation</a>
+    <a class="toc-item" href="#Duty">Duty</a>
   </div>
   <div class="window">
-    <div id="Background" class="step">
-      <div class="step-header">
-        Determine Background
-        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
-      </div>
-      <div class="step-content">
-        <input type="text">
-      </div>
-    </div>
-    <div id="Duty" class="step">
-      <div class="step-header">
-        Determine Duty
-        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
-      </div>
-      <div class="step-content">
-        <input type="text">
-      </div>
-    </div>
-    <div id="Species" class="step">
+    <div id="species_step" class="step">
       <div class="step-header">
         Select a Species
         <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
       </div>
       <div class="step-content">
-          <select name="species" id="species"></select>
+        <div class="row">
+          <div style="min-width: 150px;">
+            <select name="species" id="species"></select>
+            <div class="row derived-char" style="justify-content: space-between;">
+              <div>
+                <div>Wound Threshold:</div>
+                <div>Strain Threshold:</div>
+                <div>Experience:</div>
+              </div>
+              <div>
+                <div id="Wound Threshold">0</div>
+                <div id="Strain Threshold">0</div>
+                <div id="Experience">0</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="char-section">
+            <div class="char-div"><div id="Brawn" class="char-val">0</div><div class="char_title">Brawn</div></div>
+            <div class="char-div"><div id="Agility" class="char-val">0</div><div class="char_title">Agility</div></div>
+            <div class="char-div"><div id="Intellect" class="char-val">0</div><div class="char_title">Intellect</div></div>
+            <div class="char-div"><div id="Cunning" class="char-val">0</div><div class="char_title">Cunning</div></div>
+            <div class="char-div"><div id="Willpower" class="char-val">0</div><div class="char_title">Willpower</div></div>
+            <div class="char-div"><div id="Presence" class="char-val">0</div><div class="char_title">Presence</div></div>
+          </div>
+        </div>
+        <div class="row" style="padding-top: 10px;">
+          
+          <div class="row"><div>Special Abilities: </div><div class="special_abilities"></div></div>
+        </div>
+        <div></div>
       </div>
     </div>
-    <div id="Career" class="step">
+    <div id="career_step" class="step">
       <div class="step-header">
         Select Career and Specialization
         <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
@@ -69,6 +81,24 @@
         
       </div>
     </div>
+    <div id="Gear and Appearance" class="step">
+      <div class="step-header">
+        Choose Gear and Appearance
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        <input type="text" name="" id="">
+      </div>
+    </div>
+    <div id="Background" class="step">
+      <div class="step-header">
+        Determine Background
+        <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
+      </div>
+      <div class="step-content">
+        <input type="text">
+      </div>
+    </div>
     <div id="Motivation" class="step">
       <div class="step-header">
         Determine Motivation
@@ -78,13 +108,13 @@
         <input type="text" name="" id="">
       </div>
     </div>
-    <div id="Gear and Appearance" class="step">
+    <div id="Duty" class="step">
       <div class="step-header">
-        Choose Gear and Appearance
+        Determine Duty
         <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
       </div>
       <div class="step-content">
-        <input type="text" name="" id="">
+        <input type="text">
       </div>
     </div>
   </div>

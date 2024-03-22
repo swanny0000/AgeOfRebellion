@@ -1,15 +1,10 @@
 import * as Page_Functions from "../../source/page_functions.js";
+import { Characteristics } from "../../source/characteristics.js";
+import { Species } from "../../source/species.js";
 
-var step_id;
-if (!Number.isInteger(step_id)) {step_id=0;}
-  buildHeader(step_id);
-  buildContent(step_id);
+var steps = ["Background", "Duty", "Species", "Career", "Level Up", "Motivation", "Gear and Appearance"];
 
-document.getElementById("prev").addEventListener("click", previousStep);
-document.getElementById("next").addEventListener("click", nextStep);
-function previousStep() {if (step_id > 0) {step_id-=1; updatePageLocation(step_id);}}
-function nextStep() {if (step_id < 6) {step_id+=1; updatePageLocation(step_id);}}
-
-function updatePageLocation(step_id) {
-
-}
+Page_Functions.buildSpeciesSelect("species");
+document.getElementById("species").addEventListener("change", function() {
+  
+})
