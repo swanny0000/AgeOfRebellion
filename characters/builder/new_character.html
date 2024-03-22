@@ -38,26 +38,28 @@
                 <div>Strain Threshold:</div>
                 <div>Experience:</div>
               </div>
-              <div>
-                <div id="Wound Threshold">0</div>
-                <div id="Strain Threshold">0</div>
-                <div id="Experience">0</div>
+              <div style="min-width: 25px; text-align: right;">
+                <div id="species_wt">0</div>
+                <div id="species_st">0</div>
+                <div id="species_experience">0</div>
               </div>
             </div>
           </div>
           
           <div class="char-section">
-            <div class="char-div"><div id="Brawn" class="char-val">0</div><div class="char_title">Brawn</div></div>
-            <div class="char-div"><div id="Agility" class="char-val">0</div><div class="char_title">Agility</div></div>
-            <div class="char-div"><div id="Intellect" class="char-val">0</div><div class="char_title">Intellect</div></div>
-            <div class="char-div"><div id="Cunning" class="char-val">0</div><div class="char_title">Cunning</div></div>
-            <div class="char-div"><div id="Willpower" class="char-val">0</div><div class="char_title">Willpower</div></div>
-            <div class="char-div"><div id="Presence" class="char-val">0</div><div class="char_title">Presence</div></div>
+            <div class="char-div"><div id="species_brawn" class="char-val">0</div><div class="char_title">Brawn</div></div>
+            <div class="char-div"><div id="species_agility" class="char-val">0</div><div class="char_title">Agility</div></div>
+            <div class="char-div"><div id="species_intellect" class="char-val">0</div><div class="char_title">Intellect</div></div>
+            <div class="char-div"><div id="species_cunning" class="char-val">0</div><div class="char_title">Cunning</div></div>
+            <div class="char-div"><div id="species_willpower" class="char-val">0</div><div class="char_title">Willpower</div></div>
+            <div class="char-div"><div id="species_presence" class="char-val">0</div><div class="char_title">Presence</div></div>
           </div>
         </div>
         <div class="row" style="padding-top: 10px;">
           
-          <div class="row"><div>Special Abilities: </div><div class="special_abilities"></div></div>
+          <div class="row" id="abilities" style="display: flex; flex-flow: column;">
+            <div>Special Abilities: </div><div class="special_abilities"></div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -68,8 +70,27 @@
         <div class="step-text">Here's some additional information about this step, and how you should approach it...</div>
       </div>
       <div class="step-content">
-        <select name="career" id="career"></select>
-        <select name="specialization" id="specialization"></select>
+        <div style="display: flex; flex-flow: column;">
+          <div>
+            <div class="row">
+              <select name="career" id="career"></select>
+              <select name="career_skills" id="career_skill_1" style="margin-left: 20px;" disabled><option value="0">Select a skill...</option></select>
+              <select name="career_skills" id="career_skill_2" style="margin-left: 10px;" disabled><option value="0">Select a skill...</option></select>
+              <select name="career_skills" id="career_skill_3" style="margin-left: 10px;" disabled><option value="0">Select a skill...</option></select>
+              <select name="career_skills" id="career_skill_4" style="margin-left: 10px;" disabled><option value="0">Select a skill...</option></select>
+            </div>
+            <div id="career_text" class="career-text"></div>
+          </div>
+          <div>
+            <div class="row">
+              <select name="specialization" id="specialization" disabled><option value="0">Select a Specialization...</option></select>
+              <select name="spec_skills" id="spec_skill_1" style="margin-left: 20px;" disabled><option value="0">Select a skill...</option></select>
+              <select name="spec_skills" id="spec_skill_2" style="margin-left: 10px;" disabled><option value="0">Select a skill...</option></select>
+            </div>
+            <div id="specialization_text" class="career-text"></div>
+          </div>
+        </div>
+        
       </div>
     </div>
     <div id="Level Up" class="step">

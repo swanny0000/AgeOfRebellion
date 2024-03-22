@@ -7,7 +7,9 @@ export const Species = {
       starting_experience: 100,
       starting_skills: ["Streetwise"],
       starting_talents: ["Convincing Demeanor"],
-      abilities: [{"Special Abilities": "Bothans begin the game with one rank in Streetwise. They still may not train Streetwise above rank 2 during character creation. They also start with one rank in the Convincing Demeanor talent."}]
+      abilities: [
+        {name: "Special Abilities", text: "Bothans begin the game with one rank in Streetwise. They still may not train Streetwise above rank 2 during character creation. They also start with one rank in the Convincing Demeanor talent."}
+      ]
     },
     Droid: {
       Brawn: 1, Agility: 1, Intellect: 1, Cunning: 1, Willpower: 1, Presence: 1,
@@ -15,9 +17,9 @@ export const Species = {
       strain_threshold_base: 10, strain_threshold_char: "Willpower",
       starting_experience: 175,
       abilities: [
-        {"Special Abilities": ""},
-        {"Inorganic": ""},
-        {"Mechanical Being": ""}
+        {name: "Special Abilities", text: ""},
+        {name: "Inorganic", text: ""},
+        {name: "Mechanical Being", text: ""}
       ]
     },
     Duros: {
@@ -27,8 +29,8 @@ export const Species = {
       starting_experience: 100,
       starting_skills: ["Piloting (Space)"],
       abilities: [
-        {"Special Abilities": "Duros begin the game with one rank in Piloting (Space). They still may not train Piloting (Space) above rank 2 during character creation."},
-        {"Intuitive Navigation": "Duros may add <<advantage>> to all Astrogation checks they make."}
+        {name: "Special Abilities", text: "Duros begin the game with one rank in Piloting (Space). They still may not train Piloting (Space) above rank 2 during character creation."},
+        {name: "Intuitive Navigation", text: "Duros may add <<advantage>> to all Astrogation checks they make."}
       ]
     },
     Gran: {
@@ -38,8 +40,8 @@ export const Species = {
       starting_experience: 100,
       starting_skills: ["Charm"],
       abilities: [
-        {"Special Abilities": "Gran begin the game with one rank in Charm of Negotiation. They still may not train Charm of Negotiation above rank 2 during character creation."},
-        {"Enhanced Vision": ""}
+        {name: "Special Abilities", text: "Gran begin the game with one rank in Charm of Negotiation. They still may not train Charm of Negotiation above rank 2 during character creation."},
+        {name: "Enhanced Vision", text: ""}
       ]
     },
     Human: {
@@ -49,8 +51,8 @@ export const Species = {
       starting_experience: 110,
       starting_skills: ["Astrogation", "Athletics"],
       abilities: [
-        {"Special Abilities": ""},
-        {"Enhanced Vision": ""}
+        {name: "Special Abilities", text: ""},
+        {name: "Enhanced Vision", text: ""}
       ]
     },
     Ithorian: {
@@ -60,8 +62,8 @@ export const Species = {
       starting_experience: 90,
       starting_skills: ["Survival"],
       abilities: [
-        {"Special Abilities": "Ithorians begin the game with one rank in Survival. They still may not train Survival above rank 2 during character creation."},
-        {"Ithorian Bellow": ""}
+        {name: "Special Abilities", text: "Ithorians begin the game with one rank in Survival. They still may not train Survival above rank 2 during character creation."},
+        {name: "Ithorian Bellow", text: ""}
       ]
     },
     "Mon Calamari": {
@@ -71,8 +73,8 @@ export const Species = {
       starting_experience: 100,
       starting_skills: ["Education"],
       abilities: [
-        {"Special Abilities": "Mon Calamari begin the game with one rank in Knowledge (Education). They still may not train Knowledge (Education) above rank 2 during character creation."},
-        {"Amphibious": "Mon Calamari can breathe underwater without penalty and never suffer movement penalities for travelling through water."}
+        {name: "Special Abilities", text: "Mon Calamari begin the game with one rank in Knowledge (Education). They still may not train Knowledge (Education) above rank 2 during character creation."},
+        {name: "Amphibious", text: "Mon Calamari can breathe underwater without penalty and never suffer movement penalities for travelling through water."}
       ]
     },
     Sullustan: {
@@ -81,11 +83,12 @@ export const Species = {
       strain_threshold_base: 10, strain_threshold_char: "Willpower",
       starting_experience: 100,
       starting_skills: ["Astrogation"],
-      abilities: [{"Special Abilities": "Ithorians begin the game with one rank in Astrogation. They still may not train Astrogation above rank 2 during character creation."}]
+      abilities: [
+        {name: "Special Abilities", text: "Ithorians begin the game with one rank in Astrogation. They still may not train Astrogation above rank 2 during character creation."}
+      ]
     }
   },
   get_base_characteristic: function(species, characteristic) {return this.species[species][characteristic];},
-  calcSoak: function() {},
   calcBaseWoundsThreshold: function(character) {
     try {
       const base = this.get_base_characteristic(character.species, "wound_threshold_base");
@@ -121,5 +124,22 @@ export const Species = {
     let list = [];
     for (const species in this.species) {list.push(species);}
     return list;
-  }
+  },
+  getBaseThresholdObj(species, char) {
+    char = char.toUpperCase();
+    if (char == "WOUND") { 
+      return {
+        Base: this.get_base_characteristic(species, "wound_threshold_base"),
+        Mod: this.get_base_characteristic(species, "wound_threshold_char")
+      };
+    }
+    if (char == "STRAIN") {
+      return {
+        Base: this.get_base_characteristic(species, "strain_threshold_base"),
+        Mod: this.get_base_characteristic(species, "strain_threshold_char")
+      };
+    }
+    return {};
+  },
+  getAbilities(species) {return this.species[species].abilities;}
 }

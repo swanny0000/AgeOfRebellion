@@ -92,6 +92,27 @@ export function newCareerSelect() {
   return career_div;
 }
 
+export function buildCareerSelect(select_id) {
+  const select_element = document.getElementById(select_id);
+  select_element.appendChild(newOption("Select a career...", "", false));
+  for (const career of Careers.list_all) {
+    select_element.appendChild(newOption(career));
+  }
+}
+
+export function buildSelect(select_id, header_option_text, option_list, multi_select=1) {
+  const select_element = document.getElementById(select_id);
+  select_element.removeAttribute("disabled");
+  clearSubElements(select_id);
+  select_element.appendChild(newOption(header_option_text, "", false));
+  for (const item of option_list) {
+    select_element.appendChild(newOption(item));
+  }
+  if (parseInt(multi_select) > 1) {
+    //allow users to select multiple selections without it looking weird...
+  }
+}
+
 export function newOption(option, elementValue=option, selectable=true) {
   const element = document.createElement("option");
   element.setAttribute("value", elementValue);

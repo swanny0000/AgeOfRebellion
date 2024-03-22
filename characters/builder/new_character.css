@@ -21,6 +21,7 @@ html {
 .toc-item {
   font-style: italic;
   color: gray;
+  text-decoration: none;
 }
 .toc-item:hover {
   background-color: lightgray;
@@ -70,6 +71,7 @@ html {
   flex-flow: row nowrap;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: 10px;
   width: 100%;
 }
 .char-div {
@@ -80,6 +82,15 @@ html {
 .char-val {font-size: 40px;}
 .derived-char {
   color: gray;
-  font-style: italic;
   font-size: smaller;
+}
+.ability-text {padding-bottom: 5px;}
+.skill-selection-div {
+  padding-left: 15px;
+  font-size: smaller;
+}
+.career-text {
+  min-height: 30px;
+  padding-left: 20px;
+  padding-bottom: 10px;
 }
